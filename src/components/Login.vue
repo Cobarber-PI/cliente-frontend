@@ -1,4 +1,13 @@
-<script setup></script>
+<script setup>
+
+import { useRouter } from 'vue-router';
+const router = useRouter();
+
+const registrar = () => {
+    router.push("/registro");
+};
+
+</script>
 
 <template>
     <div class="container">
@@ -18,9 +27,9 @@
             </div>
             <input type="text" placeholder="Email" class="input" />
             <input type="password" placeholder="Senha" class="input" />
-            <a href="#" class="link">Esqueceu sua senha?</a>
+            <a href="#" class="link" @click="registrar">Esqueceu sua senha?</a>
             <button class="botao-entrar">ENTRAR</button>
-            <a href="#" class="link baixo">Não possui conta?</a>
+            <a href="#" class="link baixo" @click="registrar">Não possui conta?</a>
         </div>
     </div>
 </template>

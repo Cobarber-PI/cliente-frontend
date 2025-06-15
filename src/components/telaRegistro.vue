@@ -8,7 +8,7 @@ const ano = ref('');
 
 <template>
     <div class="conteudo">
-        <div>
+        <div class="imagem">
             <img src="/imgsRegistro/imgRegistro.png" class="imagem" />
         </div>
 
@@ -55,14 +55,15 @@ const meses = [
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 10%;
     height: 100vh;
-    gap: 60px;
+    width: 100%;
 }
 
 .imagem {
-    width: 500px;
-    height: 500px;
-    object-fit: contain;
+    width: 450px;
+    height: 450px;
+    margin-right: 60px;
 }
 
 .forms1 {
@@ -70,7 +71,7 @@ const meses = [
     flex-direction: column;
     align-items: flex-start;
     gap: 15px;
-    width: 320px;
+    margin-right: 80px;
 }
 
 .forms1 h1 {
