@@ -2,21 +2,21 @@
 </script>
 
 <template>
-  <div class="container">
-    <header>
-      <div class="logo">
-        <div class="marcaC">
-          <img src="/public/introdução/logoBarber.png" alt="">
-          <span>|</span>
-          <h3>CoBarber</h3>
-          <p>A sua barbearia online</p>
-        </div>
+  <header>
+    <div class="logo">
+      <div class="marcaC">
+        <img src="/public/introdução/logoBarber.png" alt="">
+        <span>|</span>
+        <h3>CoBarber</h3>
+        <p>A sua barbearia online</p>
       </div>
-      <nav>
-        <button class="login">Login</button>
-        <button>Sign up</button>
-      </nav>
-    </header>
+    </div>
+    <nav>
+      <button class="login">Login</button>
+      <button>Sign up</button>
+    </nav>
+  </header>
+  <div class="container">
     <div class="imageFundo"></div>
 
     <div class="content">
@@ -52,6 +52,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 0 15vh;
 }
 
 nav {
