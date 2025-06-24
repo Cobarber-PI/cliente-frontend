@@ -8,10 +8,8 @@
         <div class="marcaC">
           <img src="/public/introdução/logoBarber.png" alt="">
           <span>|</span>
-          <div class="descricao">
           <h3>CoBarber</h3>
           <p>A sua barbearia online</p>
-          </div>
         </div>
       </div>
       <nav>
@@ -192,7 +190,7 @@ header button:hover {
 .marcaC {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.8rem;
 }
 
 .marcaC img {
@@ -204,7 +202,6 @@ header button:hover {
   margin-bottom: 10px;
   font-size: 25px;
   color: #f5e1b9;
-  margin-right: 10px;
 }
 
 .marcaC h3 {
@@ -215,15 +212,13 @@ header button:hover {
 .marcaC p {
   font-family: 'Poppins', sans-serif;
   font-size: 14px;
-  opacity: 0.9;
+  opacity: 0.8;
 }
 
 .logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   color: #fafafa;
-  border: solid 1px #f5e1b9;
-  border-radius: 5px;
-  width: 15rem;
 }
-
-
 </style>
