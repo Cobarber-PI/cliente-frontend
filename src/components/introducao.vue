@@ -52,7 +52,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 15vh;
+  margin: 0 6vh;
 }
 
 nav {
