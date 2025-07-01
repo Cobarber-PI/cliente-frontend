@@ -1,50 +1,49 @@
-<script setup>
+  <script setup>
 </script>
 
-<template>
-  <header>
-    <div class="logo">
-      <div class="marcaC">
-        <img src="/public/introdução/logoBarber.png" alt="">
-        <span>|</span>
-        <h3>CoBarber</h3>
-        <p>A sua barbearia online</p>
+  <template>
+    <header>
+        <div class="logo">
+          <div class="marcaC">
+            <img src="/public/introdução/logoBarber.png" alt="">
+            <span>|</span>
+            <h3>CoBarber</h3>
+            <p>A sua barbearia online</p>
+          </div>
+        </div>
+        <nav>
+          <button class="login">Login</button>
+          <button>Sign up</button>
+        </nav>
+    </header>
+
+    <div class="container">
+      <div class="imageFundo"></div>
+      <div class="content">
+        <h1>
+          Encontre seu barbeiro de confiança
+          <span>e agende seu horário de forma prática.</span>
+        </h1>
+        <p>
+          <strong>Escolha seu barbeiro favorito</strong> e cuide do seu estilo — tudo em um só lugar.
+        </p>
+
+        <div class="botao">
+          <button>Começar agora</button>
+          <p>Agendamentos online, rápido e gratuito</p>
+        </div>
       </div>
     </div>
-    <nav>
-      <button class="login">Login</button>
-      <button>Sign up</button>
-    </nav>
-  </header>
-  <div class="container">
-    <div class="imageFundo"></div>
 
-    <div class="content">
-      <h1>
-        Encontre seu barbeiro de confiança
-        <span>e agende seu horário de forma prática.</span>
-      </h1>
-      <p>
-        <strong>Escolha seu barbeiro favorito</strong> e cuide do seu estilo — tudo em um só lugar.
-      </p>
-
-      <div class="botao">
-        <button>Começar agora</button>
-        <p>Agendamentos online, rápido e gratuito</p>
-      </div>
+    <div class="br">
+      <h1>Marque seu horário. A gente cuida do resto.</h1>
     </div>
-  </div>
-
-  <div class="teste">
-    <h1>teste</h1>
-    <p>opaaaa</p>
-  </div>
-</template>
+  </template>
 
 <style scoped>
 /* ---------------- HEADER ---------------- */
 header {
-  position: fixed;
+  position: absolute;
   top: 1.5rem;
   left: 5rem;
   right: 5rem;
@@ -54,6 +53,7 @@ header {
   align-items: center;
   margin: 0 6vh;
 }
+
 
 nav {
   display: flex;
@@ -82,7 +82,6 @@ header button {
   transition: 0.3s;
 }
 
-
 header button:hover {
   background-color: #f5e1b9;
   color: black;
@@ -93,6 +92,7 @@ header button:hover {
   position: relative;
   width: 100%;
   height: 100vh;
+  background-color: #121212;
 }
 
 /* ---------------- BACKGROUND IMAGE ---------------- */
@@ -126,7 +126,6 @@ header button:hover {
 .content h1 span {
   display: block;
   font-family: 'Poppins', sans-serif;
-
 }
 
 .content p {
@@ -221,5 +220,18 @@ header button:hover {
   align-items: center;
   gap: 1rem;
   color: #fafafa;
+}
+
+.br {
+  width: 100%;
+  height: 30vh;
+  background-color: #090808;
+  color: #ffffff;
+  text-align: center;
+}
+
+.br h1 {
+  padding-top: 5rem;
+  font-size: 35px;
 }
 </style>
