@@ -1,44 +1,46 @@
-  <script setup>
+<script setup>
+import { useRouter } from 'vue-router'
+const router = useRouter()
 </script>
 
-  <template>
-    <header>
-        <div class="logo">
-          <div class="marcaC">
-            <img src="/public/introdução/logoBarber.png" alt="">
-            <span>|</span>
-            <h3>CoBarber</h3>
-            <p>A sua barbearia online</p>
-          </div>
-        </div>
-        <nav>
-          <button class="login">Login</button>
-          <button>Sign up</button>
-        </nav>
-    </header>
-
-    <div class="container">
-      <div class="imageFundo"></div>
-      <div class="content">
-        <h1>
-          Encontre seu barbeiro de confiança
-          <span>e agende seu horário de forma prática.</span>
-        </h1>
-        <p>
-          <strong>Escolha seu barbeiro favorito</strong> e cuide do seu estilo — tudo em um só lugar.
-        </p>
-
-        <div class="botao">
-          <button>Começar agora</button>
-          <p>Agendamentos online, rápido e gratuito</p>
-        </div>
+<template>
+  <header>
+    <div class="logo">
+      <div class="marcaC">
+        <img src="/public/introdução/logoBarber.png" alt="" />
+        <span>|</span>
+        <h3>CoBarber</h3>
+        <p>A sua barbearia online</p>
       </div>
     </div>
+    <nav>
+      <button class="login" @click="router.push('/login')">Login</button>
+      <button @click="router.push('/telaRegistro')">Sign up</button>
+    </nav>
+  </header>
 
-    <div class="br">
-      <h1>Marque seu horário. A gente cuida do resto.</h1>
+  <div class="container">
+    <div class="imageFundo"></div>
+    <div class="content">
+      <h1>
+        Encontre seu barbeiro de confiança
+        <span>e agende seu horário de forma prática.</span>
+      </h1>
+      <p>
+        <strong>Escolha seu barbeiro favorito</strong> e cuide do seu estilo — tudo em um só lugar.
+      </p>
+
+      <div class="botao">
+        <button>Começar agora</button>
+        <p>Agendamentos online, rápido e gratuito</p>
+      </div>
     </div>
-  </template>
+  </div>
+
+  <div class="br">
+    <h1>Marque seu horário. A gente cuida do resto.</h1>
+  </div>
+</template>
 
 <style scoped>
 /* ---------------- HEADER ---------------- */
@@ -53,7 +55,6 @@ header {
   align-items: center;
   margin: 0 6vh;
 }
-
 
 nav {
   display: flex;

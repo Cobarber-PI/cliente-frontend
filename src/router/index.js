@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LoginView from '../views/LoginView.vue'
-import RegistroView from '../views/telaRegistroView.vue'
+import telaRegistroView from '../views/telaRegistroView.vue'
 import IntroducaoView from '../views/introducaoView.vue'
 
 const router = createRouter({
@@ -12,19 +12,14 @@ const router = createRouter({
       component: IntroducaoView,
     },
     {
-      path: '/registro',
-      name: 'registro',
-      component: RegistroView,
+      path: '/telaRegistro',
+      name: 'telaRegistroView',
+      component: telaRegistroView,
     },
     {
       path: '/login',
       name: 'Login',
       component: LoginView,
-    },
-    {
-      path: '/introducao',
-      name: 'introducao',
-      component: IntroducaoView
     },
     {
       path: '/about',
