@@ -1,6 +1,24 @@
 <script setup>
 import { useRouter } from 'vue-router'
 const router = useRouter()
+
+const cards = [
+  {
+    icon: "/public/introdução/calendario.png",
+    title: "Descubra e agende com facilidade",
+    description: "Encontre barbearias próximas, compare e agende em poucos toques.",
+  },
+  {
+    icon: "/public/introdução/lupa.png",
+    title: "Escolha o profissional ideal",
+    description: "Veja avaliações, horários disponíveis e especialidades de cada barbeiro."
+  },
+  {
+    icon: "/public/introdução/coracao.png",
+    title: "Salve seus favoritos",
+    description: "Acompanhe seus agendamentos e repita os serviços que você mais gostou."
+  }
+];
 </script>
 
 <template>
@@ -29,21 +47,32 @@ const router = useRouter()
       <p>
         <strong>Escolha seu barbeiro favorito</strong> e cuide do seu estilo — tudo em um só lugar.
       </p>
-
-      <div class="botao">
-        <button>Começar agora</button>
-        <p>Agendamentos online, rápido e gratuito</p>
-      </div>
     </div>
   </div>
 
-  <div class="br">
-    <h1>Marque seu horário. A gente cuida do resto.</h1>
+  <div class="flexibility">
+    <div class="title-subt">
+      <h1>Tudo o que você precisa para encontrar a barbearia ideal</h1>
+    </div>
+
+    <div class="cards-wrapper">
+      <div class="cards-container">
+        <div v-for="(card, index) in cards" :key="index" class="card">
+          <div class="icon"><img :src=card.icon></div>
+          <h3>{{ card.title }}</h3>
+          <p>{{ card.description }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="botao">
+      <button>Começar agora</button>
+      <p>Agendamentos online, rápido e gratuito</p>
+    </div>
   </div>
 </template>
 
 <style scoped>
-/* ---------------- HEADER ---------------- */
 header {
   position: absolute;
   top: 1.5rem;
@@ -88,7 +117,6 @@ header button:hover {
   color: black;
 }
 
-/* ---------------- CONTAINER ---------------- */
 .container {
   position: relative;
   width: 100%;
@@ -96,7 +124,6 @@ header button:hover {
   background-color: #121212;
 }
 
-/* ---------------- BACKGROUND IMAGE ---------------- */
 .imageFundo {
   position: absolute;
   width: 100%;
@@ -107,12 +134,11 @@ header button:hover {
   filter: blur(0.5px) brightness(0.09);
 }
 
-/* ---------------- CONTENT ---------------- */
 .content {
   position: relative;
   color: white;
   text-align: center;
-  top: 30%;
+  top: 40%;
 }
 
 .content h1 {
@@ -140,7 +166,6 @@ header button:hover {
   max-width: 700px;
 }
 
-/* ---------------- BUTTON ---------------- */
 .botao {
   margin-top: 3rem;
 }
@@ -172,11 +197,9 @@ header button:hover {
   0% {
     background-position: 0% 50%;
   }
-
   50% {
     background-position: 100% 50%;
   }
-
   100% {
     background-position: 0% 50%;
   }
@@ -223,16 +246,86 @@ header button:hover {
   color: #fafafa;
 }
 
-.br {
+.flexibility {
   width: 100%;
-  height: 30vh;
-  background-color: #090808;
+  height: 100vh;
+  background-color: #080808;
   color: #ffffff;
+  padding-bottom: 3rem;
+}
+
+.title-subt {
+  text-align: center;
+  padding: 4rem 0 5rem 0;
+  font-size: 20px;
+}
+
+.cards-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 0 5rem;
+}
+
+.card {
+  background-color: #111;
+  border: 1px solid #333;
+  border-radius: 5px;
+  padding: 2rem;
+  text-align: center;
+  color: white;
+  box-shadow: 0 0 12px #7b79791b;
+  transition: 0.3s;
+  flex: 1;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px #00000080;
+}
+
+.icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.card p {
+  padding-top: 1.5rem;
+}
+
+.botao {
+  margin-top: 4rem;
   text-align: center;
 }
 
-.br h1 {
-  padding-top: 5rem;
-  font-size: 35px;
+.botao button {
+  font-size: 20px;
+  border: none;
+  border-radius: 5px;
+  padding: 0.9rem 4rem;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 450;
+  background: linear-gradient(270deg, #cdcccc, #c7bfbf, #ffffff);
+  background-size: 600% 600%;
+  color: #000000;
+  transition: 0.5s;
+}
+
+.botao button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+  color: #121212;
+  background: linear-gradient(300deg, #cdcccc, #626060, #ffffff, #c89d00, #f5e1b9, #c89d00);
+  background-size: 600% 600%;
+  animation: gradienteSuave 10s ease infinite;
+}
+
+.icon img {
+  width: 50px;
+  height: 50px;
+  display: block;
+  margin: 0 auto;
+  color: #c89d00;
 }
 </style>
