@@ -1,20 +1,25 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
-import RegistroView from '../views/telaRegistroView.vue'
+import telaRegistroView from '../views/telaRegistroView.vue'
+import IntroducaoView from '../views/introducaoView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'Login',
-      component: LoginView,
+      name: 'Introducao',
+      component: IntroducaoView,
     },
     {
-      path: '/registro',
-      name: 'registro',
-      component: RegistroView,
+      path: '/telaRegistro',
+      name: 'telaRegistroView',
+      component: telaRegistroView,
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: LoginView,
     },
     {
       path: '/about',
