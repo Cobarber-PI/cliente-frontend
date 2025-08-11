@@ -3,7 +3,7 @@
 <template>
     <div class="container">
         <div class="espacoEscura">
-            <img src="/public/login/Barber.png" alt="Barbeiro">
+            <img src="/login/Barber.png" alt="Barbeiro">
         </div>
         <div class="parteClara">
             <h1 class="titulo">Bem Vindo de Volta!</h1>
@@ -42,7 +42,7 @@
 
 .espacoEscura img {
     width: 80%;
-    width: 490px;
+    max-width: 490px;
 }
 
 .parteClara {

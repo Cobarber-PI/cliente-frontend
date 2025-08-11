@@ -1,75 +1,76 @@
-  <script setup>
-  import { useRouter } from 'vue-router'
-  const router = useRouter()
-  const cards = [
-    {
-      icon: "/public/introdução/calendario.png",
-      title: "Descubra e agende com facilidade",
-      description: "Encontre barbearias próximas, compare e agende em poucos toques.",
-    },
-    {
-      icon: "/public/introdução/lupa.png",
-      title: "Escolha o profissional ideal",
-      description: "Veja avaliações, horários disponíveis e especialidades de cada barbeiro."
-    },
-    {
-      icon: "/public/introdução/coracao.png",
-      title: "Salve seus favoritos",
-      description: "Acompanhe seus agendamentos e repita os serviços que você mais gostou."
-    }
-  ];
+<script setup>
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
+const cards = [
+  {
+    icon: "/introdução/calendario.png",
+    title: "Descubra e agende com facilidade",
+    description: "Encontre barbearias próximas, compare e agende em poucos toques.",
+  },
+  {
+    icon: "/introdução/lupa.png",
+    title: "Escolha o profissional ideal",
+    description: "Veja avaliações, horários disponíveis e especialidades de cada barbeiro."
+  },
+  {
+    icon: "/introdução/coracao.png",
+    title: "Salve seus favoritos",
+    description: "Acompanhe seus agendamentos e repita os serviços que você mais gostou."
+  }
+];
 </script>
 
-  <template>
-    <header>
-      <div class="logo">
-        <div class="marcaC">
-          <img src="/public/introdução/logoBarber.png" alt="" />
-          <span>|</span>
-          <h3>CoBarber</h3>
-          <p>A sua barbearia online</p>
-        </div>
+<template>
+  <header>
+    <div class="logo">
+      <div class="marcaC">
+        <img src="/introdução/logoBarber.png" alt="" />
+        <span>|</span>
+        <h3>CoBarber</h3>
+        <p>A sua barbearia online</p>
       </div>
-      <nav>
-        <button class="login" @click="router.push('/login')">Login</button>
-        <button @click="router.push('/telaRegistro')">Sign up</button>
-      </nav>
-    </header>
+    </div>
+    <nav>
+      <button class="login" @click="router.push('/login')">Login</button>
+      <button @click="router.push('/telaRegistro')">Sign up</button>
+    </nav>
+  </header>
 
-    <div class="container">
-      <div class="imageFundo"></div>
-      <div class="content">
-        <h1>
-          Encontre seu barbeiro de confiança
-          <span>e agende seu horário de forma prática.</span>
-        </h1>
-        <p>
-          <strong>Escolha seu barbeiro favorito</strong> e cuide do seu estilo — tudo em um só lugar.
-        </p>
+  <div class="container">
+    <div class="imageFundo"></div>
+    <div class="content">
+      <h1>
+        Encontre seu barbeiro de confiança
+        <span>e agende seu horário de forma prática.</span>
+      </h1>
+      <p>
+        <strong>Escolha seu barbeiro favorito</strong> e cuide do seu estilo — tudo em um só lugar.
+      </p>
+    </div>
+  </div>
+
+  <div class="flexibility">
+    <div class="title-subt">
+      <h1>Tudo o que você precisa para encontrar a barbearia ideal</h1>
+    </div>
+
+    <div class="cards-wrapper">
+      <div class="cards-container">
+        <div v-for="(card, index) in cards" :key="index" class="card">
+          <div class="icon"><img :src="card.icon" /></div>
+          <h3>{{ card.title }}</h3>
+          <p>{{ card.description }}</p>
+        </div>
       </div>
     </div>
 
-    <div class="flexibility">
-      <div class="title-subt">
-        <h1>Tudo o que você precisa para encontrar a barbearia ideal</h1>
-      </div>
-
-      <div class="cards-wrapper">
-        <div class="cards-container">
-          <div v-for="(card, index) in cards" :key="index" class="card">
-            <div class="icon"><img :src=card.icon></div>
-            <h3>{{ card.title }}</h3>
-            <p>{{ card.description }}</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="botao">
-        <button>Começar agora</button>
-        <p>Agendamentos online, rápido e gratuito</p>
-      </div>
+    <div class="botao">
+      <button>Começar agora</button>
+      <p>Agendamentos online, rápido e gratuito</p>
     </div>
-  </template>
+  </div>
+</template>
 
 <style scoped>
 header {
@@ -329,5 +330,4 @@ header button:hover {
   margin: 0 auto;
   color: #c89d00;
 }
-
 </style>
