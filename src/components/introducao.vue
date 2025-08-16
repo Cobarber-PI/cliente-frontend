@@ -27,11 +27,10 @@ const passos = [
 </script>
 
 <template>
-  <!-- Header -->
   <header>
     <div class="logo">
       <div class="marcaC">
-        <img src="/public/introdução/logoBarber.png" alt="" />
+        <img src="/introdução/logoBarber.png" alt="" />
         <span>|</span>
         <h3>CoBarber</h3>
         <p>A sua barbearia online</p>
@@ -42,8 +41,6 @@ const passos = [
       <button @click="router.push('/telaRegistro')">Sign up</button>
     </nav>
   </header>
-
-  <!-- Hero -->
   <div class="container">
     <div class="imageFundo"></div>
     <div class="content">
@@ -56,8 +53,6 @@ const passos = [
       </p>
     </div>
   </div>
-
-  <!-- Cards principais -->
   <div class="flexibility">
     <div class="title-subt">
       <h1>Como <span class="highlight">funciona</span></h1>
@@ -65,7 +60,6 @@ const passos = [
         Agendar seu horário nunca foi tão simples. Siga estes passos e tenha uma <br> experiência incrível.
       </p>
     </div>
-
     <div class="cards-wrapper">
       <div class="cards-container">
         <div v-for="(passo, index) in passos" :key="index" class="cartao-passo">
@@ -76,7 +70,6 @@ const passos = [
         </div>
       </div>
     </div>
-
     <div class="botao">
       <button>Começar agora</button>
       <p>Agendamentos online, rápido e gratuito</p>
@@ -85,7 +78,6 @@ const passos = [
 </template>
 
 <style scoped>
-/* ---------- Header ---------- */
 header {
   position: absolute;
   top: 1.5rem;
@@ -165,7 +157,6 @@ header button:hover {
   color: #fafafa;
 }
 
-/* ---------- Hero ---------- */
 .container {
   position: relative;
   width: 100%;
@@ -217,7 +208,6 @@ header button:hover {
   margin: 0 auto;
 }
 
-/* ---------- Cards principais ---------- */
 .flexibility {
   background-color: #080808;
   height: 110vh;
@@ -319,11 +309,6 @@ header button:hover {
   font-size: 20px;
   color: #ccc;
 }
-
-/* ---------- Como funciona ---------- */
-
-
-
 .cartao-passo {
   background: #111;
   border: 1px solid #333;
