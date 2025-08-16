@@ -4,7 +4,7 @@ const router = useRouter()
 
 const passos = [
   {
-    icone: "📍", 
+    icone: "📍",
     titulo: "Encontre sua barbearia",
     descricao: "Use nossos filtros para encontrar a barbearia perfeita perto de você."
   },
@@ -57,35 +57,31 @@ const passos = [
     </div>
   </div>
 
-<!-- Cards principais -->
-<div class="flexibility">
-  <div class="title-subt">
-    <h1>Como <span class="highlight">funciona</span></h1>
-    <p class="subtitulo">
-      Agendar seu horário nunca foi tão simples. Siga estes passos e tenha uma <br> experiência incrível.
-    </p>
-  </div>
+  <!-- Cards principais -->
+  <div class="flexibility">
+    <div class="title-subt">
+      <h1>Como <span class="highlight">funciona</span></h1>
+      <p class="subtitulo">
+        Agendar seu horário nunca foi tão simples. Siga estes passos e tenha uma <br> experiência incrível.
+      </p>
+    </div>
 
-  <div class="cards-wrapper">
-    <div class="cards-container">
-      <div
-        v-for="(passo, index) in passos"
-        :key="index"
-        class="cartao-passo"
-      >
-        <div class="numero-passo">{{ index + 1 }}</div>
-        <div class="icone">{{ passo.icone }}</div>
-        <h3>{{ passo.titulo }}</h3>
-        <p>{{ passo.descricao }}</p>
+    <div class="cards-wrapper">
+      <div class="cards-container">
+        <div v-for="(passo, index) in passos" :key="index" class="cartao-passo">
+          <div class="numero-passo">{{ index + 1 }}</div>
+          <div class="icone">{{ passo.icone }}</div>
+          <h3>{{ passo.titulo }}</h3>
+          <p>{{ passo.descricao }}</p>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="botao">
-    <button>Começar agora</button>
-    <p>Agendamentos online, rápido e gratuito</p>
+    <div class="botao">
+      <button>Começar agora</button>
+      <p>Agendamentos online, rápido e gratuito</p>
+    </div>
   </div>
-</div>
 </template>
 
 <style scoped>
@@ -207,8 +203,8 @@ header button:hover {
   color: #f5b93a;
 }
 
-.title-subt h1 .highlight{
-    color: #f5b93a;
+.title-subt h1 .highlight {
+  color: #f5b93a;
 }
 
 .content p {
@@ -224,6 +220,7 @@ header button:hover {
 /* ---------- Cards principais ---------- */
 .flexibility {
   background-color: #080808;
+  height: 110vh;
   color: #ffffff;
   padding-bottom: 3rem;
 }
@@ -304,9 +301,17 @@ header button:hover {
 }
 
 @keyframes gradienteSuave {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .botao p {
@@ -332,7 +337,7 @@ header button:hover {
 
 .cartao-passo:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
 }
 
 .numero-passo {
@@ -375,5 +380,4 @@ header button:hover {
   color: #ccc;
   padding: 20px;
 }
-
 </style>
