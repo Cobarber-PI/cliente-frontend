@@ -3,7 +3,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 import LoginView from '../views/LoginView.vue'
 import telaRegistroView from '../views/telaRegistroView.vue'
 import IntroducaoView from '../views/introducaoView.vue'
-import ListaBarbeiroView from '@/views/ListaBarbeiroView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,11 +26,6 @@ const router = createRouter({
       path: '/about',
       name: 'about',
       component: () => import('../views/AboutView.vue'),
-    },
-    {
-      path: '/listaBarbeiro',
-      name: 'ListaBarbeiro',
-      component: ListaBarbeiroView,
     },
   ],
 })
