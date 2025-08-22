@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 
-// Estados dos filtros
+// --- Estados dos filtros principais ---
 const localizacao = ref('')
 const distancia = ref(0)
 const avaliacao = ref(0)
@@ -11,7 +11,7 @@ const servico = ref([])
 const facilidade = ref([])
 const ordenar = ref('relevancia')
 
-// opções (agora tudo centralizado em arrays)
+// --- Opções de cada filtro ---
 const opcoesPreco = [
   { label: 'Até R$ 30', value: '30' },
   { label: 'R$ 30 - 50', value: '50' },
@@ -25,8 +25,10 @@ const opcoesFuncionamento = [
   { label: 'Aberto 24h', value: '24h' },
 ]
 
+// Controle do botão 'ver mais' dos serviços
 const mostrarMaisServicos = ref(false)
 
+// Alterna exibição dos serviços (ver mais/menos)
 function alternarVerMais() {
   mostrarMaisServicos.value = !mostrarMaisServicos.value
 }
@@ -45,7 +47,8 @@ const opcoesFacilidade = [
   { label: 'Ar Condicionado', value: 'ar' },
 ]
 
-// Funções de ação
+// --- Funções de ação dos botões ---
+// Aplica os filtros selecionados
 const aplicarFiltros = () => {
   console.log('Filtros aplicados:', {
     localizacao: localizacao.value,
@@ -59,6 +62,7 @@ const aplicarFiltros = () => {
   })
 }
 
+// Limpa todos os filtros
 const limparFiltros = () => {
   localizacao.value = ''
   distancia.value = 0
@@ -71,16 +75,19 @@ const limparFiltros = () => {
 }
 </script>
 
+<!--
+  Sidebar de filtros
+-->
 <template>
   <aside class="filtros">
     <div class="center">
-      <!-- Título -->
+      <!-- Título do filtro -->
       <div class="title">
         <img src="/Filtro/filtro.png" alt="Filtro" class="imagem-filtro" />
         <h2>Filtros</h2>
       </div>
 
-      <!-- Localização -->
+      <!-- Campo de localização -->
       <div class="filtro-section">
         <label>Localização</label>
         <input class="input-loc" v-model="localizacao" placeholder="Digite o bairro..." />
@@ -88,7 +95,7 @@ const limparFiltros = () => {
 
       <hr />
 
-      <!-- Distância -->
+      <!-- Slider de distância -->
       <div class="filtro-section">
         <label>Distância máxima - {{ distancia }} km</label>
         <input
@@ -104,7 +111,7 @@ const limparFiltros = () => {
 
       <hr />
 
-      <!-- Avaliação -->
+      <!-- Slider de avaliação mínima -->
       <div class="filtro-section">
         <label
           >Avaliação mínima - <span class="avaliacao">{{ avaliacao }}</span>
@@ -124,7 +131,7 @@ const limparFiltros = () => {
 
       <hr />
 
-      <!-- Preço -->
+      <!-- Faixa de preço (radio) -->
       <div class="filtro-section">
         <span><img src="/Filtro/cifrao.png" alt="" /> Faixa de preço</span>
         <div class="radio-group">
@@ -137,7 +144,7 @@ const limparFiltros = () => {
 
       <hr />
 
-      <!-- Funcionamento -->
+      <!-- Funcionamento (radio) -->
       <div class="filtro-section">
         <span><img src="/Filtro/relogio.png" alt="" /> Funcionamento</span>
         <div class="radio-group">
@@ -150,7 +157,7 @@ const limparFiltros = () => {
 
       <hr />
 
-      <!-- Serviços -->
+      <!-- Serviços principais (checkbox + ver mais) -->
       <div class="filtro-section">
         <span><img src="/Filtro/pente.png" alt="" /> Serviços principais</span>
         <div class="radio-group">
@@ -175,7 +182,7 @@ const limparFiltros = () => {
 
       <hr />
 
-      <!-- Facilidades -->
+      <!-- Facilidades (checkbox) -->
       <div class="filtro-section">
         <span><img src="/Filtro/cliente.png" alt="" /> Facilidades</span>
         <div class="radio-group">
@@ -188,7 +195,7 @@ const limparFiltros = () => {
 
       <hr />
 
-      <!-- Ordenar por -->
+      <!-- Ordenação dos resultados -->
       <div class="filtro-section">
         <label>Ordenar por</label>
         <select v-model="ordenar" class="select-ordenar">
@@ -199,7 +206,7 @@ const limparFiltros = () => {
         </select>
       </div>
 
-      <!-- Botões -->
+      <!-- Botões de ação -->
       <div class="botoes">
         <button class="btn-aplicar" @click="aplicarFiltros">Aplicar Filtros</button>
         <button class="btn-limpar" @click="limparFiltros">Limpar Filtros</button>
@@ -209,6 +216,7 @@ const limparFiltros = () => {
 </template>
 
 <style scoped>
+/* --- Container principal do filtro --- */
 aside.filtros {
   width: 320px;
   background: #1e1e20;
@@ -217,10 +225,12 @@ aside.filtros {
   padding: 16px;
 }
 
+/* --- Centralização do conteúdo --- */
 .center {
   padding: 10px;
 }
 
+/* --- Título do filtro --- */
 .title {
   display: flex;
   align-items: center;
@@ -238,12 +248,14 @@ aside.filtros {
   height: 25px;
 }
 
+/* --- Seções de cada filtro --- */
 .filtro-section {
   margin: 22px 0;
   display: flex;
   flex-direction: column;
 }
 
+/* --- Labels dos filtros --- */
 label {
   font-size: 15px;
   margin-bottom: 10px;
@@ -251,6 +263,7 @@ label {
   font-weight: 600;
 }
 
+/* --- Grupo de opções (radio/checkbox) --- */
 .radio-group {
   display: flex;
   flex-direction: column;
@@ -258,6 +271,7 @@ label {
   margin-top: 6px;
 }
 
+/* --- Botão 'ver mais'/'ver menos' --- */
 .filtro-section .ver-mais {
   font-size: 14px;
   color: #e1b12c;
@@ -282,6 +296,7 @@ label {
   text-align: center;
 }
 
+/* --- Inputs principais --- */
 .input-loc,
 .select-ordenar {
   height: 42px;
@@ -310,6 +325,7 @@ hr {
   border: solid #222225 1px;
 }
 
+/* --- Slider de range --- */
 input[type='range'] {
   appearance: none;
   -webkit-appearance: none;
@@ -329,6 +345,7 @@ input[type='range']::-webkit-slider-thumb {
   border: 2px solid #f0c238;
 }
 
+/* --- Botões de ação --- */
 .botoes {
   display: flex;
   flex-direction: column;
@@ -336,6 +353,7 @@ input[type='range']::-webkit-slider-thumb {
   margin-top: 20px;
 }
 
+/* --- Botão aplicar --- */
 .btn-aplicar {
   background: #f0c238;
   border: none;
@@ -345,6 +363,7 @@ input[type='range']::-webkit-slider-thumb {
   cursor: pointer;
 }
 
+/* --- Botão limpar --- */
 .btn-limpar {
   background: transparent;
   border: 2px solid #444;
@@ -355,24 +374,25 @@ input[type='range']::-webkit-slider-thumb {
   cursor: pointer;
 }
 
+/* --- Ícones das seções --- */
 .filtro-section img {
   width: 18px;
   height: 18px;
   margin-right: 5px;
 }
 
+/* --- Ícone estrela avaliação --- */
 .filtro-section .estrela {
   width: 15px;
   height: 15px;
   margin: 0 6px;
 }
 
+/* --- Nota de avaliação --- */
 label .avaliacao {
   font-size: 16px;
-    margin-left: 5px;
-
+  margin-left: 5px;
 }
-
 
 .filtro-section span {
   color: #fafafa;
@@ -387,14 +407,17 @@ label .avaliacao {
   font-weight: 400;
 }
 
+/* --- Seta animada do ver mais/menos --- */
 .seta {
   transition: transform 0.2s;
 }
 
+/* --- Estado rotacionado da seta --- */
 .rotated {
   transform: rotate(180deg);
 }
 
+/* --- Radio customizado --- */
 input[type='radio'] {
   appearance: none;
   -webkit-appearance: none;
@@ -424,6 +447,7 @@ input[type='radio']:checked::after {
   background-size: contain;
 }
 
+/* --- Checkbox customizado --- */
 input[type='checkbox'] {
   appearance: none;
   -webkit-appearance: none;
