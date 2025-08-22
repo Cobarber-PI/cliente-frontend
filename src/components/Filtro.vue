@@ -431,8 +431,8 @@ input[type='radio'] {
 }
 
 input[type='radio']:checked {
-  border-color: #e5b72d;
-  background: #cea529;
+  border-color: #e57d2d;
+  background: #e8b312;
 }
 
 input[type='radio']:checked::after {
@@ -462,7 +462,7 @@ input[type='checkbox'] {
 
 input[type='checkbox']:checked {
   border-color: #e5b72d;
-  background: #cea529;
+  background: #c8990d;
 }
 
 input[type='checkbox']:checked::after {
