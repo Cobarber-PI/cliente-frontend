@@ -3,13 +3,47 @@ import { ref } from 'vue'
 
 // Estados dos filtros
 const localizacao = ref('')
-const distancia = ref(0) // pode trocar para ref(1) se quiser evitar mostrar 0
-const avaliacao = ref(0) // idem
+const distancia = ref(0)
+const avaliacao = ref(0)
 const preco = ref('')
 const funcionamento = ref('')
-const servico = ref('')
-const facilidade = ref('')
+const servico = ref([])
+const facilidade = ref([])
 const ordenar = ref('relevancia')
+
+// opções (agora tudo centralizado em arrays)
+const opcoesPreco = [
+  { label: 'Até R$ 30', value: '30' },
+  { label: 'R$ 30 - 50', value: '50' },
+  { label: 'R$ 50 - 100', value: '100' },
+]
+
+const opcoesFuncionamento = [
+  { label: 'Aberto agora', value: 'agora' },
+  { label: 'Dias de semana', value: 'dds' },
+  { label: 'Finais de semana', value: 'fds' },
+  { label: 'Aberto 24h', value: '24h' },
+]
+
+const mostrarMaisServicos = ref(false)
+
+function alternarVerMais() {
+  mostrarMaisServicos.value = !mostrarMaisServicos.value
+}
+
+const opcoesServico = [
+  { label: 'Corte Masculino', value: 'corte' },
+  { label: 'Barba & Bigode', value: 'barba' },
+  { label: 'Sobrancelha', value: 'sobrancelha' },
+  { label: 'Pintura de cabelo', value: 'pintura' },
+  { label: 'Tratamento capilar', value: 'tratamento' },
+]
+
+const opcoesFacilidade = [
+  { label: 'Wi-Fi Gratuito', value: 'wifi' },
+  { label: 'Estacionamento', value: 'estacionamento' },
+  { label: 'Ar Condicionado', value: 'ar' },
+]
 
 // Funções de ação
 const aplicarFiltros = () => {
@@ -56,7 +90,7 @@ const limparFiltros = () => {
 
       <!-- Distância -->
       <div class="filtro-section">
-        <label>Distância máxima: {{ distancia }} km</label>
+        <label>Distância máxima - {{ distancia }} km</label>
         <input
           type="range"
           min="1"
@@ -72,7 +106,10 @@ const limparFiltros = () => {
 
       <!-- Avaliação -->
       <div class="filtro-section">
-        <label>Avaliação mínima: {{ avaliacao }} ★</label>
+        <label
+          >Avaliação mínima - <span class="avaliacao">{{ avaliacao }}</span>
+          <img src="/Filtro/estrela.png" alt="estrela" class="estrela" />
+        </label>
         <input
           type="range"
           min="1"
@@ -89,30 +126,25 @@ const limparFiltros = () => {
 
       <!-- Preço -->
       <div class="filtro-section">
-        <label>$ Faixa de preço {{ preco }}</label>
-        <select v-model="preco" class="select-ordenar">
-          <option value="30">Até - R$ 30</option>
-          <option value="50">R$ 30 - 50</option>
-          <option value="100">R$ 50 - 100</option>
-        </select>
+        <span><img src="/Filtro/cifrao.png" alt="" /> Faixa de preço</span>
+        <div class="radio-group">
+          <label v-for="op in opcoesPreco" :key="op.value">
+            <input type="radio" v-model="preco" :value="op.value" />
+            {{ op.label }}
+          </label>
+        </div>
       </div>
 
       <hr />
 
       <!-- Funcionamento -->
       <div class="filtro-section">
-        <span>⏰ Funcionamento</span>
+        <span><img src="/Filtro/relogio.png" alt="" /> Funcionamento</span>
         <div class="radio-group">
-          <label><input type="radio" value="agora" v-model="funcionamento" /> Aberto agora</label>
-          <label
-            ><input type="radio" value="dds" v-model="funcionamento" /> Aberto nos dias de
-            semana</label
-          >
-          <label
-            ><input type="radio" value="fds" v-model="funcionamento" /> Aberto nos finais de
-            semana</label
-          >
-          <label><input type="radio" value="24h" v-model="funcionamento" /> Aberto 24h</label>
+          <label v-for="op in opcoesFuncionamento" :key="op.value">
+            <input type="radio" v-model="funcionamento" :value="op.value" />
+            {{ op.label }}
+          </label>
         </div>
       </div>
 
@@ -120,29 +152,38 @@ const limparFiltros = () => {
 
       <!-- Serviços -->
       <div class="filtro-section">
-        <span>✂ Serviços principais</span>
+        <span><img src="/Filtro/pente.png" alt="" /> Serviços principais</span>
         <div class="radio-group">
-          <label><input type="radio" value="corte" v-model="servico" /> Corte Masculino</label>
-          <label><input type="radio" value="barba" v-model="servico" /> Barba & Bigode</label>
-          <label><input type="radio" value="sobrancelha" v-model="servico" /> Sobrancelha</label>
+          <label
+            v-for="op in mostrarMaisServicos ? opcoesServico : opcoesServico.slice(0, 3)"
+            :key="op.value"
+          >
+            <input type="checkbox" v-model="servico" :value="op.value" />
+            {{ op.label }}
+          </label>
         </div>
-        <span class="ver-mais">Ver mais</span>
+        <span class="ver-mais" @click="alternarVerMais">
+          <img
+            src="/Filtro/seta.png"
+            alt="seta"
+            :class="{ rotated: mostrarMaisServicos }"
+            class="seta"
+          />
+          {{ mostrarMaisServicos ? 'Ver menos' : 'Ver mais' }}
+        </span>
       </div>
 
       <hr />
 
       <!-- Facilidades -->
       <div class="filtro-section">
-        <span>📶 Facilidades</span>
+        <span><img src="/Filtro/cliente.png" alt="" /> Facilidades</span>
         <div class="radio-group">
-          <label><input type="radio" value="wifi" v-model="facilidade" /> Wi-Fi Gratuito</label>
-          <label
-            ><input type="radio" value="estacionamento" v-model="facilidade" />
-            Estacionamento</label
-          >
-          <label><input type="radio" value="ar" v-model="facilidade" /> Ar Condicionado</label>
+          <label v-for="op in opcoesFacilidade" :key="op.value">
+            <input type="checkbox" v-model="facilidade" :value="op.value" />
+            {{ op.label }}
+          </label>
         </div>
-        <span class="ver-mais">Ver mais</span>
       </div>
 
       <hr />
@@ -168,7 +209,6 @@ const limparFiltros = () => {
 </template>
 
 <style scoped>
-
 aside.filtros {
   width: 320px;
   background: #1e1e20;
@@ -218,11 +258,28 @@ label {
   margin-top: 6px;
 }
 
-.ver-mais {
-  margin-top: 8px;
+.filtro-section .ver-mais {
   font-size: 14px;
   color: #e1b12c;
   cursor: pointer;
+}
+
+.filtro-section .ver-mais img {
+  width: 10px;
+  height: 10px;
+}
+
+.ver-mais {
+  width: 100px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #1e1e20;
+  border-radius: 8px;
+  border: solid #483f25 1px;
+  text-align: center;
 }
 
 .input-loc,
@@ -243,12 +300,18 @@ label {
   border: solid #f0c238 2px;
 }
 
+.select-ordenar option {
+  background: #09090b;
+  color: #fafafa;
+  border: solid #342c15 1px;
+}
 
 hr {
   border: solid #222225 1px;
 }
 
 input[type='range'] {
+  appearance: none;
   -webkit-appearance: none;
   width: 100%;
   height: 8px;
@@ -256,7 +319,6 @@ input[type='range'] {
   outline: none;
 }
 
-/* Bolinha (thumb) */
 input[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 18px;
@@ -267,7 +329,6 @@ input[type='range']::-webkit-slider-thumb {
   border: 2px solid #f0c238;
 }
 
-/* Botões */
 .botoes {
   display: flex;
   flex-direction: column;
@@ -292,5 +353,103 @@ input[type='range']::-webkit-slider-thumb {
   color: #fafafa;
   font-weight: 600;
   cursor: pointer;
+}
+
+.filtro-section img {
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
+}
+
+.filtro-section .estrela {
+  width: 15px;
+  height: 15px;
+  margin: 0 6px;
+}
+
+label .avaliacao {
+  font-size: 16px;
+    margin-left: 5px;
+
+}
+
+
+.filtro-section span {
+  color: #fafafa;
+  font-weight: 600;
+  padding: 10px 0;
+}
+
+.radio-group label {
+  color: #c1c1c1;
+  outline: none;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.seta {
+  transition: transform 0.2s;
+}
+
+.rotated {
+  transform: rotate(180deg);
+}
+
+input[type='radio'] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #b78900;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  margin-right: 6px;
+}
+
+input[type='radio']:checked {
+  border-color: #e5b72d;
+  background: #cea529;
+}
+
+input[type='radio']:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 11px;
+  height: 11px;
+  transform: translate(-50%, -50%);
+  background-image: url('/Filtro/marca-de-verificacao.png');
+  background-size: contain;
+}
+
+input[type='checkbox'] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #b78900;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  margin-right: 6px;
+}
+
+input[type='checkbox']:checked {
+  border-color: #e5b72d;
+  background: #cea529;
+}
+
+input[type='checkbox']:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 11px;
+  height: 11px;
+  transform: translate(-50%, -50%);
+  background-image: url('/Filtro/marca-de-verificacao.png');
+  background-size: contain;
 }
 </style>
