@@ -100,8 +100,8 @@ header button {
   font-size: 15px;
   padding: 8px 16px;
   background-color: transparent;
-  border: 1px solid #f5e1b9;
-  color: #f5e1b9;
+  border: 1px solid #ffffff;
+  color: #ffffff;
   cursor: pointer;
   border-radius: 4px;
   font-family: 'Poppins', sans-serif;
@@ -111,7 +111,7 @@ header button {
 .login {
   background-color: transparent;
   border: none;
-  color: #f5e1b9;
+  color: #ffffff;
   cursor: pointer;
   border-radius: 4px;
   font-family: 'Poppins', sans-serif;
