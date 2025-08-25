@@ -1,9 +1,9 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+import TelaHome from '@/components/TelaHome.vue';
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <TelaHome />
   </main>
 </template>
