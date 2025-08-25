@@ -8,17 +8,19 @@ import Email from 'vue-material-design-icons/Email.vue'
   <footer>
     <div class="footer-container">
       <div class="first-colum">
-        <h2>CoBarber</h2>
+        <div class="logo-footer">
+          <div class="image"><img src="/introdução/logoBarber.png" alt="Logo CoBarber" /></div>
+          <h2>CoBarber</h2>
+        </div>
         <span
           >A plataforma mais completa para agendamento em barbearias. Conectando clientes e
           profissionais de forma simples e eficiente.</span
         >
         <div class="infos">
-          <span><MapMarker style="color: #f5b906" /> São Paulo (SP) - Brasil</span>
-          <span><Phone style="color: #f5b906" /> (11) 9999-9999</span>
-          <span><Email style="color: #f5b906" /> contato@cobarber.com</span>
+          <span><MapMarker style="color: #efb402" /> São Paulo (SP) - Brasil</span>
+          <span><Phone style="color: #efb402" /> (11) 9999-9999</span>
+          <span><Email style="color: #efb402" /> contato@cobarber.com</span>
         </div>
-        <p></p>
       </div>
       <div class="colum">
         <h3>Links Rápidos</h3>
@@ -61,6 +63,12 @@ import Email from 'vue-material-design-icons/Email.vue'
 </template>
 
 <style scoped>
+.image img {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+}
+
 footer {
   width: 100%;
   height: 70vh;
@@ -141,4 +149,23 @@ footer {
   color: #f0c238;
 }
 
+.logo-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-footer img {
+  width: 40px;
+  height: 40px;
+  margin: 6px;
+}
+
+.image {
+  width: 50px;
+  height: 50px;
+  background: #222225;
+  border: solid 1px #f0c238;
+  border-radius: 12px;
+}
 </style>
