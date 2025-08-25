@@ -1,3 +1,9 @@
+<script setup>
+import MapMarker from 'vue-material-design-icons/MapMarker.vue'
+import Phone from 'vue-material-design-icons/Phone.vue'
+import Email from 'vue-material-design-icons/Email.vue'
+</script>
+
 <template>
   <footer>
     <div class="footer-container">
@@ -8,9 +14,9 @@
           profissionais de forma simples e eficiente.</span
         >
         <div class="infos">
-          <span><img src="/Footer/localizacao.png" class="loc" /> São Paulo (SP) - Brasil</span>
-          <span><img src="/Footer/telefone.png" class="tel" />(11) 9999-9999</span>
-          <span><img src="/Footer/o-email.png" class="email" />contato@cobarber.com</span>
+          <span><MapMarker style="color: #f5b906" /> São Paulo (SP) - Brasil</span>
+          <span><Phone style="color: #f5b906" /> (11) 9999-9999</span>
+          <span><Email style="color: #f5b906" /> contato@cobarber.com</span>
         </div>
         <p></p>
       </div>
@@ -26,28 +32,28 @@
       <div class="colum">
         <h3>Suporte</h3>
         <ul>
-          <li><a href="#">Central de Ajuda</a></li>
-          <li><a href="#">Contato</a></li>
-          <li><a href="#">Suporte Técnico</a></li>
-          <li><a href="#">Reportar Problema</a></li>
+          <li><a href="https://github.com/Henrique0330">Central de Ajuda</a></li>
+          <li><a href="https://github.com/Henrique0330">Contato</a></li>
+          <li><a href="https://github.com/Henrique0330">Suporte Técnico</a></li>
+          <li><a href="https://github.com/Henrique0330">Reportar Problema</a></li>
         </ul>
       </div>
       <div class="colum">
         <h3>Para Negócios</h3>
         <ul>
-          <li><a href="#">Cadastre sua Barbearia</a></li>
-          <li><a href="#">Planos para Barbeiros</a></li>
-          <li><a href="#">Dashboard Profissional</a></li>
-          <li><a href="#">API para Desenvolvedores</a></li>
+          <li><a href="https://github.com/MarcoPeruzzocmd">Cadastre sua Barbearia</a></li>
+          <li><a href="https://github.com/MarcoPeruzzocmd">Planos para Barbeiros</a></li>
+          <li><a href="https://github.com/MarcoPeruzzocmd">Dashboard Profissional</a></li>
+          <li><a href="https://github.com/MarcoPeruzzocmd">API para Desenvolvedores</a></li>
         </ul>
       </div>
       <div class="colum">
         <h3>Legal</h3>
         <ul>
-          <li><a href="#">Termos de Uso</a></li>
-          <li><a href="#">Política de Privacidade</a></li>
-          <li><a href="#">Cookies</a></li>
-          <li><a href="#">LGPD</a></li>
+          <li><a href="https://github.com/GoodSir6">Termos de Uso</a></li>
+          <li><a href="https://github.com/GoodSir6">Política de Privacidade</a></li>
+          <li><a href="https://github.com/GoodSir6">Cookies</a></li>
+          <li><a href="https://github.com/GoodSir6">LGPD</a></li>
         </ul>
       </div>
     </div>
@@ -97,18 +103,14 @@ footer {
 .infos {
   display: flex;
   flex-direction: column;
-  gap: 8px; /* espaço entre as linhas (local, tel, email) */
 }
 
 .infos span {
   display: flex;
-  align-items: center;
   gap: 10px; /* espaço entre ícone e texto */
   font-size: 15px;
   color: #a1a1aa;
 }
-
-/* todos os ícones terão a mesma largura, garantindo alinhamento */
 
 .infos h3 {
   margin-top: 12px;
@@ -139,10 +141,4 @@ footer {
   color: #f0c238;
 }
 
-.infos span img {
-  width: 22px;
-  height: 22px;
-  object-fit: contain;
-  flex-shrink: 0; /* evita encolher */
-}
 </style>
