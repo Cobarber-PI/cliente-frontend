@@ -1,121 +1,151 @@
-<script setup></script>
+<script setup>
+import { ref } from 'vue'
+
+const cpf = ref('')
+const celular = ref('')
+</script>
 
 <template>
-    <div class="container">
-        <div class="espacoEscura">
-            <img src="/login/Barber.png" alt="Barbeiro">
-        </div>
-        <div class="parteClara">
-            <h1 class="titulo">Bem Vindo de Volta!</h1>
-            <button class="botao-google">
-                <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" />
-                <p>Continuar com Google</p>
-            </button>
-            <div class="divisor">
-                <span></span>
-                ou
-                <span></span>
-            </div>
-            <input type="text" placeholder="Email" class="input" />
-            <input type="password" placeholder="Senha" class="input" />
-            <a href="#" class="link">Esqueceu sua senha?</a>
-            <button class="botao-entrar">ENTRAR</button>
-            <a href="#" class="link baixo">Não possui conta?</a>
-        </div>
+  <div class="container">
+    <div class="logo">
+      <img src="/public/login/cobarber.png" alt="Logo" />
     </div>
+
+    <div class="form-box">
+      <p class="titulo">Olá!</p>
+      <p class="subtitle">Para continuar, digite seus dados</p>
+
+      <form @submit.prevent="() => {}">
+        <input
+          type="text"
+          v-model="cpf"
+          placeholder="CPF"
+          maxlength="11"
+          inputmode="numeric"
+        />
+
+        <div class="input-group">
+          <input
+            type="date"
+            placeholder="Data de nascimento"
+          />
+        </div>
+
+        <input
+          type="text"
+          v-model="celular"
+          placeholder="Celular"
+          maxlength="11"
+          inputmode="numeric"
+        />
+
+        <button type="submit" class="btn">
+          Cadastrar-se
+        </button>
+      </form>
+
+      <p class="link">Não tem uma conta? <a href="#">Cadastre-se</a></p>
+    </div>
+  </div>
 </template>
 
 <style scoped>
 .container {
-    display: flex;
-    height: 100vh;
-    width: 100%;
+  --field-w: 29.5vw;
+  --field-h: 6.6vh;
+
+  background: #0F0F0E;
+  color: #fff;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;        
+  justify-content: center;
 }
 
-.espacoEscura {
-    width: 50%;
-    background-color: #1C2227;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.logo img {
+  width: 180px;
+  margin-bottom: 20px;
 }
 
-.espacoEscura img {
-    width: 80%;
-    max-width: 490px;
-}
-
-.parteClara {
-    margin-left: 15%;
-    background-color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.form-box {
+  width: var(--field-w);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .titulo {
-    font-size: 28px;
-    margin-bottom: 25px;
+  font-size: 50px;
+  margin: 0 0 4px 0;
+  line-height: 1.1;
+  font-weight: 100;
 }
 
-.botao-google {
-    display: flex;
-    gap: 60px;
-    border: 1px solid #ccc;
-    background-color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
+.subtitle {
+  font-size: 20px;
+  margin: 0 0 20px 0;
+  color: #cfcfcf;
 }
 
-.botao-google img {
-    width: 20px;
-    height: 20px;
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.divisor {
-    display: flex;
-    align-items: center;
-    color: #888;
-    margin: 15px 0 20px;
-    gap: 12px;
+input,
+.btn {
+  width: var(--field-w);
+  height: var(--field-h);
+  box-sizing: border-box;
+
+  border-radius: 8px;
+  border: 1px solid #444;
+  background: transparent;
+  color: #fff;
+  padding: 0 16px;
+  font-size: 14px;
 }
 
-.divisor span {
-    height: 1px;
-    background-color: #ccc;
-    width: 110px;
+input::placeholder {
+  color: #aaa;
 }
 
-.input {
-    width: 100%;
-    padding: 14px;
-    margin-bottom: 15px;
-    border-radius: 8px;
-    border: none;
-    background-color: #e0e0e0;
-    font-size: 16px;
+input[type="date"] {
+  appearance: none;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.input-group {
+  position: relative;
+  width: 100%;
+}
+
+.btn {
+  background: #c7a464;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn:hover {
+  background: #b18f52;
 }
 
 .link {
-    font-size: 14px;
-    color: #444;
-    text-decoration: none;
-    margin: 10px 0;
-    font-weight: 600;
+  margin-top: 15px;
+  font-size: 13px;
 }
-
-.botao-entrar {
-    width: 100%;
-    max-width: 300px;
-    padding: 12px;
-    background-color: #1C2227;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
+.link a {
+  color: #c7a464;
+  text-decoration: none;
+}
+.link a:hover {
+  text-decoration: underline;
 }
 </style>
