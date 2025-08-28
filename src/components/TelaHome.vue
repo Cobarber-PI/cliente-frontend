@@ -1,51 +1,148 @@
-<script setup></script>
+<script setup>
+</script>
+
 <template>
-    <nav class="header">
-        <div class="logo">
-            <img src="/public/home/logo1.svg" alt="" class="imgLogo">
-            <h4>CoBarber</h4>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="/public/home/logo1.svg" alt="">
+                <h1>CoBarber</h1>
+            </div>
+            <div class="nav">
+                <ul>
+                    <router-link to="/">Início</router-link>
+                    <router-link to="/barbearias">Barbearias</router-link>
+                    <router-link to="/agendamentos">Agendamentos</router-link>  
+                </ul>
+            </div>
+            <div class="login">
+                <button class="entrar">
+                    <img src="/public/home/user.svg" alt="">
+                    <p>Login</p>
+                </button>
+                <button class="cadastrar">
+                    Cadastrar   
+                </button>
+            </div>
         </div>
-        <div class="links">
-            <a href="">Início</a>
-            <a href="">Barbearias</a>
-            <a href="">Agendamentos</a>
+    </header>
+
+    <main>
+        <h1>Encontre a <span>barbearia perfeita</span></h1>
+        <p>Agende um horário com os melhores barbeiros de sua região. Simples, rápido e sem complicação</p>
+        <div class="busca">
+
         </div>
-    </nav>
-    <div></div>
+    </main>
+    <!--  calc(100vh - 80px)-->
 </template>
 
 <style scoped>
-
-.header {
-    display: flex;
-    align-items: center;
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+header {
     width: 100%;
-    height: 93px;
+    height: 80px;
     background-color: #09090B;
-    justify-content: space-between;
-}
-
-.logo {
-    margin-left: 44px;
+    color: white;
     display: flex;
     align-items: center;
 }
-.imgLogo {
-    width: 70px;
-    height: 70px;
+
+.login{
+    display: flex;
+    gap: 10px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
+    padding: 0 20px;
+    margin: 0 auto;
+    width: 90%;
 }
 
-h4 {
-    font-size: 25px;
-    font-weight: bold;
-    color: white;
+.logo{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img{
+    margin-top: 15px;
+    width: 50%;
+}   
+
+.logo h1{
+    font-size: 24px;
     font-family: "Cinzel", serif;
+    font-weight: bold;
+
 }
 
-.links > a {
-    margin: 39px;
-    color: #B0B0B0;
+ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+a{
     text-decoration: none;
+    color: #B0B0B0;
+}
+button{
+    display: flex;
+    background-color: #09090B;
+    color: white;
+    border: 1px solid #B29457;
+    border-radius: 10px;
+    width: 95px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    gap: 11px;
+    cursor: pointer;
+}
+.cadastrar{
+    background-color: #5f5136;
+    border: 1px solid #09090B;
+
+}
+main{
+    width: 100%;
+    height: 699px; 
+    background-image: url('/public/home/fundoHome.svg');
+    background-size: cover;
+}
+main > h1{
+    color: white;
+    font-size: 75px;
+    text-align: center;
+    padding-top: 95px;
+    font-family: 'monteserrat', sans-serif;
+}
+main > h1 span{
+    color: #F1C23C;
+    font-weight: bold;
+}
+main > p{
+    color: #A1A1AA;
+    font-size: 25px;
+    text-align: center;
+    width: 700px;
+    margin: auto;
+    margin-top: 25px;
+}
+.busca{
+    width: 850px;
+    height: 120px;
+    background-color: #1F1F21;
+    margin: auto;
+    margin-top: 60px;
+    border-radius: 15px;
+    border: solid 1px #F1C23C;
 }
 </style>

@@ -1,11 +1,10 @@
 <script setup>
 import TelaHome from '@/components/TelaHome.vue';
-import Header2Comp from '@/components/Header2Comp.vue';
+import Header2Comp from '@/components/TelaHome.vue';
 </script>
 
 <template>
   <main>
-    <!-- <TelaHome /> -->
-    <Header2Comp />
+    <TelaHome />
   </main>
 </template>
