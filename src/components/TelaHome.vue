@@ -28,7 +28,7 @@
     </header>
 
     <main>
-        <h1>Encontre a <span>barbearia perfeita</span></h1>
+        <h1 class="homeTitulo">Encontre a <span>barbearia perfeita</span></h1>
         <p>Agende um horário com os melhores barbeiros de sua região. Simples, rápido e sem complicação</p>
         <div class="busca">
             <div class="inputs">
@@ -38,6 +38,10 @@
                     <p>Buscar barbearias</p>
                 </button>
             </div>
+        </div>
+        <div class="textoInfo">
+            <p class="paragrafoInfo"><img src="/public/home/tesoura.svg" alt=""> +150 Barbearias</p>
+            <p class="paragrafoInfo"><img src="/public/home/localizacao.svg" alt="">Toda a região</p>
         </div>
     </main>
     <!--  calc(100vh - 80px)-->
@@ -102,7 +106,7 @@ a {
 
 .entrar {
     display: flex;
-    background-color: #09090B;
+    background-color: #0F0F0E;
     color: white;
     border: 1px solid #B29457;
     border-radius: 10px;
@@ -128,12 +132,12 @@ a {
 
 main {
     width: 100%;
-    height: 699px;
+    height: 580px;
     background-image: url('/public/home/fundoHome.svg');
     background-size: cover;
 }
 
-main>h1 {
+.homeTitulo {
     color: white;
     font-size: 75px;
     text-align: center;
@@ -141,7 +145,7 @@ main>h1 {
     font-family: 'monteserrat', sans-serif;
 }
 
-main>h1 span {
+.homeTitulo span {
     color: #F1C23C;
     font-weight: bold;
 }
@@ -166,13 +170,15 @@ main>p {
     display: flex;
     align-items: center;
 }
+
 .inputs {
     display: flex;
     justify-content: center;
     gap: 20px;
     width: 100%;
 }
-.inputs > input{
+
+.inputs>input {
     width: 510px;
     height: 65px;
     border-radius: 15px;
@@ -183,7 +189,8 @@ main>p {
     color: white;
     font-family: 'Inter', sans-serif;
 }
-.inputs > .buscarBarberias{
+
+.inputs>.buscarBarberias {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -196,5 +203,18 @@ main>p {
     cursor: pointer;
     font-size: 18px;
     font-weight: 500;
+}
+.textoInfo {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
+}
+.paragrafoInfo {
+    color: #B0B0B0;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
 }
 </style>
