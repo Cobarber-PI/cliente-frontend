@@ -1,48 +1,49 @@
 <script setup>
 import { ref } from 'vue'
-
-const cpf = ref('')
-const celular = ref('')
 import TelaRegistroDois from './telaRegistroDois.vue'
+
+const senha = ref('')
+const senhaConfirmada = ref('')
+const email = ref('')
+const nome = ref('')
+
 const stage = ref(true)
 
 const showStage = () => {
-    stage.value = !stage.value
-    console.log(stage.value)
+  stage.value = !stage.value
+  console.log(stage.value)
 }
 </script>
 
 <template>
   <div class="container">
-    
-    <div class="logo">
-      <img src="/public/login/cobarber.svg" alt="Logo" />
-    </div>
-
-    <div class="form-box" >
-        
+    <div class="form-box">
+      <div class="logo">
+        <img src="/public/login/cobarber.svg" alt="Logo" />
+      </div>
       <p class="titulo">Olá!</p>
       <p class="subtitle">Para continuar, digite seus dados</p>
-        <div class="stage" v-if="stage">
+      <div class="stage" v-if="stage">
 
-      <form @submit.prevent="() => { }">
-        <input type="text" v-model="cpf" placeholder="CPF" maxlength="11" inputmode="numeric" />
-        <div class="input-group">
-         
-        </div>
-
-        <input type="text" v-model="celular" placeholder="Celular" maxlength="11" inputmode="numeric" />
-
-      </form>
+        <form @submit.prevent="() => { }">
+          <input type="text" v-model="nome" placeholder="Nome completo" maxlength="100" inputmode="latin-name" />
+          <input type="text" v-model="email" placeholder="Email" maxlength="30" inputmode="numeric" />
+          <input type="text" v-model="senha" placeholder="Senha" maxlength="30" inputmode="numeric" />
+          <input type="text" v-model="senhaConfirmada" placeholder="Confirme sua senha" maxlength="30"
+            inputmode="numeric" />
+        </form>
+      </div>
+      <TelaRegistroDois v-if="!stage" />
     </div>
-    <TelaRegistroDois v-if="!stage" />
-    </div>
-        <button type="submit" class="btn" @click="showStage" @submit.prevent>
-          Cadastrar-se
-        </button>
-
-      <p class="link">Já tem uma conta? <a href="#">Faça o login</a></p>
-    </div>
+    <br>
+    <button type="submit" class="btn" @click="showStage" @submit.prevent v-if="stage">
+      Continuar
+    </button>
+    <button type="submit" class="btn" @click="cadastrar" @submit.prevent v-if="!stage">
+      Cadastrar
+    </button>
+    <p class="link">Já tem uma conta? <a href="#">Faça o login</a></p>
+  </div>
 
 </template>
 
@@ -59,7 +60,7 @@ const showStage = () => {
 
   background: #0F0F0E;
   color: #fff;
-  min-height: 100vh;
+  height: 100vh;
 
   display: flex;
   flex-direction: column;
@@ -69,26 +70,36 @@ const showStage = () => {
 
 .logo img {
   width: 160px;
-  margin-bottom: 20px;
+  margin-top: -50px;
+}
+.logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .form-box {
   width: var(--field-w);
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  height: 60vh;
 }
 
 .titulo {
   font-size: 45px;
   margin: 0 0 -4px 0;
   font-weight: 300;
+  text-align: start;
+  width: 100%;
 }
 
 .subtitle {
   font-size: 20px;
   margin: 0 0 30px 0;
   color: #cfcfcf;
+  width: 100%;
+  text-align: start;
 }
 
 form {

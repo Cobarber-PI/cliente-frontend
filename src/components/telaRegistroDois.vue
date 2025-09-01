@@ -8,9 +8,7 @@ const dateFocused = ref(false)
 </script>
 
 <template>
-   
-
-    <div class="form-box">
+    <div class="form-box2">
       <form @submit.prevent="() => { }">
         <input type="text" v-model="cpf" placeholder="CPF" maxlength="11" inputmode="numeric" />
         <div class="input-group">
@@ -20,12 +18,9 @@ const dateFocused = ref(false)
             Data de nascimento
           </span>
         </div>
-
         <input type="text" v-model="celular" placeholder="Celular" maxlength="11" inputmode="numeric" />
       </form>
-
     </div>
-  
 </template>
 
 <style scoped>
@@ -41,7 +36,7 @@ const dateFocused = ref(false)
 
   background: #0F0F0E;
   color: #fff;
-  min-height: 100vh;
+  height: 100vh;
 
   display: flex;
   flex-direction: column;
@@ -51,14 +46,16 @@ const dateFocused = ref(false)
 
 .logo img {
   width: 160px;
-  margin-bottom: 20px;
+  margin-top: -50px;
 }
 
-.form-box {
+.form-box2 {
   width: var(--field-w);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: space-around;
+  height: 50vh;
 }
 
 .titulo {
