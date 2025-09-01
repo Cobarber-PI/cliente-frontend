@@ -8,15 +8,9 @@ const dateFocused = ref(false)
 </script>
 
 <template>
-  <div class="container">
-    <div class="logo">
-      <img src="/public/login/cobarber.svg" alt="Logo" />
-    </div>
+   
 
     <div class="form-box">
-      <p class="titulo">Olá!</p>
-      <p class="subtitle">Para continuar, digite seus dados</p>
-
       <form @submit.prevent="() => { }">
         <input type="text" v-model="cpf" placeholder="CPF" maxlength="11" inputmode="numeric" />
         <div class="input-group">
@@ -28,15 +22,10 @@ const dateFocused = ref(false)
         </div>
 
         <input type="text" v-model="celular" placeholder="Celular" maxlength="11" inputmode="numeric" />
-
-        <button type="submit" class="btn">
-          Cadastrar-se
-        </button>
       </form>
 
-      <p class="link">Não tem uma conta? <a href="#">Cadastre-se</a></p>
     </div>
-  </div>
+  
 </template>
 
 <style scoped>

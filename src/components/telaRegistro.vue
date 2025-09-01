@@ -1,141 +1,178 @@
 <script setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
 
-const dia = ref('');
-const mes = ref('');
-const ano = ref('');
+const cpf = ref('')
+const celular = ref('')
+import TelaRegistroDois from './telaRegistroDois.vue'
+const stage = ref(true)
+
+const showStage = () => {
+    stage.value = !stage.value
+    console.log(stage.value)
+}
 </script>
 
 <template>
-    <div class="conteudo">
-        <div>
-            <img src="/imgsRegistro/imgRegistro.png" class="imagem" />
-        </div>
-
-        <div class="forms1">
-            <h1 class="titulo">Sign up</h1>
-            <input class="input-form" type="text" placeholder="User" />
-            <input class="input-form" type="text" placeholder="Phone" />
-            <input class="input-form" type="text" placeholder="CPF" />
-
-            <div class="forms2">
-                <label>Data de nascimento</label>
-                <div class="data-nasc">
-                    <select v-model="dia" required>
-                        <option value="" disabled selected>Dia</option>
-                        <option v-for="d in 31" :key="d" :value="d">{{ d }}</option>
-                    </select>
-
-                    <select v-model="mes" required>
-                        <option value="" disabled selected>Mês</option>
-                        <option v-for="(nome, i) in meses" :key="i" :value="i + 1">{{ nome }}</option>
-                    </select>
-
-                    <select v-model="ano" required>
-                        <option value="" disabled selected>Ano</option>
-                        <option v-for="y in 2025 - 1500 + 1" :key="y" :value="2025 - y + 1">{{ 2025 - y + 1 }}</option>
-                    </select>
-                </div>
-            </div>
-
-            <button class="botao">CONTINUAR</button>
-        </div>
+  <div class="container">
+    
+    <div class="logo">
+      <img src="/public/login/cobarber.svg" alt="Logo" />
     </div>
+
+    <div class="form-box" >
+        
+      <p class="titulo">Olá!</p>
+      <p class="subtitle">Para continuar, digite seus dados</p>
+        <div class="stage" v-if="stage">
+
+      <form @submit.prevent="() => { }">
+        <input type="text" v-model="cpf" placeholder="CPF" maxlength="11" inputmode="numeric" />
+        <div class="input-group">
+         
+        </div>
+
+        <input type="text" v-model="celular" placeholder="Celular" maxlength="11" inputmode="numeric" />
+
+      </form>
+    </div>
+    <TelaRegistroDois v-if="!stage" />
+    </div>
+        <button type="submit" class="btn" @click="showStage" @submit.prevent>
+          Cadastrar-se
+        </button>
+
+      <p class="link">Já tem uma conta? <a href="#">Faça o login</a></p>
+    </div>
+
 </template>
 
-<script>
-const meses = [
-    "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-    "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
-];
-</script>
-
 <style scoped>
-.conteudo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    gap: 60px;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI';
 }
 
-.imagem {
-    width: 500px;
-    height: 500px;
-    object-fit: contain;
+.container {
+  --field-w: 25.5vw;
+  --field-h: 6.6vh;
+
+  background: #0F0F0E;
+  color: #fff;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.forms1 {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 15px;
-    width: 320px;
+.logo img {
+  width: 160px;
+  margin-bottom: 20px;
 }
 
-.forms1 h1 {
-    font-size: 60px;
-    margin-bottom: 10px;
-    width: 100%;
-    text-align: center;
+.form-box {
+  width: var(--field-w);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.input-form {
-    width: 100%;
-    padding: 15px;
-    border: none;
-    border-radius: 8px;
-    background-color: #e0e0e0;
-    font-size: 16px;
+.titulo {
+  font-size: 45px;
+  margin: 0 0 -4px 0;
+  font-weight: 300;
 }
 
-.forms2 label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: block;
-    opacity: 50%;
+.subtitle {
+  font-size: 20px;
+  margin: 0 0 30px 0;
+  color: #cfcfcf;
 }
 
-.data-nasc {
-    display: flex;
-    gap: 10px;
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.data-nasc select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    background-color: #e0e0e0;
-    font-size: 14px;
-    width: 100px;
-    color: #333;
+input,
+.btn {
+  width: var(--field-w);
+  height: var(--field-h);
+  box-sizing: border-box;
+
+  border-radius: 8px;
+  border: 1px solid #4D4025;
+  background: transparent;
+  color: #fff;
+  padding: 0 16px;
+  font-size: 14px;
 }
 
-.data-nasc select:nth-child(2) {
-    width: 100px;
+input::placeholder {
+  color: #aaa;
 }
 
-.data-nasc select:nth-child(3) {
-    width: 100px;
+.input-group {
+  position: relative;
+  width: 100%;
 }
 
-.botao {
-    width: 100%;
-    padding: 15px;
-    background-color: #111;
-    color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
+.date-input {
+  position: relative;
+  z-index: 0;
 }
 
-.botao:hover {
-    background-color: #333;
+.date-input::-webkit-datetime-edit {
+  color: transparent;
 }
 
+.date-input.has-value::-webkit-datetime-edit,
+.date-input:focus::-webkit-datetime-edit {
+  color: #fff;
+}
+
+.date-placeholder {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+  font-size: 14px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+
+.btn {
+  background: #c7a464;
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 1px;
+}
+
+.btn:hover {
+  background: #b18f52;
+}
+
+.link {
+  margin-top: 20px;
+  font-size: 15px;
+  letter-spacing: 1px;
+  width: 100%;
+  text-align: center;
+}
+
+.link a {
+  color: #c7a464;
+  text-decoration: none;
+}
+
+.link a:hover {
+  text-decoration: underline;
+}
 </style>
