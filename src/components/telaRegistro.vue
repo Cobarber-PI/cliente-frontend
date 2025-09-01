@@ -36,13 +36,19 @@ const showStage = () => {
       <TelaRegistroDois v-if="!stage" />
     </div>
     <br>
+    <div class="buttons">
     <button type="submit" class="btn" @click="showStage" @submit.prevent v-if="stage">
       Continuar
     </button>
     <button type="submit" class="btn" @click="cadastrar" @submit.prevent v-if="!stage">
       Cadastrar
     </button>
-    <p class="link">Já tem uma conta? <a href="#">Faça o login</a></p>
+    <br>
+    <button class="btngoogle">
+      <img src="/public/login/googlesvg.svg" alt="">
+    </button>
+    </div>
+    <p class="link">Já tem uma conta? <router-link to="/login">Faça o login</router-link></p>
   </div>
 
 </template>
@@ -109,7 +115,7 @@ form {
 }
 
 input,
-.btn {
+button {
   width: var(--field-w);
   height: var(--field-h);
   box-sizing: border-box;
@@ -185,5 +191,13 @@ input::placeholder {
 
 .link a:hover {
   text-decoration: underline;
+}
+.buttons{
+    display: flex;
+    flex-direction: column;
+    
+}
+.btngoogle{
+    cursor: pointer;
 }
 </style>
