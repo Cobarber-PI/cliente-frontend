@@ -43,6 +43,41 @@
             <p class="paragrafoInfo"><img src="/public/home/tesoura.svg" alt=""> +150 Barbearias</p>
             <p class="paragrafoInfo"><img src="/public/home/localizacao.svg" alt="">Toda a região</p>
         </div>
+        <div class="tutorial">
+            <h1 class="tituloTutotial">Como <span>funciona</span></h1>
+            <p class="textoTutorial">Agendar seu horário nunca foi tão simples. Siga estes passos e tenha uma
+                experiência incrível.</p>
+        </div>
+        <div class="wrapperTutorial">
+            <div class="cardsTutorial">
+                <div class="imgTutorial">
+                    <img src="/public/home/lupaTutorial.svg" alt="">
+                </div>
+                <h2>Encontre sua barbearia</h2>
+                <p>Use nossos filtros para encontrar a barbearia perfeita perto de você</p>
+            </div>
+            <div class="cardsTutorial">
+                <div class="imgTutorial">
+                    <img src="/public/home/calendario.svg" alt="">
+                </div>
+                <h2>Escolha data e horário</h2>
+                <p>Selecione o dia e horário que melhor se adequa à sua agenda</p>
+            </div>
+            <div class="cardsTutorial">
+                <div class="imgTutorial">
+                    <img class="tesouraTutorial" src="/public/home/tesoura.svg" alt="">
+                </div>
+                <h2>Confirme seu agendamento</h2>
+                <p>Finalize o agendamento e receba confirmação por email</p>
+            </div>
+            <div class="cardsTutorial">
+                <div class="imgTutorial">
+                    <img src="/public/home/estrela.svg" alt="">
+                </div>
+                <h2>Avalie o atendimento</h2>
+                <p>Após o serviço, deixe sua avaliação para ajudar outros clientes</p>
+            </div>
+        </div>
     </main>
     <!--  calc(100vh - 80px)-->
 </template>
@@ -204,17 +239,88 @@ main>p {
     font-size: 18px;
     font-weight: 500;
 }
+
 .textoInfo {
     display: flex;
     justify-content: center;
     gap: 40px;
     margin-top: 40px;
 }
+
 .paragrafoInfo {
     color: #B0B0B0;
     font-size: 20px;
     display: flex;
     align-items: center;
     gap: 14px;
+}
+
+.tituloTutotial {
+    color: white;
+    font-size: 55px;
+    text-align: center;
+    margin-top: 70px;
+    font-family: 'monteserrat', sans-serif;
+}
+
+.tituloTutotial span {
+    color: #F1C23C;
+}
+
+.textoTutorial {
+    color: #A1A1AA;
+    font-size: 22px;
+    text-align: center;
+    width: 800px;
+    margin: auto;
+    margin-top: 25px;
+}
+
+.wrapperTutorial {
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    margin-top: 70px;
+}
+
+.cardsTutorial {
+    background-color: #212124;
+    width: 300px;
+    height: 350px;
+    border-radius: 15px;
+    padding: 27px;
+    text-align: center;
+    color: white;
+    border: solid 1px #F1C23C;
+}
+.imgTutorial{
+    width: 80px;
+    height: 80px;
+    border: solid 1px #F1C23C;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 30px;
+}
+.cardsTutorial h2 {
+    font-size: 17px;
+    width: 122px;
+    margin: auto;
+    padding-top: 30px
+}
+.cardsTutorial p {
+    font-size: 16px;
+    margin-top: 20px;
+    color: #A1A1AA;
+    font-weight: bold;
+    width: 180px;
+    margin: auto;
+    padding-top: 20px;
+}
+.tesouraTutorial{
+    width: 35px;
+    height: 35px;
 }
 </style>
