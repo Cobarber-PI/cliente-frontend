@@ -42,7 +42,7 @@ const passos = [
     </nav>
   </header>
   <div class="container">
-    <!-- Corrigido -->
+    <!-- Corrigido-->
     <div class="imageFundo"></div>
     <div class="content">
       <h1>

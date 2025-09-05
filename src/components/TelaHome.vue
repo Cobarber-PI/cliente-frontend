@@ -1,0 +1,326 @@
+<script setup>
+</script>
+
+<template>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="/public/home/logo1.svg" alt="">
+                <h1>CoBarber</h1>
+            </div>
+            <div class="nav">
+                <ul>
+                    <router-link to="/">Início</router-link>
+                    <router-link to="/barbearias">Barbearias</router-link>
+                    <router-link to="/agendamentos">Agendamentos</router-link>
+                </ul>
+            </div>
+            <div class="login">
+                <button class="entrar">
+                    <img src="/public/home/user.svg" alt="">
+                    <p>Login</p>
+                </button>
+                <button class="cadastrar">
+                    Cadastrar
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <h1 class="homeTitulo">Encontre a <span>barbearia perfeita</span></h1>
+        <p>Agende um horário com os melhores barbeiros de sua região. Simples, rápido e sem complicação</p>
+        <div class="busca">
+            <div class="inputs">
+                <input type="text" placeholder="Digite seu bairro ou cidade">
+                <button class="buscarBarberias">
+                    <img src="/public/home/lupa.svg" alt="">
+                    <p>Buscar barbearias</p>
+                </button>
+            </div>
+        </div>
+        <div class="textoInfo">
+            <p class="paragrafoInfo"><img src="/public/home/tesoura.svg" alt=""> +150 Barbearias</p>
+            <p class="paragrafoInfo"><img src="/public/home/localizacao.svg" alt="">Toda a região</p>
+        </div>
+        <div class="tutorial">
+            <h1 class="tituloTutotial">Como <span>funciona</span></h1>
+            <p class="textoTutorial">Agendar seu horário nunca foi tão simples. Siga estes passos e tenha uma
+                experiência incrível.</p>
+        </div>
+        <div class="wrapperTutorial">
+            <div class="cardsTutorial">
+                <div class="imgTutorial">
+                    <img src="/public/home/lupaTutorial.svg" alt="">
+                </div>
+                <h2>Encontre sua barbearia</h2>
+                <p>Use nossos filtros para encontrar a barbearia perfeita perto de você</p>
+            </div>
+            <div class="cardsTutorial">
+                <div class="imgTutorial">
+                    <img src="/public/home/calendario.svg" alt="">
+                </div>
+                <h2>Escolha data e horário</h2>
+                <p>Selecione o dia e horário que melhor se adequa à sua agenda</p>
+            </div>
+            <div class="cardsTutorial">
+                <div class="imgTutorial">
+                    <img class="tesouraTutorial" src="/public/home/tesoura.svg" alt="">
+                </div>
+                <h2>Confirme seu agendamento</h2>
+                <p>Finalize o agendamento e receba confirmação por email</p>
+            </div>
+            <div class="cardsTutorial">
+                <div class="imgTutorial">
+                    <img src="/public/home/estrela.svg" alt="">
+                </div>
+                <h2>Avalie o atendimento</h2>
+                <p>Após o serviço, deixe sua avaliação para ajudar outros clientes</p>
+            </div>
+        </div>
+    </main>
+    <!--  calc(100vh - 80px)-->
+</template>
+
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+header {
+    width: 100%;
+    height: 80px;
+    background-color: #09090B;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.login {
+    display: flex;
+    gap: 10px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    margin: 0 auto;
+    width: 90%;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img {
+    margin-top: 15px;
+    width: 50%;
+}
+
+.logo h1 {
+    font-size: 24px;
+    font-family: "Cinzel", serif;
+    font-weight: bold;
+
+}
+
+ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+a {
+    text-decoration: none;
+    color: #B0B0B0;
+}
+
+.entrar {
+    display: flex;
+    background-color: #0F0F0E;
+    color: white;
+    border: 1px solid #B29457;
+    border-radius: 10px;
+    width: 95px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    gap: 11px;
+    cursor: pointer;
+}
+
+.cadastrar {
+    background-color: #5f5136;
+    border: 1px solid #09090B;
+    color: white;
+    border-radius: 10px;
+    width: 95px;
+    height: 40px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+main {
+    width: 100%;
+    height: 580px;
+    background-image: url('/public/home/fundoHome.svg');
+    background-size: cover;
+}
+
+.homeTitulo {
+    color: white;
+    font-size: 75px;
+    text-align: center;
+    padding-top: 95px;
+    font-family: 'monteserrat', sans-serif;
+}
+
+.homeTitulo span {
+    color: #F1C23C;
+    font-weight: bold;
+}
+
+main>p {
+    color: #A1A1AA;
+    font-size: 25px;
+    text-align: center;
+    width: 700px;
+    margin: auto;
+    margin-top: 25px;
+}
+
+.busca {
+    width: 850px;
+    height: 120px;
+    background-color: #1F1F21;
+    margin: auto;
+    margin-top: 60px;
+    border-radius: 15px;
+    border: solid 1px #F1C23C;
+    display: flex;
+    align-items: center;
+}
+
+.inputs {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.inputs>input {
+    width: 510px;
+    height: 65px;
+    border-radius: 15px;
+    border: solid 1px #F1C23C;
+    padding-left: 15px;
+    font-size: 15px;
+    background-color: #131315;
+    color: white;
+    font-family: 'Inter', sans-serif;
+}
+
+.inputs>.buscarBarberias {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    background-color: #F1C23C;
+    border: none;
+    border-radius: 15px;
+    width: 250px;
+    height: 65px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.textoInfo {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.paragrafoInfo {
+    color: #B0B0B0;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.tituloTutotial {
+    color: white;
+    font-size: 55px;
+    text-align: center;
+    margin-top: 70px;
+    font-family: 'monteserrat', sans-serif;
+}
+
+.tituloTutotial span {
+    color: #F1C23C;
+}
+
+.textoTutorial {
+    color: #A1A1AA;
+    font-size: 22px;
+    text-align: center;
+    width: 800px;
+    margin: auto;
+    margin-top: 25px;
+}
+
+.wrapperTutorial {
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    margin-top: 70px;
+}
+
+.cardsTutorial {
+    background-color: #212124;
+    width: 300px;
+    height: 350px;
+    border-radius: 15px;
+    padding: 27px;
+    text-align: center;
+    color: white;
+    border: solid 1px #F1C23C;
+}
+.imgTutorial{
+    width: 80px;
+    height: 80px;
+    border: solid 1px #F1C23C;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 30px;
+}
+.cardsTutorial h2 {
+    font-size: 17px;
+    width: 122px;
+    margin: auto;
+    padding-top: 30px
+}
+.cardsTutorial p {
+    font-size: 16px;
+    margin-top: 20px;
+    color: #A1A1AA;
+    font-weight: bold;
+    width: 180px;
+    margin: auto;
+    padding-top: 20px;
+}
+.tesouraTutorial{
+    width: 35px;
+    height: 35px;
+}
+</style>
