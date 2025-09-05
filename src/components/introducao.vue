@@ -30,7 +30,7 @@ const passos = [
   <header>
     <div class="logo">
       <div class="marcaC">
-        <img src="/introdução/logoBarber.png" alt="" />
+        <img src="/introdução/logoBarber.png" alt="Logo CoBarber" />
         <span>|</span>
         <h3>CoBarber</h3>
         <p>A sua barbearia online</p>
@@ -42,6 +42,7 @@ const passos = [
     </nav>
   </header>
   <div class="container">
+    <!-- Corrigido-->
     <div class="imageFundo"></div>
     <div class="content">
       <h1>
@@ -99,8 +100,8 @@ header button {
   font-size: 15px;
   padding: 8px 16px;
   background-color: transparent;
-  border: 1px solid #f5e1b9;
-  color: #f5e1b9;
+  border: 1px solid #ffffff;
+  color: #ffffff;
   cursor: pointer;
   border-radius: 4px;
   font-family: 'Poppins', sans-serif;
@@ -110,7 +111,7 @@ header button {
 .login {
   background-color: transparent;
   border: none;
-  color: #f5e1b9;
+  color: #ffffff;
   cursor: pointer;
   border-radius: 4px;
   font-family: 'Poppins', sans-serif;
@@ -168,6 +169,7 @@ header button:hover {
   position: absolute;
   width: 100%;
   height: 100%;
+  /* Corrigido */
   background-image: url('/introdução/nathon-oski-EW_rqoSdDes-unsplash-scaled.jpg');
   background-size: cover;
   background-position: center;
@@ -309,6 +311,8 @@ header button:hover {
   font-size: 20px;
   color: #ccc;
 }
+
+/* ---------- Como funciona ---------- */
 .cartao-passo {
   background: #111;
   border: 1px solid #333;
