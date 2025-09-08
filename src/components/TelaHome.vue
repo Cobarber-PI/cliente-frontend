@@ -5,7 +5,7 @@
     <header>
         <div class="container">
             <div class="logo">
-                <img src="/public/home/logo1.svg" alt="">
+                <img src="/home/logo1.svg" alt="">
                 <h1>CoBarber</h1>
             </div>
             <div class="nav">
@@ -17,7 +17,7 @@
             </div>
             <div class="login">
                 <button class="entrar">
-                    <img src="/public/home/user.svg" alt="">
+                    <img src="/home/user.svg" alt="">
                     <p>Login</p>
                 </button>
                 <button class="cadastrar">
@@ -34,14 +34,14 @@
             <div class="inputs">
                 <input type="text" placeholder="Digite seu bairro ou cidade">
                 <button class="buscarBarberias">
-                    <img src="/public/home/lupa.svg" alt="">
+                    <img src="/home/lupa.svg" alt="">
                     <p>Buscar barbearias</p>
                 </button>
             </div>
         </div>
         <div class="textoInfo">
-            <p class="paragrafoInfo"><img src="/public/home/tesoura.svg" alt=""> +150 Barbearias</p>
-            <p class="paragrafoInfo"><img src="/public/home/localizacao.svg" alt="">Toda a região</p>
+            <p class="paragrafoInfo"><img src="/home/tesoura.svg" alt=""> +150 Barbearias</p>
+            <p class="paragrafoInfo"><img src="/home/localizacao.svg" alt="">Toda a região</p>
         </div>
     </main>
 </template>
@@ -67,9 +67,9 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 55px;
     margin: 0 auto;
-    width: 90%;
+    width: 100%;
 }
 
 .logo {
@@ -131,14 +131,14 @@ a {
 
 main {
     width: 100%;
-    height: 580px;
+    height: 100vh;
     background-image: url('/public/home/fundoHome.svg');
     background-size: cover;
 }
 
 .homeTitulo {
     color: white;
-    font-size: 75px;
+    font-size: 65px;
     text-align: center;
     padding-top: 95px;
     font-family: 'monteserrat', sans-serif;
@@ -151,7 +151,7 @@ main {
 
 main>p {
     color: #A1A1AA;
-    font-size: 25px;
+    font-size: 22px;
     text-align: center;
     width: 700px;
     margin: auto;
@@ -159,13 +159,13 @@ main>p {
 }
 
 .busca {
-    width: 850px;
-    height: 120px;
+    width: 780px;
+    height: 100px;
     background-color: #1F1F21;
     margin: auto;
     margin-top: 60px;
     border-radius: 15px;
-    border: solid 1px #F1C23C;
+    border: solid 1px #4A4126;
     display: flex;
     align-items: center;
 }
@@ -178,10 +178,10 @@ main>p {
 }
 
 .inputs>input {
-    width: 510px;
-    height: 65px;
+    width: 490px;
+    height: 55px;
     border-radius: 15px;
-    border: solid 1px #F1C23C;
+    border: solid 1px #4A4126;
     padding-left: 15px;
     font-size: 15px;
     background-color: #131315;
@@ -197,8 +197,8 @@ main>p {
     background-color: #F1C23C;
     border: none;
     border-radius: 15px;
-    width: 250px;
-    height: 65px;
+    width: 215px;
+    height: 55px;
     cursor: pointer;
     font-size: 18px;
     font-weight: 500;
@@ -213,7 +213,7 @@ main>p {
 
 .paragrafoInfo {
     color: #B0B0B0;
-    font-size: 20px;
+    font-size: 18px;
     display: flex;
     align-items: center;
     gap: 14px;
@@ -257,17 +257,7 @@ main>p {
     color: white;
     border: solid 1px #F1C23C;
 }
-.imgTutorial{
-    width: 80px;
-    height: 80px;
-    border: solid 1px #F1C23C;
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
-    margin-top: 30px;
-}
+
 .cardsTutorial h2 {
     font-size: 17px;
     width: 122px;
