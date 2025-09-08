@@ -1,8 +1,7 @@
 <script setup>
-import telaRegistro from '@/components/telaRegistro.vue';
-import telaRegistroDois from '@/components/telaRegistroDois.vue';
+import telaRegistro from '@/components/telaRegistro.vue'
 </script>
 
 <template>
-<telaRegistro />
+  <telaRegistro />
 </template>
