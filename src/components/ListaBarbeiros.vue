@@ -33,6 +33,72 @@ const infoBarbershop = [
         services: ['Corte Masculino', 'Barba', 'Alisamento'],
         distance: '2.4 km'
     },
+    {
+        id: 3,
+        Image: '/ListaBarbearia/Barber_to_João.jpeg',
+        name: 'Barbearia do João',
+        address: 'Rua das Flores, 123 - Centro',
+        rating: 5.0,
+        reviews: 200,
+        clock: '10:00 - 20:00',
+        services: ['Corte Masculino', 'Barba', 'Alisamento'],
+        distance: '2.4 km'
+    },
+    {
+        id: 3,
+        Image: '/ListaBarbearia/Barber_to_João.jpeg',
+        name: 'Barbearia do João',
+        address: 'Rua das Flores, 123 - Centro',
+        rating: 5.0,
+        reviews: 200,
+        clock: '10:00 - 20:00',
+        services: ['Corte Masculino', 'Barba', 'Alisamento'],
+        distance: '2.4 km'
+    },
+    {
+        id: 3,
+        Image: '/ListaBarbearia/Barber_to_João.jpeg',
+        name: 'Barbearia do João',
+        address: 'Rua das Flores, 123 - Centro',
+        rating: 5.0,
+        reviews: 200,
+        clock: '10:00 - 20:00',
+        services: ['Corte Masculino', 'Barba', 'Alisamento'],
+        distance: '2.4 km'
+    },
+    {
+        id: 3,
+        Image: '/ListaBarbearia/Barber_to_João.jpeg',
+        name: 'Barbearia do João',
+        address: 'Rua das Flores, 123 - Centro',
+        rating: 5.0,
+        reviews: 200,
+        clock: '10:00 - 20:00',
+        services: ['Corte Masculino', 'Barba', 'Alisamento'],
+        distance: '2.4 km'
+    },
+    {
+        id: 3,
+        Image: '/ListaBarbearia/Barber_to_João.jpeg',
+        name: 'Barbearia do João',
+        address: 'Rua das Flores, 123 - Centro',
+        rating: 5.0,
+        reviews: 200,
+        clock: '10:00 - 20:00',
+        services: ['Corte Masculino', 'Barba', 'Alisamento'],
+        distance: '2.4 km'
+    },
+    {
+        id: 3,
+        Image: '/ListaBarbearia/Barber_to_João.jpeg',
+        name: 'Barbearia do João',
+        address: 'Rua das Flores, 123 - Centro',
+        rating: 5.0,
+        reviews: 200,
+        clock: '10:00 - 20:00',
+        services: ['Corte Masculino', 'Barba', 'Alisamento'],
+        distance: '2.4 km'
+    },
 ]
 </script>
 
@@ -249,7 +315,16 @@ const infoBarbershop = [
 .container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 35px;
     justify-content: center;
+  }
+
+.titulo-barbearias {
+    width: 100%;
+    text-align: center;
+    color: #F0C238;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 20px 0;
 }
 </style>

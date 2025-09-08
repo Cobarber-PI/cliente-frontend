@@ -73,7 +73,6 @@ footer {
   width: 100%;
   height: 70vh;
   background-color: #212124;
-  position: fixed;
   bottom: 0;
   color: white;
   display: flex;

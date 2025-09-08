@@ -43,43 +43,7 @@
             <p class="paragrafoInfo"><img src="/public/home/tesoura.svg" alt=""> +150 Barbearias</p>
             <p class="paragrafoInfo"><img src="/public/home/localizacao.svg" alt="">Toda a região</p>
         </div>
-        <div class="tutorial">
-            <h1 class="tituloTutotial">Como <span>funciona</span></h1>
-            <p class="textoTutorial">Agendar seu horário nunca foi tão simples. Siga estes passos e tenha uma
-                experiência incrível.</p>
-        </div>
-        <div class="wrapperTutorial">
-            <div class="cardsTutorial">
-                <div class="imgTutorial">
-                    <img src="/public/home/lupaTutorial.svg" alt="">
-                </div>
-                <h2>Encontre sua barbearia</h2>
-                <p>Use nossos filtros para encontrar a barbearia perfeita perto de você</p>
-            </div>
-            <div class="cardsTutorial">
-                <div class="imgTutorial">
-                    <img src="/public/home/calendario.svg" alt="">
-                </div>
-                <h2>Escolha data e horário</h2>
-                <p>Selecione o dia e horário que melhor se adequa à sua agenda</p>
-            </div>
-            <div class="cardsTutorial">
-                <div class="imgTutorial">
-                    <img class="tesouraTutorial" src="/public/home/tesoura.svg" alt="">
-                </div>
-                <h2>Confirme seu agendamento</h2>
-                <p>Finalize o agendamento e receba confirmação por email</p>
-            </div>
-            <div class="cardsTutorial">
-                <div class="imgTutorial">
-                    <img src="/public/home/estrela.svg" alt="">
-                </div>
-                <h2>Avalie o atendimento</h2>
-                <p>Após o serviço, deixe sua avaliação para ajudar outros clientes</p>
-            </div>
-        </div>
     </main>
-    <!--  calc(100vh - 80px)-->
 </template>
 
 <style scoped>

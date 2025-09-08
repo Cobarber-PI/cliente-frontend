@@ -225,10 +225,6 @@ aside.filtros {
   padding: 16px;
 }
 
-/* --- Centralização do conteúdo --- */
-.center {
-  padding: 10px;
-}
 
 /* --- Título do filtro --- */
 .title {
