@@ -13,6 +13,10 @@ const showStage = () => {
   stage.value = !stage.value
   console.log(stage.value)
 }
+
+const voltar = () => {
+  stage.value = !stage.value
+}
 </script>
 
 <template>
@@ -33,7 +37,7 @@ const showStage = () => {
             inputmode="numeric" />
         </form>
       </div>
-      <TelaRegistroDois v-if="!stage" />
+      <TelaRegistroDois @voltar="voltar" v-if="!stage" />
     </div>
     <br>
     <div class="buttons">
@@ -76,7 +80,6 @@ const showStage = () => {
 
 .logo img {
   width: 160px;
-  margin-top: -50px;
 }
 .logo{
   display: flex;
@@ -89,7 +92,6 @@ const showStage = () => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 60vh;
 }
 
 .titulo {
@@ -197,6 +199,7 @@ input::placeholder {
     flex-direction: column;
     
 }
+
 .btngoogle{
     cursor: pointer;
 }

@@ -5,9 +5,13 @@ const cpf = ref('')
 const dataNascimento = ref('')
 const celular = ref('')
 const dateFocused = ref(false)
+
+const emits = defineEmits(['voltar'])
+
 </script>
 
 <template>
+  <img @click="emits('voltar')" class="iconeVoltar" src="/public/imgsRegistro/Vector.svg" alt="Clique para voltar">
     <div class="form-box2">
       <form @submit.prevent="() => { }">
         <input type="text" v-model="cpf" placeholder="CPF" maxlength="11" inputmode="numeric" />
@@ -44,18 +48,12 @@ const dateFocused = ref(false)
   justify-content: center;
 }
 
-.logo img {
-  width: 160px;
-  margin-top: -50px;
-}
-
 .form-box2 {
   width: var(--field-w);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-around;
-  height: 50vh;
 }
 
 .titulo {
@@ -153,5 +151,12 @@ input::placeholder {
 
 .link a:hover {
   text-decoration: underline;
+}
+
+.iconeVoltar{
+  cursor: pointer;
+  position: absolute;
+  top: 83px;
+  left: 83px;
 }
 </style>
