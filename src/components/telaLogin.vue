@@ -1,17 +1,12 @@
 <script setup>
 import { ref } from 'vue'
-import TelaRegistroDois from './telaRegistroDois.vue'
 
 const senha = ref('')
-const senhaConfirmada = ref('')
 const email = ref('')
-const nome = ref('')
 
-const stage = ref(true)
-
-const showStage = () => {
-  stage.value = !stage.value
-  console.log(stage.value)
+const onLogin = () => {
+  // TODO: implementar lógica de login
+  console.log('Logando:', { email: email.value, senha: senha.value })
 }
 </script>
 
@@ -19,38 +14,32 @@ const showStage = () => {
   <div class="container">
     <div class="form-box">
       <div class="logo">
-        <img src="/public/login/cobarber.svg" alt="Logo" />
+        <img src="/login/cobarber.svg" alt="Logo" />
       </div>
       <p class="titulo">Olá!</p>
       <p class="subtitle">Para continuar, digite seus dados</p>
-      <div class="stage" v-if="stage">
 
-        <form @submit.prevent="() => { }">
-          <input type="text" v-model="nome" placeholder="Nome completo" maxlength="100" inputmode="latin-name" />
-          <input type="text" v-model="email" placeholder="Email" maxlength="30" inputmode="numeric" />
-          <input type="text" v-model="senha" placeholder="Senha" maxlength="30" inputmode="numeric" />
-          <input type="text" v-model="senhaConfirmada" placeholder="Confirme sua senha" maxlength="30"
-            inputmode="numeric" />
-        </form>
-      </div>
-      <TelaRegistroDois v-if="!stage" />
+      <form @submit.prevent="onLogin">
+        <input type="email" v-model="email" placeholder="Email" maxlength="100" autocomplete="email" />
+        <input type="password" v-model="senha" placeholder="Senha" maxlength="100" autocomplete="current-password" />
+        <button type="submit" class="btn">Entrar</button>
+      </form>
+
+      <p class="link"><a>Esqueceu sua senha?</a></p>
     </div>
-    <br>
+
+    <br />
+
     <div class="buttons">
-    <button type="submit" class="btn" @click="showStage" @submit.prevent v-if="stage">
-      Continuar
-    </button>
-    <button type="submit" class="btn" @click="cadastrar" @submit.prevent v-if="!stage">
-      Cadastrar
-    </button>
-    <br>
-    <button class="btngoogle">
-      <img src="/public/login/googlesvg.svg" alt="">
-    </button>
+      <button class="btngoogle">
+        <img src="/login/googlesvg.svg" alt="Google" />
+      </button>
     </div>
-    <p class="link">Já tem uma conta? <router-link to="/login">Faça o login</router-link></p>
-  </div>
 
+    <p class="link">
+      Não tem uma conta? <router-link to="/telaRegistro">Cadastre-se</router-link>
+    </p>
+  </div>
 </template>
 
 <style scoped>
@@ -78,7 +67,8 @@ const showStage = () => {
   width: 160px;
   margin-top: -50px;
 }
-.logo{
+
+.logo {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -89,7 +79,6 @@ const showStage = () => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 60vh;
 }
 
 .titulo {
@@ -132,37 +121,6 @@ input::placeholder {
   color: #aaa;
 }
 
-.input-group {
-  position: relative;
-  width: 100%;
-}
-
-.date-input {
-  position: relative;
-  z-index: 0;
-}
-
-.date-input::-webkit-datetime-edit {
-  color: transparent;
-}
-
-.date-input.has-value::-webkit-datetime-edit,
-.date-input:focus::-webkit-datetime-edit {
-  color: #fff;
-}
-
-.date-placeholder {
-  position: absolute;
-  left: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #aaa;
-  font-size: 14px;
-  pointer-events: none;
-  z-index: 1;
-}
-
-
 .btn {
   background: #c7a464;
   border: none;
@@ -187,17 +145,23 @@ input::placeholder {
 .link a {
   color: #c7a464;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .link a:hover {
   text-decoration: underline;
 }
-.buttons{
-    display: flex;
-    flex-direction: column;
-    
+
+.buttons {
+  display: flex;
+  flex-direction: column;
 }
-.btngoogle{
-    cursor: pointer;
+
+.btngoogle {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 </style>

@@ -1,56 +1,26 @@
 <script setup>
 import { ref } from 'vue'
-import TelaRegistroDois from './telaRegistroDois.vue'
 
-const senha = ref('')
-const senhaConfirmada = ref('')
-const email = ref('')
-const nome = ref('')
-
-const stage = ref(true)
-
-const showStage = () => {
-  stage.value = !stage.value
-  console.log(stage.value)
-}
+const cpf = ref('')
+const dataNascimento = ref('')
+const celular = ref('')
+const dateFocused = ref(false)
 </script>
 
 <template>
-  <div class="container">
-    <div class="form-box">
-      <div class="logo">
-        <img src="/public/login/cobarber.svg" alt="Logo" />
-      </div>
-      <p class="titulo">Olá!</p>
-      <p class="subtitle">Para continuar, digite seus dados</p>
-      <div class="stage" v-if="stage">
-
-        <form @submit.prevent="() => { }">
-          <input type="text" v-model="nome" placeholder="Nome completo" maxlength="100" inputmode="latin-name" />
-          <input type="text" v-model="email" placeholder="Email" maxlength="30" inputmode="numeric" />
-          <input type="text" v-model="senha" placeholder="Senha" maxlength="30" inputmode="numeric" />
-          <input type="text" v-model="senhaConfirmada" placeholder="Confirme sua senha" maxlength="30"
-            inputmode="numeric" />
-        </form>
-      </div>
-      <TelaRegistroDois v-if="!stage" />
+    <div class="form-box2">
+      <form @submit.prevent="() => { }">
+        <input type="text" v-model="cpf" placeholder="CPF" maxlength="11" inputmode="numeric" />
+        <div class="input-group">
+          <input type="date" v-model="dataNascimento" class="date-input" :class="{ 'has-value': !!dataNascimento }"
+            @focus="dateFocused = true" @blur="dateFocused = false" />
+          <span class="date-placeholder" v-if="!dataNascimento && !dateFocused">
+            Data de nascimento
+          </span>
+        </div>
+        <input type="text" v-model="celular" placeholder="Celular" maxlength="11" inputmode="numeric" />
+      </form>
     </div>
-    <br>
-    <div class="buttons">
-    <button type="submit" class="btn" @click="showStage" @submit.prevent v-if="stage">
-      Continuar
-    </button>
-    <button type="submit" class="btn" @click="cadastrar" @submit.prevent v-if="!stage">
-      Cadastrar
-    </button>
-    <br>
-    <button class="btngoogle">
-      <img src="/public/login/googlesvg.svg" alt="">
-    </button>
-    </div>
-    <p class="link">Já tem uma conta? <router-link to="/login">Faça o login</router-link></p>
-  </div>
-
 </template>
 
 <style scoped>
@@ -78,34 +48,26 @@ const showStage = () => {
   width: 160px;
   margin-top: -50px;
 }
-.logo{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-.form-box {
+.form-box2 {
   width: var(--field-w);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  height: 60vh;
+  align-items: flex-start;
+  justify-content: space-around;
+  height: 50vh;
 }
 
 .titulo {
   font-size: 45px;
   margin: 0 0 -4px 0;
   font-weight: 300;
-  text-align: start;
-  width: 100%;
 }
 
 .subtitle {
   font-size: 20px;
   margin: 0 0 30px 0;
   color: #cfcfcf;
-  width: 100%;
-  text-align: start;
 }
 
 form {
@@ -115,7 +77,7 @@ form {
 }
 
 input,
-button {
+.btn {
   width: var(--field-w);
   height: var(--field-h);
   box-sizing: border-box;
@@ -191,13 +153,5 @@ input::placeholder {
 
 .link a:hover {
   text-decoration: underline;
-}
-.buttons{
-    display: flex;
-    flex-direction: column;
-    
-}
-.btngoogle{
-    cursor: pointer;
 }
 </style>

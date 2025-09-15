@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+
 import LoginView from '../views/LoginView.vue'
 import telaRegistroView from '../views/telaRegistroView.vue'
 import IntroducaoView from '../views/introducaoView.vue'
@@ -29,10 +30,13 @@ const router = createRouter({
     },
     {
       path: '/home',
-      name: 'home',
+      name: 'Home',
       component: HomeView,
-    },
+    }
   ],
+  scrollBehavior() {
+    return { top: 0 }
+  }
 })
 
 export default router
