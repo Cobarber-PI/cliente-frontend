@@ -12,7 +12,7 @@ export const useAuthStore = defineStore("auth", () => {
     const login = async (email, password) => {
         try {
             const response = await AuthService.login(email, password);
-            const decodedToken = VueJwtDecode.decode(response.token.access);
+            const decodedToken = VueJwtDecode.decode(response.access);
             console.log("Decoded Token:", decodedToken);
             state.user = decodedToken
 

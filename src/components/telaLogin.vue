@@ -14,7 +14,7 @@ const data = reactive({
 
 function onLogin() {
  authStore.login(data.email, data.password);
- if (authStore.user) {
+ if (authStore.state.user) {
   router.push('/home');
   } else {
   alert('Falha no login. Verifique suas credenciais.');
