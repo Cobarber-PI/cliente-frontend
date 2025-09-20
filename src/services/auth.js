@@ -13,7 +13,7 @@ class AuthService {
 
     async register(userData) {
         try {
-            const response = await api.post("/", userData);
+            const response = await api.post("/usuarios/", userData);
             return response.data;
         } catch (error) {
             console.log("Register error:", error);
