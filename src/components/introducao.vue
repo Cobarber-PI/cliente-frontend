@@ -42,7 +42,7 @@ const passos = [
     </nav>
   </header>
   <div class="container">
-    <!-- Corrigido -->
+    <!-- Corrigido-->
     <div class="imageFundo"></div>
     <div class="content">
       <h1>
@@ -72,7 +72,7 @@ const passos = [
       </div>
     </div>
     <div class="botao">
-      <button>Começar agora</button>
+      <button @click="router.push('/home')">Começar agora</button>
       <p>Agendamentos online, rápido e gratuito</p>
     </div>
   </div>
