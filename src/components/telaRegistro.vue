@@ -1,21 +1,101 @@
 <script setup>
 import { ref } from 'vue'
 import TelaRegistroDois from './telaRegistroDois.vue'
+import AuthService from '@/services/auth.js'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
+
+// Dados do primeiro stage
 const senha = ref('')
 const senhaConfirmada = ref('')
 const email = ref('')
 const nome = ref('')
 
+// Dados do segundo stage (definidos aqui para acessibilidade global)
+const cpf = ref('')
+const dataNascimento = ref('')
+const celular = ref('')
+
+// Estados
 const stage = ref(true)
+const isLoading = ref(false)
+const errorMessage = ref('')
 
 const showStage = () => {
+  // Validação do primeiro stage
+  if (!nome.value || !email.value || !senha.value || !senhaConfirmada.value) {
+    errorMessage.value = 'Todos os campos são obrigatórios'
+    return
+  }
+
+  if (senha.value !== senhaConfirmada.value) {
+    errorMessage.value = 'As senhas não coincidem'
+    return
+  }
+
+  if (senha.value.length < 8) {
+    errorMessage.value = 'A senha deve ter pelo menos 8 caracteres'
+    return
+  }
+
+  errorMessage.value = ''
   stage.value = !stage.value
   console.log(stage.value)
 }
 
 const voltar = () => {
   stage.value = !stage.value
+
+const cadastrar = async () => {
+  try {
+    isLoading.value = true
+    errorMessage.value = ''
+
+    // Validação do segundo stage
+    if (!cpf.value || !dataNascimento.value || !celular.value) {
+      errorMessage.value = 'Todos os campos são obrigatórios'
+      return
+    }
+
+    // Preparar dados para envio
+    const userData = {
+      nome: nome.value,
+      email: email.value,
+      password: senha.value,
+      confirm_password: senhaConfirmada.value,
+      cpf: cpf.value,
+      dataNascimento: dataNascimento.value,
+      celular: celular.value
+    }
+
+    console.log('Enviando dados para o backend:', userData)
+
+    // Enviar para o backend
+    const response = await AuthService.register(userData)
+
+    console.log('Registro realizado com sucesso:', response)
+
+    // Redirecionar para login ou home após sucesso
+    router.push('/home')
+
+  } catch (error) {
+
+    if (error.response && error.response.data) {
+      errorMessage.value = error.response.data.message || 'Erro no cadastro'
+    } else {
+      errorMessage.value = 'Erro de conexão com o servidor'
+    }
+  } finally {
+    isLoading.value = false
+  }
+}
+
+// Expor as refs para o componente filho
+const updateChildData = (childData) => {
+  cpf.value = childData.cpf
+  dataNascimento.value = childData.dataNascimento
+  celular.value = childData.celular
 }
 </script>
 
@@ -27,25 +107,30 @@ const voltar = () => {
       </div>
       <p class="titulo">Olá!</p>
       <p class="subtitle">Para continuar, digite seus dados</p>
+
+      <!-- Exibir mensagens de erro -->
+      <div v-if="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+
       <div class="stage" v-if="stage">
 
-        <form @submit.prevent="() => { }">
+        <form @submit.prevent="showStage">
           <input type="text" v-model="nome" placeholder="Nome completo" maxlength="100" inputmode="latin-name" />
-          <input type="text" v-model="email" placeholder="Email" maxlength="30" inputmode="numeric" />
-          <input type="text" v-model="senha" placeholder="Senha" maxlength="30" inputmode="numeric" />
-          <input type="text" v-model="senhaConfirmada" placeholder="Confirme sua senha" maxlength="30"
-            inputmode="numeric" />
+          <input type="email" v-model="email" placeholder="Email" maxlength="50" />
+          <input type="password" v-model="senha" placeholder="Senha" maxlength="30" />
+          <input type="password" v-model="senhaConfirmada" placeholder="Confirme sua senha" maxlength="30" />
         </form>
       </div>
-      <TelaRegistroDois @voltar="voltar" v-if="!stage" />
+      <TelaRegistroDois @voltar="voltar" v-if="!stage" @update-data="updateChildData" />
     </div>
     <br>
     <div class="buttons">
-    <button type="submit" class="btn" @click="showStage" @submit.prevent v-if="stage">
+    <button type="submit" class="btn" @click="showStage" v-if="stage" :disabled="isLoading">
       Continuar
     </button>
-    <button type="submit" class="btn" @click="cadastrar" @submit.prevent v-if="!stage">
-      Cadastrar
+    <button type="submit" class="btn" @click="cadastrar" v-if="!stage" :disabled="isLoading">
+      {{ isLoading ? 'Cadastrando...' : 'Cadastrar' }}
     </button>
     <br>
     <button class="btngoogle">
@@ -108,6 +193,17 @@ const voltar = () => {
   color: #cfcfcf;
   width: 100%;
   text-align: start;
+}
+
+.error-message {
+  background-color: #ff4444;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
 }
 
 form {
@@ -178,6 +274,11 @@ input::placeholder {
   background: #b18f52;
 }
 
+.btn:disabled {
+  background: #666;
+  cursor: not-allowed;
+}
+
 .link {
   margin-top: 20px;
   font-size: 15px;
@@ -197,7 +298,7 @@ input::placeholder {
 .buttons{
     display: flex;
     flex-direction: column;
-    
+
 }
 
 .btngoogle{

@@ -1,12 +1,25 @@
 <script setup>
 import { ref } from 'vue'
+import { useAuthStore } from '@/stores/auth';
+import { reactive } from 'vue';
+import LoginView from '@/views/LoginView.vue';
+import { useRouter } from 'vue-router';
 
-const senha = ref('')
-const email = ref('')
+const authStore = useAuthStore();
+const router = useRouter();
+const data = reactive({
+  email: '',
+  password: ''
+}); 
 
-const onLogin = () => {
-  // TODO: implementar lógica de login
-  console.log('Logando:', { email: email.value, senha: senha.value })
+function onLogin() {
+ authStore.login(data.email, data.password);
+ if (authStore.state.user) {
+  router.push('/home');
+  } else {
+  alert('Falha no login. Verifique suas credenciais.');
+ }
+
 }
 </script>
 
@@ -20,8 +33,8 @@ const onLogin = () => {
       <p class="subtitle">Para continuar, digite seus dados</p>
 
       <form @submit.prevent="onLogin">
-        <input type="email" v-model="email" placeholder="Email" maxlength="100" autocomplete="email" />
-        <input type="password" v-model="senha" placeholder="Senha" maxlength="100" autocomplete="current-password" />
+        <input type="email" placeholder="Email" maxlength="100" autocomplete="email" v-model="data.email" />
+        <input type="password" v-model="data.password" placeholder="Senha" maxlength="100" autocomplete="current-password" />
         <button type="submit" class="btn">Entrar</button>
       </form>
 
