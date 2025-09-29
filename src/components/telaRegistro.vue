@@ -46,6 +46,11 @@ const showStage = () => {
 
 const voltar = () => {
   stage.value = !stage.value
+}
+
+const voltarParaLogin = () => {
+  router.push('/')
+}
 
 const cadastrar = async () => {
   try {
@@ -101,9 +106,12 @@ const updateChildData = (childData) => {
 
 <template>
   <div class="container">
+    <!-- Botão voltar apenas na primeira tela -->
+    <img v-if="stage" @click="voltarParaLogin" class="iconeVoltar" src="/imgsRegistro/Vector.svg" alt="Clique para voltar ao login">
+
     <div class="form-box">
       <div class="logo">
-        <img src="/public/login/cobarber.svg" alt="Logo" />
+        <img src="/login/cobarber.svg" alt="Logo" />
       </div>
       <p class="titulo">Olá!</p>
       <p class="subtitle">Para continuar, digite seus dados</p>
@@ -303,5 +311,18 @@ input::placeholder {
 
 .btngoogle{
     cursor: pointer;
+}
+
+.iconeVoltar {
+  cursor: pointer;
+  position: absolute;
+  top: 83px;
+  left: 83px;
+  z-index: 10;
+}
+
+.iconeVoltar:hover {
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
 }
 </style>

@@ -20,7 +20,7 @@ watch([cpf, dataNascimento, celular], () => {
 </script>
 
 <template>
-  <img @click="emits('voltar')" class="iconeVoltar" src="/public/imgsRegistro/Vector.svg" alt="Clique para voltar">
+  <img @click="emit('voltar')" class="iconeVoltar" src="/imgsRegistro/Vector.svg" alt="Clique para voltar">
     <div class="form-box2">
       <form @submit.prevent="() => { }">
         <input type="text" v-model="cpf" placeholder="CPF" maxlength="11" inputmode="numeric" />

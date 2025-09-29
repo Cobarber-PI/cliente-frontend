@@ -1,8 +1,6 @@
 <script setup>
-import { ref } from 'vue'
 import { useAuthStore } from '@/stores/auth';
 import { reactive } from 'vue';
-import LoginView from '@/views/LoginView.vue';
 import { useRouter } from 'vue-router';
 
 const authStore = useAuthStore();
@@ -10,7 +8,11 @@ const router = useRouter();
 const data = reactive({
   email: '',
   password: ''
-}); 
+});
+
+const voltarParaIntroducao = () => {
+  router.push('/')
+}
 
 function onLogin() {
  authStore.login(data.email, data.password);
@@ -25,6 +27,9 @@ function onLogin() {
 
 <template>
   <div class="container">
+    <!-- Botão voltar para introdução -->
+    <img @click="voltarParaIntroducao" class="iconeVoltar" src="/imgsRegistro/Vector.svg" alt="Clique para voltar à introdução">
+
     <div class="form-box">
       <div class="logo">
         <img src="/login/cobarber.svg" alt="Logo" />
@@ -163,6 +168,19 @@ input::placeholder {
 
 .link a:hover {
   text-decoration: underline;
+}
+
+.iconeVoltar {
+  cursor: pointer;
+  position: absolute;
+  top: 83px;
+  left: 83px;
+  z-index: 10;
+}
+
+.iconeVoltar:hover {
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
 }
 
 .buttons {
