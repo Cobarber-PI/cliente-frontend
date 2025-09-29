@@ -104,10 +104,6 @@ const updateChildData = (childData) => {
       </div>
       <p class="titulo">Olá!</p>
       <p class="subtitle">Para continuar, digite seus dados</p>
-    <div class="conteudo">
-        <div class="imagem">
-            <img src="/imgsRegistro/imgRegistro.png" class="imagem" />
-        </div>
 
       <!-- Exibir mensagens de erro -->
       <div v-if="errorMessage" class="error-message">
@@ -140,8 +136,6 @@ const updateChildData = (childData) => {
     </div>
     <p class="link">Já tem uma conta? <router-link to="/login">Faça o login</router-link></p>
   </div>
-  </div>
-
 
 </template>
 
@@ -164,21 +158,6 @@ const updateChildData = (childData) => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  }
-
-.conteudo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10%;
-    height: 100vh;
-    width: 100%;
-}
-
-.imagem {
-    width: 450px;
-    height: 450px;
-    margin-right: 60px;
 }
 
 .logo img {
@@ -318,11 +297,8 @@ input::placeholder {
 .buttons{
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 15px;
-    margin-right: 80px;
-}
 
+}
 .btngoogle{
     cursor: pointer;
 }

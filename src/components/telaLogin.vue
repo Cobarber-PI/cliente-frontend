@@ -1,8 +1,6 @@
 <script setup>
-import { ref } from 'vue'
 import { useAuthStore } from '@/stores/auth';
 import { reactive } from 'vue';
-import LoginView from '@/views/LoginView.vue';
 import { useRouter } from 'vue-router';
 
 const authStore = useAuthStore();
@@ -10,7 +8,7 @@ const router = useRouter();
 const data = reactive({
   email: '',
   password: ''
-}); 
+});
 
 function onLogin() {
  authStore.login(data.email, data.password);
