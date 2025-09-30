@@ -6,8 +6,9 @@ const dataNascimento = ref('')
 const celular = ref('')
 const dateFocused = ref(false)
 
+
 // Emitir dados para o componente pai
-const emit = defineEmits(['update-data','voltar'])
+const emit = defineEmits(['update-data', 'voltar'])
 
 // Observar mudanças nos dados e emitir para o pai
 watch([cpf, dataNascimento, celular], () => {
@@ -20,20 +21,20 @@ watch([cpf, dataNascimento, celular], () => {
 </script>
 
 <template>
-  <img @click="emit('voltar')" class="iconeVoltar" src="/imgsRegistro/Vector.svg" alt="Clique para voltar">
-    <div class="form-box2">
-      <form @submit.prevent="() => { }">
-        <input type="text" v-model="cpf" placeholder="CPF" maxlength="11" inputmode="numeric" />
-        <div class="input-group">
-          <input type="date" v-model="dataNascimento" class="date-input" :class="{ 'has-value': !!dataNascimento }"
-            @focus="dateFocused = true" @blur="dateFocused = false" />
-          <span class="date-placeholder" v-if="!dataNascimento && !dateFocused">
-            Data de nascimento
-          </span>
-        </div>
-        <input type="text" v-model="celular" placeholder="Celular" maxlength="11" inputmode="numeric" />
-      </form>
-    </div>
+  <img @click="emit('voltar')" class="iconeVoltar" src="/imgsRegistro/Vector.svg" alt="Voltar para primeira etapa">
+  <div class="form-box2">
+    <form @submit.prevent="() => { }">
+      <input type="text" v-model="cpf" placeholder="CPF" maxlength="11" inputmode="numeric" />
+      <div class="input-group">
+        <input type="date" v-model="dataNascimento" class="date-input" :class="{ 'has-value': !!dataNascimento }"
+          @focus="dateFocused = true" @blur="dateFocused = false" />
+        <span class="date-placeholder" v-if="!dataNascimento && !dateFocused">
+          Data de nascimento
+        </span>
+      </div>
+      <input type="text" v-model="celular" placeholder="Celular" maxlength="11" inputmode="numeric" />
+    </form>
+  </div>
 </template>
 
 <style scoped>
@@ -57,12 +58,18 @@ watch([cpf, dataNascimento, celular], () => {
   justify-content: center;
 }
 
+.logo img {
+  width: 160px;
+  margin-top: -50px;
+}
+
 .form-box2 {
   width: var(--field-w);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-around;
+  height: 50vh;
 }
 
 .titulo {
@@ -161,11 +168,18 @@ input::placeholder {
 .link a:hover {
   text-decoration: underline;
 }
-
-.iconeVoltar{
+.iconeVoltar {
   cursor: pointer;
   position: absolute;
   top: 83px;
-  left: 83px;
+  left: 9rem;
+  z-index: 10;
+  width: 35px;
+  height: 35px;
+}
+
+.iconeVoltar:hover {
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
 }
 </style>
