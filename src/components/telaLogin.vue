@@ -1,8 +1,9 @@
 <script setup>
 import { useAuthStore } from '@/stores/auth';
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
+const loading = ref(false);
 const authStore = useAuthStore();
 const router = useRouter();
 const data = reactive({
@@ -14,21 +15,26 @@ const voltarParaIntroducao = () => {
   router.push('/')
 }
 
-function onLogin() {
- authStore.login(data.email, data.password);
- if (authStore.state.user) {
-  router.push('/home');
-  } else {
-  alert('Falha no login. Verifique suas credenciais.');
- }
-
+async function onLogin() {
+  loading.value = true;
+  try {
+    await authStore.login(data.email, data.password);
+    if (authStore.state.user) {
+      router.push('/home');
+    }
+  } catch {
+    alert('Falha no login. Verifique suas credenciais.');
+  } finally {
+    loading.value = false;
+  }
 }
 </script>
 
 <template>
   <div class="container">
     <!-- Botão voltar para introdução -->
-    <img @click="voltarParaIntroducao" class="iconeVoltar" src="/imgsRegistro/Vector.svg" alt="Clique para voltar à introdução">
+    <img @click="voltarParaIntroducao" class="iconeVoltar" src="/imgsRegistro/Vector.svg"
+      alt="Clique para voltar à introdução">
 
     <div class="form-box">
       <div class="logo">
@@ -39,8 +45,9 @@ function onLogin() {
 
       <form @submit.prevent="onLogin">
         <input type="email" placeholder="Email" maxlength="100" autocomplete="email" v-model="data.email" />
-        <input type="password" v-model="data.password" placeholder="Senha" maxlength="100" autocomplete="current-password" />
-        <button type="submit" class="btn">Entrar</button>
+        <input type="password" v-model="data.password" placeholder="Senha" maxlength="100"
+          autocomplete="current-password" />
+        <button type="submit" class="btn" :disabled="loading">{{ loading ? 'Carregando...' : 'Entrar' }}</button>
       </form>
 
       <p class="link"><a>Esqueceu sua senha?</a></p>
@@ -150,6 +157,11 @@ input::placeholder {
 
 .btn:hover {
   background: #b18f52;
+}
+
+.btn:disabled {
+  background: #7a6a45;
+  cursor: not-allowed;
 }
 
 .link {
