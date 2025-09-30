@@ -4,6 +4,10 @@ import TelaRegistroDois from './telaRegistroDois.vue'
 import AuthService from '@/services/auth.js'
 import { useRouter } from 'vue-router'
 
+// Toastify
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
+
 const router = useRouter()
 
 // Dados do primeiro stage
@@ -12,7 +16,7 @@ const senhaConfirmada = ref('')
 const email = ref('')
 const nome = ref('')
 
-// Dados do segundo stage (definidos aqui para acessibilidade global)
+// Dados do segundo stage
 const cpf = ref('')
 const dataNascimento = ref('')
 const celular = ref('')
@@ -20,42 +24,73 @@ const celular = ref('')
 // Estados
 const stage = ref(true)
 const isLoading = ref(false)
-const errorMessage = ref('')
+const mostrarSenha = ref(false)
+const mostrarSenhaConfirmada = ref(false)
+
+// Funções para toggle das senhas
+const toggleSenha = () => {
+  mostrarSenha.value = !mostrarSenha.value
+}
+
+const toggleSenhaConfirmada = () => {
+  mostrarSenhaConfirmada.value = !mostrarSenhaConfirmada.value
+}
+
+// Função para validar email
+const validarEmail = (email) => {
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+  return emailRegex.test(email)
+}
 
 const showStage = () => {
   // Validação do primeiro stage
   if (!nome.value || !email.value || !senha.value || !senhaConfirmada.value) {
-    errorMessage.value = 'Todos os campos são obrigatórios'
+    toast.error('Preencha todos os campos', { autoClose: 2000, theme: 'dark' })
+    return
+  }
+
+  // Validação do email
+  if (!validarEmail(email.value)) {
+    toast.error('Por favor, insira um email válido (exemplo: usuario@email.com)', { autoClose: 3000, theme: 'dark' })
     return
   }
 
   if (senha.value !== senhaConfirmada.value) {
-    errorMessage.value = 'As senhas não coincidem'
+    toast.error('As senhas não coincidem', { autoClose: 2000, theme: 'dark' })
     return
   }
 
   if (senha.value.length < 8) {
-    errorMessage.value = 'A senha deve ter pelo menos 8 caracteres'
+    toast.warn('A senha deve ter pelo menos 8 caracteres', { autoClose: 2000, theme: 'dark' })
     return
   }
 
-  errorMessage.value = ''
   stage.value = !stage.value
-  console.log(stage.value)
+  toast.info('Continue preenchendo seus dados!', { autoClose: 1500, theme: 'dark' })
+}
+
+
+const voltarParaLogin = () => {
+  router.push('/login')
 }
 
 const cadastrar = async () => {
   try {
     isLoading.value = true
-    errorMessage.value = ''
 
-    // Validação do segundo stage
-    if (!cpf.value || !dataNascimento.value || !celular.value) {
-      errorMessage.value = 'Todos os campos são obrigatórios'
+    if (dataNascimento.value < 16) {
+      toast.error('Você deve ser maior de 16 anos para se cadastrar', { autoClose: 2000, theme: 'dark' })
       return
     }
 
-    // Preparar dados para envio
+    // Validação do segundo stage
+    if (!cpf.value || !dataNascimento.value || !celular.value) {
+      toast.error('Todos os campos são obrigatórios', { autoClose: 2000 })
+      return
+    }
+
+
+    // Preparar dados
     const userData = {
       nome: nome.value,
       email: email.value,
@@ -68,36 +103,43 @@ const cadastrar = async () => {
 
     console.log('Enviando dados para o backend:', userData)
 
-    // Enviar para o backend
     const response = await AuthService.register(userData)
 
     console.log('Registro realizado com sucesso:', response)
+    toast.success('Cadastro realizado com sucesso!', { autoClose: 2000 })
 
-    // Redirecionar para login ou home após sucesso
     router.push('/home')
 
   } catch (error) {
-
     if (error.response && error.response.data) {
-      errorMessage.value = error.response.data.message || 'Erro no cadastro'
+      toast.error(error.response.data.message || 'Este usuário já está cadastrado! Tente fazer login ou use outro email.')
     } else {
-      errorMessage.value = 'Erro de conexão com o servidor'
+      toast.error('Erro de conexão com o servidor')
     }
   } finally {
     isLoading.value = false
   }
 }
 
-// Expor as refs para o componente filho
+// Expor dados pro filho
 const updateChildData = (childData) => {
   cpf.value = childData.cpf
   dataNascimento.value = childData.dataNascimento
   celular.value = childData.celular
 }
+
+// Função para voltar para o primeiro stage
+const voltarParaPrimeiroStage = () => {
+  stage.value = true
+}
 </script>
 
 <template>
   <div class="container">
+    <!-- Botão voltar apenas na primeira tela -->
+    <img v-if="stage" @click="voltarParaLogin" class="iconeVoltar" src="/imgsRegistro/Vector.svg"
+      alt="Voltar para login">
+
     <div class="form-box">
       <div class="logo">
         <img src="/public/login/cobarber.svg" alt="Logo" />
@@ -105,38 +147,52 @@ const updateChildData = (childData) => {
       <p class="titulo">Olá!</p>
       <p class="subtitle">Para continuar, digite seus dados</p>
 
-      <!-- Exibir mensagens de erro -->
-      <div v-if="errorMessage" class="error-message">
-        {{ errorMessage }}
-      </div>
-
       <div class="stage" v-if="stage">
-
         <form @submit.prevent="showStage">
           <input type="text" v-model="nome" placeholder="Nome completo" maxlength="100" inputmode="latin-name" />
-          <input type="email" v-model="email" placeholder="Email" maxlength="50" />
-          <input type="password" v-model="senha" placeholder="Senha" maxlength="30" />
-          <input type="password" v-model="senhaConfirmada" placeholder="Confirme sua senha" maxlength="30" />
+          <input type="email" v-model="email" placeholder="Email (ex: usuario@email.com)" maxlength="50"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" autocomplete="email"
+            title="Digite um email válido (ex: usuario@email.com)" />
+
+          <!-- Campo de senha com olhinho -->
+          <div class="password-container">
+            <input :type="mostrarSenha ? 'text' : 'password'" v-model="senha" placeholder="Senha" maxlength="30" />
+            <img class="eye-icon" @click="toggleSenha"
+              :src="mostrarSenha ? '/imgsRegistro/ocultado.svg' : '/imgsRegistro/olho.svg'"
+              :alt="mostrarSenha ? 'Ocultar senha' : 'Mostrar senha'" />
+          </div>
+
+          <!-- Campo de confirmar senha com olhinho -->
+          <div class="password-container">
+            <input :type="mostrarSenhaConfirmada ? 'text' : 'password'" v-model="senhaConfirmada"
+              placeholder="Confirme sua senha" maxlength="30" />
+            <img class="eye-icon" @click="toggleSenhaConfirmada"
+              :src="mostrarSenhaConfirmada ? '/imgsRegistro/ocultado.svg' : '/imgsRegistro/olho.svg'"
+              :alt="mostrarSenhaConfirmada ? 'Ocultar senha' : 'Mostrar senha'" />
+          </div>
         </form>
       </div>
-      <TelaRegistroDois v-if="!stage" @update-data="updateChildData" />
+
+      <TelaRegistroDois v-if="!stage" @update-data="updateChildData" @voltar="voltarParaPrimeiroStage" />
     </div>
+
     <br>
+
     <div class="buttons">
-    <button type="submit" class="btn" @click="showStage" v-if="stage" :disabled="isLoading">
-      Continuar
-    </button>
-    <button type="submit" class="btn" @click="cadastrar" v-if="!stage" :disabled="isLoading">
-      {{ isLoading ? 'Cadastrando...' : 'Cadastrar' }}
-    </button>
-    <br>
-    <button class="btngoogle">
-      <img src="/public/login/googlesvg.svg" alt="">
-    </button>
+      <button type="submit" class="btn" @click="showStage" v-if="stage" :disabled="isLoading">
+        Continuar
+      </button>
+      <button type="submit" class="btn" @click="cadastrar" v-if="!stage" :disabled="isLoading">
+        {{ isLoading ? 'Cadastrando...' : 'Cadastrar' }}
+      </button>
+      <br>
+      <button class="btngoogle">
+        <img src="/public/login/googlesvg.svg" alt="">
+      </button>
     </div>
+
     <p class="link">Já tem uma conta? <router-link to="/login">Faça o login</router-link></p>
   </div>
-
 </template>
 
 <style scoped>
@@ -164,7 +220,8 @@ const updateChildData = (childData) => {
   width: 160px;
   margin-top: -50px;
 }
-.logo{
+
+.logo {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -194,17 +251,6 @@ const updateChildData = (childData) => {
   text-align: start;
 }
 
-.error-message {
-  background-color: #ff4444;
-  color: white;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 15px;
-  width: 100%;
-  text-align: center;
-  font-size: 14px;
-}
-
 form {
   display: flex;
   flex-direction: column;
@@ -229,34 +275,32 @@ input::placeholder {
   color: #aaa;
 }
 
-.input-group {
+/* Container para campos de senha com ícone */
+.password-container {
   position: relative;
+  width: var(--field-w);
+  height: var(--field-h);
+}
+
+.password-container input {
   width: 100%;
+  height: 100%;
+  padding-right: 45px;
+  /* Espaço para o ícone */
 }
 
-.date-input {
-  position: relative;
-  z-index: 0;
-}
-
-.date-input::-webkit-datetime-edit {
-  color: transparent;
-}
-
-.date-input.has-value::-webkit-datetime-edit,
-.date-input:focus::-webkit-datetime-edit {
-  color: #fff;
-}
-
-.date-placeholder {
+.eye-icon {
   position: absolute;
-  left: 16px;
+  right: 20px;
   top: 50%;
   transform: translateY(-50%);
-  color: #aaa;
-  font-size: 14px;
-  pointer-events: none;
-  z-index: 1;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+  filter: invert(1);
+  /* Torna o ícone branco */
 }
 
 
@@ -294,12 +338,28 @@ input::placeholder {
 .link a:hover {
   text-decoration: underline;
 }
-.buttons{
-    display: flex;
-    flex-direction: column;
 
+.buttons {
+  display: flex;
+  flex-direction: column;
 }
-.btngoogle{
-    cursor: pointer;
+
+.btngoogle {
+  cursor: pointer;
+}
+
+.iconeVoltar {
+  cursor: pointer;
+  position: absolute;
+  top: 83px;
+  left: 9rem;
+  z-index: 10;
+  width: 35px;
+  height: 35px;
+}
+
+.iconeVoltar:hover {
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
 }
 </style>

@@ -10,6 +10,10 @@ const data = reactive({
   password: ''
 });
 
+const voltarParaIntroducao = () => {
+  router.push('/')
+}
+
 function onLogin() {
  authStore.login(data.email, data.password);
  if (authStore.state.user) {
@@ -23,6 +27,9 @@ function onLogin() {
 
 <template>
   <div class="container">
+    <!-- Botão voltar para introdução -->
+    <img @click="voltarParaIntroducao" class="iconeVoltar" src="/imgsRegistro/Vector.svg" alt="Voltar para introdução">
+
     <div class="form-box">
       <div class="logo">
         <img src="/login/cobarber.svg" alt="Logo" />
@@ -174,5 +181,20 @@ input::placeholder {
   align-items: center;
   justify-content: center;
   gap: 8px;
+}
+
+.iconeVoltar {
+  cursor: pointer;
+  position: absolute;
+  top: 83px;
+  left: 5rem;
+  z-index: 10;
+  width: 35px;
+  height: 35px;
+}
+
+.iconeVoltar:hover {
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
 }
 </style>
