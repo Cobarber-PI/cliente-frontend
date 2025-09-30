@@ -74,6 +74,14 @@ const voltarParaLogin = () => {
   router.push('/login')
 }
 
+const voltar = () => {
+  stage.value = !stage.value
+}
+
+const voltarParaLogin = () => {
+  router.push('/')
+}
+
 const cadastrar = async () => {
   try {
     isLoading.value = true
@@ -137,12 +145,13 @@ const voltarParaPrimeiroStage = () => {
 <template>
   <div class="container">
     <!-- Botão voltar apenas na primeira tela -->
+
     <img v-if="stage" @click="voltarParaLogin" class="iconeVoltar" src="/imgsRegistro/Vector.svg"
       alt="Voltar para login">
 
     <div class="form-box">
       <div class="logo">
-        <img src="/public/login/cobarber.svg" alt="Logo" />
+        <img src="/login/cobarber.svg" alt="Logo" />
       </div>
       <p class="titulo">Olá!</p>
       <p class="subtitle">Para continuar, digite seus dados</p>
@@ -172,6 +181,7 @@ const voltarParaPrimeiroStage = () => {
           </div>
         </form>
       </div>
+
 
       <TelaRegistroDois v-if="!stage" @update-data="updateChildData" @voltar="voltarParaPrimeiroStage" />
     </div>
@@ -218,7 +228,6 @@ const voltarParaPrimeiroStage = () => {
 
 .logo img {
   width: 160px;
-  margin-top: -50px;
 }
 
 .logo {
@@ -232,7 +241,6 @@ const voltarParaPrimeiroStage = () => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 60vh;
 }
 
 .titulo {
@@ -348,6 +356,7 @@ input::placeholder {
   cursor: pointer;
 }
 
+
 .iconeVoltar {
   cursor: pointer;
   position: absolute;
@@ -356,6 +365,19 @@ input::placeholder {
   z-index: 10;
   width: 35px;
   height: 35px;
+}
+
+.iconeVoltar:hover {
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.iconeVoltar {
+  cursor: pointer;
+  position: absolute;
+  top: 83px;
+  left: 83px;
+  z-index: 10;
 }
 
 .iconeVoltar:hover {
