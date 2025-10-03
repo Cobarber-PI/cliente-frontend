@@ -72,7 +72,7 @@ const passos = [
       </div>
     </div>
     <div class="botao">
-      <button @click="router.push('/home')">Começar agora</button>
+      <button @click="router.push('/login')">Começar agora</button>
       <p>Agendamentos online, rápido e gratuito</p>
     </div>
   </div>
