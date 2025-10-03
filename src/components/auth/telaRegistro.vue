@@ -3,10 +3,7 @@ import { ref } from 'vue'
 import TelaRegistroDois from './telaRegistroDois.vue'
 import AuthService from '@/services/auth.js'
 import { useRouter } from 'vue-router'
-
-// Toastify
 import { toast } from 'vue3-toastify'
-import 'vue3-toastify/dist/index.css'
 
 const router = useRouter()
 
@@ -71,16 +68,14 @@ const showStage = () => {
 
 
 const voltarParaLogin = () => {
-  router.push('/login')
+  // Verifica se há histórico anterior para voltar
+  if (window.history.length > 1) {
+    router.go(-1) // Volta para a página anterior
+  } else {
+    router.push('/') // Se não há histórico, vai para a introdução
+  }
 }
 
-const voltar = () => {
-  stage.value = !stage.value
-}
-
-const voltarParaLogin = () => {
-  router.push('/')
-}
 
 const cadastrar = async () => {
   try {
@@ -145,9 +140,8 @@ const voltarParaPrimeiroStage = () => {
 <template>
   <div class="container">
     <!-- Botão voltar apenas na primeira tela -->
-
     <img v-if="stage" @click="voltarParaLogin" class="iconeVoltar" src="/imgsRegistro/Vector.svg"
-      alt="Voltar para login">
+      alt="Voltar para página anterior">
 
     <div class="form-box">
       <div class="logo">
