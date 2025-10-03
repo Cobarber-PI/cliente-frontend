@@ -1,7 +1,7 @@
 <script setup>
-import login from '@/components/telaLogin.vue';
+import telaLogin from '@/components/auth/telaLogin.vue';
 </script>
 
 <template>
-  <login />
+  <telaLogin/>
 </template>
