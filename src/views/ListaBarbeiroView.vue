@@ -1,5 +1,5 @@
 <script setup>
-import ListaBarbeiros from '@/components/ListaBarbeiros.vue';
+import ListaBarbeiros from '@/components/barbeiros/ListaBarbeiros.vue';
 </script>
 
 <template>

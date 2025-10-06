@@ -1,5 +1,5 @@
 <script setup>
-import Filtro from '@/components/Filtro.vue';
+import Filtro from '@/components/layout/Filtro.vue';
 </script>
 
 <template>
