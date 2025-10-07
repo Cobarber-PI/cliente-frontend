@@ -35,19 +35,19 @@ p {
     height: 430px;
     margin: auto;
     display: flex;
-    background-color: aqua;
     align-items: center;
     justify-content: space-between;
     border-radius: 15px;
     gap: 15px;
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 .escolha {
-    background-color: blue;
+    background-color: #232322;
     height: 100%;
     width: 48%;
     display: flex;
     border-radius: 15px;
+    border: 1px solid #F0C238;
 }
 </style>
