@@ -207,4 +207,16 @@ input::placeholder {
   justify-content: center;
   gap: 8px;
 }
+@media screen and (max-width: 1150px) {
+  .container {
+    --field-w: 50vw;
+    --field-h: 7.5vh;
+  }
+
+  .iconeVoltar {
+    top: 20px;
+    left: 20px;
+  }
+  
+}
 </style>
