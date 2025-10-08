@@ -277,7 +277,6 @@ input::placeholder {
   color: #aaa;
 }
 
-/* Container para campos de senha com ícone */
 .password-container {
   position: relative;
   width: var(--field-w);
@@ -288,7 +287,6 @@ input::placeholder {
   width: 100%;
   height: 100%;
   padding-right: 45px;
-  /* Espaço para o ícone */
 }
 
 .eye-icon {
@@ -302,7 +300,6 @@ input::placeholder {
   opacity: 0.7;
   transition: opacity 0.2s ease;
   filter: invert(1);
-  /* Torna o ícone branco */
 }
 
 
@@ -354,23 +351,8 @@ input::placeholder {
 .iconeVoltar {
   cursor: pointer;
   position: absolute;
-  top: 83px;
-  left: 9rem;
-  z-index: 10;
-  width: 35px;
-  height: 35px;
-}
-
-.iconeVoltar:hover {
-  opacity: 0.7;
-  transition: opacity 0.2s ease;
-}
-
-.iconeVoltar {
-  cursor: pointer;
-  position: absolute;
-  top: 83px;
-  left: 83px;
+  top: 2rem;
+  left: 2rem;
   z-index: 10;
 }
 
@@ -378,4 +360,20 @@ input::placeholder {
   opacity: 0.7;
   transition: opacity 0.2s ease;
 }
+
+.iconeVoltar:hover {
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+@media (max-width: 1150px) {
+  .container {
+    --field-w: 60vw;
+    --field-h: 7vh;
+  }
+}
+@media (max-width: 400px) {
+  .container {
+    --field-w: 90vw;
+    --field-h: 7vh;
+  }}
 </style>
