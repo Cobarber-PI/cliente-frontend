@@ -185,8 +185,8 @@ input::placeholder {
 .iconeVoltar {
   cursor: pointer;
   position: absolute;
-  top: 83px;
-  left: 83px;
+  top: 2rem;
+  left: 2rem;
   z-index: 10;
 }
 
@@ -212,11 +212,5 @@ input::placeholder {
     --field-w: 50vw;
     --field-h: 7.5vh;
   }
-
-  .iconeVoltar {
-    top: 20px;
-    left: 20px;
-  }
-  
 }
 </style>
