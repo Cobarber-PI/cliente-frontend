@@ -32,13 +32,7 @@ const router = createRouter({
       path: '/home',
       name: 'Home',
       component: HomeView,
-    }
-    ,
-    {
-      path: '/funcionamento',
-      name: 'FuncionamentoBarbearia',
-      component: () => import('@/components/barbeiros/FuncionamentoBarbearia.vue'),
-    }
+    },
   ],
   scrollBehavior() {
     return { top: 0 }
