@@ -111,7 +111,7 @@ const cadastrar = async () => {
     console.log('Registro realizado com sucesso:', response)
     toast.success('Cadastro realizado com sucesso!', { autoClose: 2000 })
 
-    router.push('/home')
+    router.push('/escolha')
 
   } catch (error) {
     if (error.response && error.response.data) {
