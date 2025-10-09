@@ -74,7 +74,7 @@ const cadastrar = async () => {
     console.log('Registro realizado com sucesso:', response)
 
     // Redirecionar para login ou home após sucesso
-    router.push('/home')
+    router.push('/escolha')
 
   } catch (error) {
 

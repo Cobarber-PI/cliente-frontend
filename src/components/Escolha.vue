@@ -1,4 +1,11 @@
-<script setup></script>
+<script setup>
+import { useRouter } from 'vue-router';
+const router = useRouter();
+
+function redirecionarHome(){
+    router.push('/home')
+}
+</script>
 
 <template>
     <h1 class="titulo">Bem vindo!</h1>
@@ -15,7 +22,7 @@
                 <p class="topicos"><span>•</span>Avalie e comente sobre os serviços</p>
                 <p class="topicos"><span>•</span>Histórico de agendamentos</p>
             </div>
-            <div class="button"><button class="cliente">Continuar como Cliente</button></div>
+            <div class="button"><button @click="redirecionarHome" class="cliente">Continuar como Cliente</button></div>
         </div>
         <div class="escolha" id="proprietario">
             <div class="img">
@@ -28,7 +35,7 @@
                 <p class="topicos"><span>•</span>Controle financeiro completo</p>
                 <p class="topicos"><span>•</span>Cadastre serviços e profissionais</p>
             </div>
-            <div class="button"><button class="proprietário">Continuar como Proprietário</button>            
+            <div class="button"><button @click="redirecionarHome" class="proprietário">Continuar como Proprietário</button>            
             </div>
         </div>
     </div>
