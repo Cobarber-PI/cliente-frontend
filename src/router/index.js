@@ -34,11 +34,6 @@ const router = createRouter({
       name: 'Home',
       component: HomeView,
     },
-    {
-      path: '/servicosBarbeiros',
-      name: 'ServicosBarbeiros',
-      component: ServicosBarbeirosView,
-    }
   ],
   scrollBehavior() {
     return { top: 0 }
