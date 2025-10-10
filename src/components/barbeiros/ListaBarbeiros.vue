@@ -1,4 +1,6 @@
 <script setup>
+
+
 const infoBarbershop = [
     {
         id: 1,
@@ -100,6 +102,14 @@ const infoBarbershop = [
         distance: '2.4 km'
     },
 ]
+
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+function goToBarbearias() {
+  router.push('/barbearia');
+}
 </script>
 
 <template>
@@ -125,7 +135,7 @@ const infoBarbershop = [
                         }}</span> </div>
             </div>
             <div class="centerButton">
-                <button><img src="/ListaBarbearia/tesouras.png" alt="tesouras" class="imageButton">Agendar
+                <button @click="goToBarbearias" ><img src="/ListaBarbearia/tesouras.png" alt="tesouras" class="imageButton">Agendar
                     Horário</button>
             </div>
         </div>
