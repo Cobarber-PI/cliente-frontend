@@ -16,6 +16,10 @@ import InfoBarbearia from '@/components/layout/InfoBarbearia.vue';
 
 <style scoped>
 
+.barbearia-page {
+  display: flex;
+  flex-direction: column;
+}
 
 .hero-wrapper {
   min-height: 380px;
