@@ -1,4 +1,12 @@
 <script setup>
+import { onMounted } from 'vue';
+import { useAuthStore } from '@/stores/auth';
+
+const authStore = useAuthStore();
+
+onMounted(() => {
+    authStore.me();
+});
 </script>
 
 <template>
@@ -15,14 +23,19 @@
                     <router-link to="/agendamentos">Agendamentos</router-link>
                 </ul>
             </div>
-            <div class="login">
+            <div class="login" v-if="!authStore.state.user">
                 <button class="entrar">
                     <img src="/home/user.svg" alt="">
                     <p>Login</p>
                 </button>
                 <button class="cadastrar">
+                    {{ authStore.state.user?.is_owner }}
                     Cadastrar
                 </button>
+            </div>
+            <div v-else>
+                <p>{{ authStore.state.user?.name }}</p>
+                <button @click="authStore.logout">Logout</button>
             </div>
         </div>
     </header>
@@ -140,7 +153,7 @@ main {
     color: white;
     font-size: 65px;
     text-align: center;
-    padding-top: 95px;
+    padding-top: 9rem;
     font-family: 'monteserrat', sans-serif;
 }
 
