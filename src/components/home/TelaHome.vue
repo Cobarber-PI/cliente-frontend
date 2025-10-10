@@ -153,7 +153,7 @@ main {
     color: white;
     font-size: 65px;
     text-align: center;
-    padding-top: 95px;
+    padding-top: 9rem;
     font-family: 'monteserrat', sans-serif;
 }
 

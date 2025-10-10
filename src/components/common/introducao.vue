@@ -212,7 +212,7 @@ header button:hover {
 
 .flexibility {
   background-color: #080808;
-  height: 110vh;
+  height: 100vh;
   color: #ffffff;
   padding-bottom: 3rem;
 }
