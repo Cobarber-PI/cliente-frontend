@@ -39,6 +39,11 @@ const router = createRouter({
       name: 'Escolha',
       component: EscolhaView
     },
+    {
+      path: '/registroBarbeiro',
+      name: 'RegistroBarbeiro',
+      component: () => import('../views/registroBarbeiroView.vue')
+    },
   ],
   scrollBehavior() {
     return { top: 0 }
