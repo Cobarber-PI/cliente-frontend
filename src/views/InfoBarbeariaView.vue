@@ -1,5 +1,6 @@
 <script setup>
 import FuncionamentoBarbearia from '@/components/barbeiros/FuncionamentoBarbearia.vue';
+import ServicosBarbeiros from '@/components/barbeiros/servicosBarbeiros.vue';
 import InfoBarbearia from '@/components/layout/InfoBarbearia.vue';
 </script>
 
@@ -10,6 +11,9 @@ import InfoBarbearia from '@/components/layout/InfoBarbearia.vue';
     </div>
     <div class="details">
         <FuncionamentoBarbearia />
+    </div>
+    <div class="services">
+        <ServicosBarbeiros/>
     </div>
   </div>
 </template>
