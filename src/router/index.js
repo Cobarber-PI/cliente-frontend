@@ -5,6 +5,7 @@ import telaRegistroView from '../views/telaRegistroView.vue'
 import IntroducaoView from '../views/introducaoView.vue'
 import HomeView from '@/views/HomeView.vue'
 import EscolhaView from '@/views/EscolhaView.vue'
+import InfoBarbeariaView from '@/views/InfoBarbeariaView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -39,6 +40,11 @@ const router = createRouter({
       name: 'Escolha',
       component: EscolhaView
     },
+    {
+      path: '/barbearia',
+      name: 'InfoBarbearia',
+      component: InfoBarbeariaView
+    }
   ],
   scrollBehavior() {
     return { top: 0 }

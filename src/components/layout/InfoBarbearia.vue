@@ -46,7 +46,9 @@ function voltar() {
 </template>
 
 <style scoped>
-
+p,h1{
+  color: white;
+}
 .buttomVoltar {
   margin: 2rem 5rem;
   position: absolute;

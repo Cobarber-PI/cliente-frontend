@@ -108,7 +108,7 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 
 function goToBarbearias() {
-  router.push('/barbearia')
+  router.push('/barbearia');
 }
 </script>
 
