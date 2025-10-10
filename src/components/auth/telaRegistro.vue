@@ -4,6 +4,7 @@ import TelaRegistroDois from './telaRegistroDois.vue'
 import AuthService from '@/services/auth.js'
 import { useRouter } from 'vue-router'
 import { toast } from 'vue3-toastify'
+import Escolha from '../Escolha.vue'
 
 const router = useRouter()
 
@@ -39,6 +40,9 @@ const validarEmail = (email) => {
   return emailRegex.test(email)
 }
 
+
+
+
 const showStage = () => {
   // Validação do primeiro stage
   if (!nome.value || !email.value || !senha.value || !senhaConfirmada.value) {
@@ -62,7 +66,7 @@ const showStage = () => {
     return
   }
 
-  stage.value = !stage.value
+  stage.value = 2
   toast.info('Continue preenchendo seus dados!', { autoClose: 1500, theme: 'dark' })
 }
 
@@ -101,14 +105,16 @@ const cadastrar = async () => {
       confirm_password: senhaConfirmada.value,
       cpf: cpf.value,
       dataNascimento: dataNascimento.value,
-      celular: celular.value
+      celular: celular.value,
+      is_owner: false
     }
 
     console.log('Enviando dados para o backend:', userData)
 
     const response = await AuthService.register(userData)
 
-    console.log('Registro realizado com sucesso:', response)
+    const data = await AuthService.login(userData.email, userData.password)
+    console.log('Registro realizado com sucesso:', response, data)
     toast.success('Cadastro realizado com sucesso!', { autoClose: 2000 })
 
     router.push('/escolha')
@@ -130,10 +136,15 @@ const updateChildData = (childData) => {
   dataNascimento.value = childData.dataNascimento
   celular.value = childData.celular
 }
-
+const updateEscolha = (childData) => {
+  is_owner.value = childData.is_owner
+}
 // Função para voltar para o primeiro stage
 const voltarParaPrimeiroStage = () => {
   stage.value = true
+}
+const voltarParaSegundoStage = () => {
+  stage.value = 2
 }
 </script>
 
@@ -178,6 +189,8 @@ const voltarParaPrimeiroStage = () => {
 
 
       <TelaRegistroDois v-if="!stage" @update-data="updateChildData" @voltar="voltarParaPrimeiroStage" />
+      <Escolha v-if="stage==3" @update-data="updateEscolha" @voltar="voltarParaSegundoStage" />
+
     </div>
 
     <br>

@@ -20,6 +20,20 @@ class AuthService {
             throw error;
         }
     }
+
+    async getUserProfile(token) {
+        try {
+            const response = await api.get("/usuarios/me/", {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            return response.data;
+        } catch (error) {
+            console.log("Get user profile error:", error);
+            throw error;
+        }
+    }
 }
 
 export default new AuthService();
