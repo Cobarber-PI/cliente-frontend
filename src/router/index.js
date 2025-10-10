@@ -44,7 +44,8 @@ const router = createRouter({
       path: '/barbearia',
       name: 'InfoBarbearia',
       component: InfoBarbeariaView
-    }
+    },
+    
   ],
   scrollBehavior() {
     return { top: 0 }
