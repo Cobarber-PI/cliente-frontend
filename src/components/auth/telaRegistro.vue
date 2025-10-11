@@ -20,7 +20,7 @@ const dataNascimento = ref('')
 const celular = ref('')
 
 // Estados
-const stage = ref(true)
+const stage = ref(1)
 const isLoading = ref(false)
 const mostrarSenha = ref(false)
 const mostrarSenhaConfirmada = ref(false)
@@ -141,7 +141,7 @@ const updateEscolha = (childData) => {
 }
 // Função para voltar para o primeiro stage
 const voltarParaPrimeiroStage = () => {
-  stage.value = true
+  stage.value = 1
 }
 const voltarParaSegundoStage = () => {
   stage.value = 2
@@ -151,7 +151,7 @@ const voltarParaSegundoStage = () => {
 <template>
   <div class="container">
     <!-- Botão voltar apenas na primeira tela -->
-    <img v-if="stage" @click="voltarParaLogin" class="iconeVoltar" src="/imgsRegistro/Vector.svg"
+    <img v-if="stage === 1" @click="voltarParaLogin" class="iconeVoltar" src="/imgsRegistro/Vector.svg"
       alt="Voltar para página anterior">
 
     <div class="form-box">
@@ -161,7 +161,7 @@ const voltarParaSegundoStage = () => {
       <p class="titulo">Olá!</p>
       <p class="subtitle">Para continuar, digite seus dados</p>
 
-      <div class="stage" v-if="stage">
+      <div class="stage" v-if="stage === 1">
         <form @submit.prevent="showStage">
           <input type="text" v-model="nome" placeholder="Nome completo" maxlength="100" inputmode="latin-name" />
           <input type="email" v-model="email" placeholder="Email (ex: usuario@email.com)" maxlength="50"
@@ -188,18 +188,18 @@ const voltarParaSegundoStage = () => {
       </div>
 
 
-      <TelaRegistroDois v-if="!stage" @update-data="updateChildData" @voltar="voltarParaPrimeiroStage" />
-      <Escolha v-if="stage==3" @update-data="updateEscolha" @voltar="voltarParaSegundoStage" />
+      <TelaRegistroDois v-if="stage === 2" @update-data="updateChildData" @voltar="voltarParaPrimeiroStage" />
+      <Escolha v-if="stage === 3" @update-data="updateEscolha" @voltar="voltarParaSegundoStage" />
 
     </div>
 
     <br>
 
     <div class="buttons">
-      <button type="submit" class="btn" @click="showStage" v-if="stage" :disabled="isLoading">
+      <button type="submit" class="btn" @click="showStage" v-if="stage === 1" :disabled="isLoading">
         Continuar
       </button>
-      <button type="submit" class="btn" @click="cadastrar" v-if="!stage" :disabled="isLoading">
+      <button type="submit" class="btn" @click="cadastrar" v-if="stage === 2" :disabled="isLoading">
         {{ isLoading ? 'Cadastrando...' : 'Cadastrar' }}
       </button>
       <br>
