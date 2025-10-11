@@ -1,7 +1,9 @@
 <script setup>
 import { onMounted } from 'vue';
 import { useAuthStore } from '@/stores/auth';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const authStore = useAuthStore();
 
 onMounted(() => {
@@ -24,18 +26,18 @@ onMounted(() => {
                 </ul>
             </div>
             <div class="login" v-if="!authStore.state.user">
-                <button class="entrar">
+                <button @click="router.push('/login')" class="entrar">
                     <img src="/home/user.svg" alt="">
                     <p>Login</p>
                 </button>
-                <button class="cadastrar">
+                <button @click="router.push('/telaRegistro')" class="cadastrar">
                     {{ authStore.state.user?.is_owner }}
                     Cadastrar
                 </button>
             </div>
             <div v-else>
                 <p>{{ authStore.state.user?.name }}</p>
-                <button @click="authStore.logout">Logout</button>
+                <button @click="authStore.logout" class="cadastrar">Logout</button>
             </div>
         </div>
     </header>

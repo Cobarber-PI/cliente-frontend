@@ -5,8 +5,10 @@ import AuthService from '@/services/auth.js'
 import { useRouter } from 'vue-router'
 import { toast } from 'vue3-toastify'
 import Escolha from '../Escolha.vue'
+import { useAuthStore } from '@/stores/auth'
 
 const router = useRouter()
+const auth = useAuthStore();
 
 // Dados do primeiro stage
 const senha = ref('')
@@ -70,7 +72,10 @@ const showStage = () => {
   toast.info('Continue preenchendo seus dados!', { autoClose: 1500, theme: 'dark' })
 }
 
-
+const showChoices = () => {
+  stage.value = 3
+  toast.info('Escolha como deseja usar a plataforma!', { autoClose: 1500, theme: 'dark' })
+}
 const voltarParaLogin = () => {
   // Verifica se há histórico anterior para voltar
   if (window.history.length > 1) {
@@ -81,7 +86,7 @@ const voltarParaLogin = () => {
 }
 
 
-const cadastrar = async () => {
+const cadastrar = async (escolha) => {
   try {
     isLoading.value = true
 
@@ -99,25 +104,25 @@ const cadastrar = async () => {
 
     // Preparar dados
     const userData = {
-      nome: nome.value,
+      name: nome.value,
       email: email.value,
       password: senha.value,
       confirm_password: senhaConfirmada.value,
       cpf: cpf.value,
-      dataNascimento: dataNascimento.value,
-      celular: celular.value,
-      is_owner: false
+      DOB: dataNascimento.value,
+      cellphone: celular.value,
+      is_owner: escolha
     }
 
     console.log('Enviando dados para o backend:', userData)
 
     const response = await AuthService.register(userData)
 
-    const data = await AuthService.login(userData.email, userData.password)
+    const data = await auth.login(userData.email, userData.password)
     console.log('Registro realizado com sucesso:', response, data)
     toast.success('Cadastro realizado com sucesso!', { autoClose: 2000 })
 
-    router.push('/escolha')
+    router.push('/home')
 
   } catch (error) {
     if (error.response && error.response.data) {
@@ -125,6 +130,7 @@ const cadastrar = async () => {
     } else {
       toast.error('Erro de conexão com o servidor')
     }
+    stage.value = 2
   } finally {
     isLoading.value = false
   }
@@ -136,20 +142,15 @@ const updateChildData = (childData) => {
   dataNascimento.value = childData.dataNascimento
   celular.value = childData.celular
 }
-const updateEscolha = (childData) => {
-  is_owner.value = childData.is_owner
-}
+
 // Função para voltar para o primeiro stage
 const voltarParaPrimeiroStage = () => {
   stage.value = 1
 }
-const voltarParaSegundoStage = () => {
-  stage.value = 2
-}
 </script>
 
 <template>
-  <div class="container">
+  <div v-if="stage < 3" class="container">
     <!-- Botão voltar apenas na primeira tela -->
     <img v-if="stage === 1" @click="voltarParaLogin" class="iconeVoltar" src="/imgsRegistro/Vector.svg"
       alt="Voltar para página anterior">
@@ -188,8 +189,7 @@ const voltarParaSegundoStage = () => {
       </div>
 
 
-      <TelaRegistroDois v-if="stage === 2" @update-data="updateChildData" @voltar="voltarParaPrimeiroStage" />
-      <Escolha v-if="stage === 3" @update-data="updateEscolha" @voltar="voltarParaSegundoStage" />
+      <TelaRegistroDois v-if="stage === 2" :data="{cpf, dataNascimento, celular}" @update-data="updateChildData" @voltar="voltarParaPrimeiroStage" />
 
     </div>
 
@@ -199,8 +199,8 @@ const voltarParaSegundoStage = () => {
       <button type="submit" class="btn" @click="showStage" v-if="stage === 1" :disabled="isLoading">
         Continuar
       </button>
-      <button type="submit" class="btn" @click="cadastrar" v-if="stage === 2" :disabled="isLoading">
-        {{ isLoading ? 'Cadastrando...' : 'Cadastrar' }}
+      <button type="submit" class="btn" @click="showChoices" v-if="stage === 2" :disabled="isLoading">
+        {{ isLoading ? 'Continuando...' : 'Continuar' }}
       </button>
       <br>
       <button class="btngoogle">
@@ -210,6 +210,7 @@ const voltarParaSegundoStage = () => {
 
     <p class="link">Já tem uma conta? <router-link to="/login">Faça o login</router-link></p>
   </div>
+  <Escolha v-if="stage === 3" @send="cadastrar" />
 </template>
 
 <style scoped>
@@ -378,15 +379,18 @@ input::placeholder {
   opacity: 0.7;
   transition: opacity 0.2s ease;
 }
+
 @media (max-width: 1150px) {
   .container {
     --field-w: 60vw;
     --field-h: 7vh;
   }
 }
+
 @media (max-width: 400px) {
   .container {
     --field-w: 90vw;
     --field-h: 7vh;
-  }}
+  }
+}
 </style>

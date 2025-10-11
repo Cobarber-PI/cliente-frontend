@@ -6,19 +6,13 @@ import { ref, watch } from 'vue';
 const authStore = useAuthStore();
 const router = useRouter();
 
-const is_owner = ref(false);
 
 function redirecionarHome(){
     router.push('/home')
 }
-const emit = defineEmits(['update-data', 'voltar'])
 
-// Observar mudanças nos dados e emitir para o pai
-watch([is_owner], () => {
-  emit('update-data', {
-    is_owner: is_owner.value
-  })
-}, { immediate: true })
+const emit = defineEmits(['send'])
+
 </script>
 
 <template>
@@ -36,7 +30,7 @@ watch([is_owner], () => {
                 <p class="topicos"><span>•</span>Avalie e comente sobre os serviços</p>
                 <p class="topicos"><span>•</span>Histórico de agendamentos</p>
             </div>
-            <div class="button"><button @click="redirecionarHome" class="cliente">Continuar como Cliente</button></div>
+            <div class="button"><button @click="emit('send', false)" class="cliente">Continuar como Cliente</button></div>
         </div>
         <div class="escolha" id="proprietario">
             <div class="img">
@@ -49,7 +43,7 @@ watch([is_owner], () => {
                 <p class="topicos"><span>•</span>Controle financeiro completo</p>
                 <p class="topicos"><span>•</span>Cadastre serviços e profissionais</p>
             </div>
-            <div class="button"><button @click="virarProp()" class="proprietário">Continuar como Proprietário</button>            
+            <div class="button"><button @click="emit('send', true)" class="proprietário">Continuar como Proprietário</button>            
             </div>
         </div>
     </div>

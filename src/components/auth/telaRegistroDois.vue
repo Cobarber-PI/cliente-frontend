@@ -1,14 +1,21 @@
 <script setup>
 import { ref, watch } from 'vue'
 
-const cpf = ref('')
-const dataNascimento = ref('')
-const celular = ref('')
+const props = defineProps(
+  {
+    'data': Object
+  }
+)
+const cpf = ref(props.data.cpf)
+const dataNascimento = ref(props.data.dataNascimento)
+const celular = ref(props.data.celular)
 const dateFocused = ref(false)
 
 
 // Emitir dados para o componente pai
 const emit = defineEmits(['update-data', 'voltar'])
+
+
 
 // Observar mudanças nos dados e emitir para o pai
 watch([cpf, dataNascimento, celular], () => {
