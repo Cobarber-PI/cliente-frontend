@@ -35,9 +35,24 @@ onMounted(() => {
                     Cadastrar
                 </button>
             </div>
-            <div v-else>
-                <p>{{ authStore.state.user?.name }}</p>
-                <button @click="authStore.logout" class="cadastrar">Logout</button>
+            <div class="logado" v-else>
+                <div class="img-user">
+                    <img src="/public/home/user.svg" alt="">
+                </div>
+                <div class="user">
+                    <div class="name">
+                        <div class="name-email">
+                            <div class="img-user">
+                            <img src="/public/home/user.svg" alt="">
+                            </div>
+                            <div>
+                                <p>{{ authStore.state.user?.name }}</p>
+                                <p>{{ authStore.state.user?.email }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button @click="authStore.logout" class="logout">Logout</button>
+                </div>
             </div>
         </div>
     </header>
@@ -279,6 +294,7 @@ main>p {
     margin: auto;
     padding-top: 30px
 }
+
 .cardsTutorial p {
     font-size: 16px;
     margin-top: 20px;
@@ -288,8 +304,63 @@ main>p {
     margin: auto;
     padding-top: 20px;
 }
-.tesouraTutorial{
+
+.tesouraTutorial {
     width: 35px;
     height: 35px;
 }
+
+.logado {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.img-user {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #F1C23C;
+    cursor: pointer;
+}
+
+.img-user>img {
+    width: 20px;
+    height: 25px;
+}
+
+.user {
+    width: 320px;
+    background-color: #09090B;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.name-email {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.name-email img {
+    width: 20px;
+    height: 20px;
+}
+.logout {
+    margin-top: 10px;
+    width: 100%;
+    height: 35px;
+    background-color: transparent;
+    border: none;
+    border-radius: 8px;
+    color: #641919;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+
 </style>
