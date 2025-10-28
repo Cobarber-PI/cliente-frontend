@@ -3,12 +3,12 @@ import { ref } from 'vue'
 import TelaRegistroDois from './telaRegistroDois.vue'
 import AuthService from '@/services/auth.js'
 import { useRouter } from 'vue-router'
-
-// Toastify
 import { toast } from 'vue3-toastify'
-import 'vue3-toastify/dist/index.css'
+import Escolha from '../Escolha.vue'
+import { useAuthStore } from '@/stores/auth'
 
 const router = useRouter()
+const auth = useAuthStore();
 
 // Dados do primeiro stage
 const senha = ref('')
@@ -22,7 +22,7 @@ const dataNascimento = ref('')
 const celular = ref('')
 
 // Estados
-const stage = ref(true)
+const stage = ref(1)
 const isLoading = ref(false)
 const mostrarSenha = ref(false)
 const mostrarSenhaConfirmada = ref(false)
@@ -41,6 +41,9 @@ const validarEmail = (email) => {
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
   return emailRegex.test(email)
 }
+
+
+
 
 const showStage = () => {
   // Validação do primeiro stage
@@ -65,24 +68,25 @@ const showStage = () => {
     return
   }
 
-  stage.value = !stage.value
+  stage.value = 2
   toast.info('Continue preenchendo seus dados!', { autoClose: 1500, theme: 'dark' })
 }
 
-
+const showChoices = () => {
+  stage.value = 3
+  toast.info('Escolha como deseja usar a plataforma!', { autoClose: 1500, theme: 'dark' })
+}
 const voltarParaLogin = () => {
-  router.push('/login')
+  // Verifica se há histórico anterior para voltar
+  if (window.history.length > 1) {
+    router.go(-1) // Volta para a página anterior
+  } else {
+    router.push('/') // Se não há histórico, vai para a introdução
+  }
 }
 
-const voltar = () => {
-  stage.value = !stage.value
-}
 
-const voltarParaLogin = () => {
-  router.push('/')
-}
-
-const cadastrar = async () => {
+const cadastrar = async (escolha) => {
   try {
     isLoading.value = true
 
@@ -100,20 +104,22 @@ const cadastrar = async () => {
 
     // Preparar dados
     const userData = {
-      nome: nome.value,
+      name: nome.value,
       email: email.value,
       password: senha.value,
       confirm_password: senhaConfirmada.value,
       cpf: cpf.value,
-      dataNascimento: dataNascimento.value,
-      celular: celular.value
+      DOB: dataNascimento.value,
+      cellphone: celular.value,
+      is_owner: escolha
     }
 
     console.log('Enviando dados para o backend:', userData)
 
     const response = await AuthService.register(userData)
 
-    console.log('Registro realizado com sucesso:', response)
+    const data = await auth.login(userData.email, userData.password)
+    console.log('Registro realizado com sucesso:', response, data)
     toast.success('Cadastro realizado com sucesso!', { autoClose: 2000 })
 
     router.push('/home')
@@ -124,6 +130,7 @@ const cadastrar = async () => {
     } else {
       toast.error('Erro de conexão com o servidor')
     }
+    stage.value = 2
   } finally {
     isLoading.value = false
   }
@@ -138,16 +145,15 @@ const updateChildData = (childData) => {
 
 // Função para voltar para o primeiro stage
 const voltarParaPrimeiroStage = () => {
-  stage.value = true
+  stage.value = 1
 }
 </script>
 
 <template>
-  <div class="container">
+  <div v-if="stage < 3" class="container">
     <!-- Botão voltar apenas na primeira tela -->
-
-    <img v-if="stage" @click="voltarParaLogin" class="iconeVoltar" src="/imgsRegistro/Vector.svg"
-      alt="Voltar para login">
+    <img v-if="stage === 1" @click="voltarParaLogin" class="iconeVoltar" src="/imgsRegistro/Vector.svg"
+      alt="Voltar para página anterior">
 
     <div class="form-box">
       <div class="logo">
@@ -156,7 +162,7 @@ const voltarParaPrimeiroStage = () => {
       <p class="titulo">Olá!</p>
       <p class="subtitle">Para continuar, digite seus dados</p>
 
-      <div class="stage" v-if="stage">
+      <div class="stage" v-if="stage === 1">
         <form @submit.prevent="showStage">
           <input type="text" v-model="nome" placeholder="Nome completo" maxlength="100" inputmode="latin-name" />
           <input type="email" v-model="email" placeholder="Email (ex: usuario@email.com)" maxlength="50"
@@ -183,17 +189,18 @@ const voltarParaPrimeiroStage = () => {
       </div>
 
 
-      <TelaRegistroDois v-if="!stage" @update-data="updateChildData" @voltar="voltarParaPrimeiroStage" />
+      <TelaRegistroDois v-if="stage === 2" :data="{cpf, dataNascimento, celular}" @update-data="updateChildData" @voltar="voltarParaPrimeiroStage" />
+
     </div>
 
     <br>
 
     <div class="buttons">
-      <button type="submit" class="btn" @click="showStage" v-if="stage" :disabled="isLoading">
+      <button type="submit" class="btn" @click="showStage" v-if="stage === 1" :disabled="isLoading">
         Continuar
       </button>
-      <button type="submit" class="btn" @click="cadastrar" v-if="!stage" :disabled="isLoading">
-        {{ isLoading ? 'Cadastrando...' : 'Cadastrar' }}
+      <button type="submit" class="btn" @click="showChoices" v-if="stage === 2" :disabled="isLoading">
+        {{ isLoading ? 'Continuando...' : 'Continuar' }}
       </button>
       <br>
       <button class="btngoogle">
@@ -203,6 +210,7 @@ const voltarParaPrimeiroStage = () => {
 
     <p class="link">Já tem uma conta? <router-link to="/login">Faça o login</router-link></p>
   </div>
+  <Escolha v-if="stage === 3" @send="cadastrar" />
 </template>
 
 <style scoped>
@@ -283,7 +291,6 @@ input::placeholder {
   color: #aaa;
 }
 
-/* Container para campos de senha com ícone */
 .password-container {
   position: relative;
   width: var(--field-w);
@@ -294,7 +301,6 @@ input::placeholder {
   width: 100%;
   height: 100%;
   padding-right: 45px;
-  /* Espaço para o ícone */
 }
 
 .eye-icon {
@@ -308,7 +314,6 @@ input::placeholder {
   opacity: 0.7;
   transition: opacity 0.2s ease;
   filter: invert(1);
-  /* Torna o ícone branco */
 }
 
 
@@ -360,11 +365,14 @@ input::placeholder {
 .iconeVoltar {
   cursor: pointer;
   position: absolute;
-  top: 83px;
-  left: 9rem;
+  top: 2rem;
+  left: 2rem;
   z-index: 10;
-  width: 35px;
-  height: 35px;
+}
+
+.iconeVoltar:hover {
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
 }
 
 .iconeVoltar:hover {
@@ -372,16 +380,17 @@ input::placeholder {
   transition: opacity 0.2s ease;
 }
 
-.iconeVoltar {
-  cursor: pointer;
-  position: absolute;
-  top: 83px;
-  left: 83px;
-  z-index: 10;
+@media (max-width: 1150px) {
+  .container {
+    --field-w: 60vw;
+    --field-h: 7vh;
+  }
 }
 
-.iconeVoltar:hover {
-  opacity: 0.7;
-  transition: opacity 0.2s ease;
+@media (max-width: 400px) {
+  .container {
+    --field-w: 90vw;
+    --field-h: 7vh;
+  }
 }
 </style>

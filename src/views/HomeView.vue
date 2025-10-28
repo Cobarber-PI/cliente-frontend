@@ -1,6 +1,6 @@
 <script setup>
-import TelaHome from '@/components/TelaHome.vue'
-import Filtro from '@/components/Filtro.vue'
+import TelaHome from '@/components/home/TelaHome.vue'
+import Filtro from '@/components/layout/Filtro.vue'
 import ListaBarbeiroView from './ListaBarbeiroView.vue'
 import FooterView from './FooterView.vue'
 </script>

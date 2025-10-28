@@ -82,8 +82,8 @@ const passos = [
 header {
   position: absolute;
   top: 1.5rem;
-  left: 5rem;
-  right: 5rem;
+  left: 5vw;
+  right: 5vw;
   z-index: 5;
   display: flex;
   justify-content: space-between;
@@ -212,7 +212,7 @@ header button:hover {
 
 .flexibility {
   background-color: #080808;
-  height: 110vh;
+  height: 100vh;
   color: #ffffff;
   padding-bottom: 3rem;
 }
@@ -225,6 +225,7 @@ header button:hover {
 
 .cards-container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
   padding: 0 5rem;
@@ -312,13 +313,13 @@ header button:hover {
   color: #ccc;
 }
 
-/* ---------- Como funciona ---------- */
 .cartao-passo {
   background: #111;
   border: 1px solid #333;
   border-radius: 10px;
   padding: 2.2rem;
-  width: 275px;
+  flex: 1 1 calc(25% - 2rem);
+  max-width: 300px;
   position: relative;
   transition: 0.3s;
   text-align: center;
@@ -368,5 +369,73 @@ header button:hover {
   font-size: 1.3rem;
   color: #ccc;
   padding: 20px;
+}
+@media screen and (max-width: 1150px) {
+  .content h1 {
+    font-size: 60px;
+  }
+
+  .content p {
+    font-size: 18px;
+  }
+
+  .flexibility {
+    height: auto;
+    padding-bottom: 5rem;
+  }
+}
+
+/* até 1000px – 2 cartões por linha (duas sessões de duas divs) */
+@media screen and (max-width: 1000px) {
+  .cartao-passo {
+    flex: 1 1 calc(45% - 2rem);
+    max-width: none; /* remove limite para ocupar metade exata */
+  }
+  .marcaC p{
+    display: none;
+  }
+  .marcaC h3{
+    font-size: 25px;
+  }
+}
+@media screen and (max-width: 800px) {
+  header{
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    top: 1rem;
+  }
+  .marcaC p{
+    display: none;
+  }
+  .marcaC h3{
+    font-size: 30px;
+  }
+  .marcaC img{
+    width: 70px;
+    height: 70px;
+  }
+  header button{
+    font-size: 18px;
+    padding: 12px 22px;
+  }
+} 
+/* até 600px – 1 cartão por linha */
+@media screen and (max-width: 600px) {
+  .cartao-passo {
+    flex: 1 1 100%;
+  }
+  .content h1 {
+    font-size: 50px;
+  }
+
+  .content p {
+    font-size: 20px;
+  }
+
+  .flexibility {
+    height: auto;
+    padding-bottom: 5rem;
+  }
 }
 </style>

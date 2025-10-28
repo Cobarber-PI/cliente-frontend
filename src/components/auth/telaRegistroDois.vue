@@ -1,14 +1,21 @@
 <script setup>
 import { ref, watch } from 'vue'
 
-const cpf = ref('')
-const dataNascimento = ref('')
-const celular = ref('')
+const props = defineProps(
+  {
+    'data': Object
+  }
+)
+const cpf = ref(props.data.cpf)
+const dataNascimento = ref(props.data.dataNascimento)
+const celular = ref(props.data.celular)
 const dateFocused = ref(false)
 
 
 // Emitir dados para o componente pai
 const emit = defineEmits(['update-data', 'voltar'])
+
+
 
 // Observar mudanças nos dados e emitir para o pai
 watch([cpf, dataNascimento, celular], () => {
@@ -69,7 +76,7 @@ watch([cpf, dataNascimento, celular], () => {
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-around;
-  height: 50vh;
+  height: auto;
 }
 
 .titulo {
@@ -171,15 +178,29 @@ input::placeholder {
 .iconeVoltar {
   cursor: pointer;
   position: absolute;
-  top: 83px;
-  left: 9rem;
+  top: 2rem;
+  left: 2rem;
   z-index: 10;
-  width: 35px;
-  height: 35px;
 }
 
 .iconeVoltar:hover {
   opacity: 0.7;
   transition: opacity 0.2s ease;
+}
+@media screen and (max-width: 768px) {
+  .form-box2 {
+    height: auto;
+  }
+
+  input,
+  .btn {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .iconeVoltar {
+    left: 2rem;
+    top: 2rem;
+  }
 }
 </style>
