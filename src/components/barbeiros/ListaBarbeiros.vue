@@ -150,7 +150,7 @@ function goToBarbearias() {
 /* ---- BARBEARIAS ---- */
 .barbershop {
     width: 300px;
-    height: 57vh;
+    height:70vh;
     border: 1px solid #2c2c2c;
     border-radius: 12px;
     margin-bottom: 16px;
