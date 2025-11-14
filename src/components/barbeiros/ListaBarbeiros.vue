@@ -146,7 +146,7 @@ function goToBarbearias() {
 * {
     font-family: 'Poppins', sans-serif;
 }
-
+    
 /* ---- BARBEARIAS ---- */
 .barbershop {
     width: 300px;
