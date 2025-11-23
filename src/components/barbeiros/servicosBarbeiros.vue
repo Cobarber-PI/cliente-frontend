@@ -386,4 +386,24 @@ function selecionarHorario(horario) {
   font-size: 15px;
   color: #FAC938;
 }
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  .Containerservicos,
+  .ContainerBarbeiro {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+  .ContainerDataHorario {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .containerCalendario,
+  .containerHorarios {
+    width: 100%;
+  }
+}
 </style>

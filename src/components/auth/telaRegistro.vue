@@ -221,7 +221,7 @@ const voltarParaPrimeiroStage = () => {
 }
 
 .container {
-  --field-w: 25.5vw;
+  --field-w: 450px;
   --field-h: 6.6vh;
 
   background: #0F0F0E;
@@ -379,18 +379,10 @@ input::placeholder {
   opacity: 0.7;
   transition: opacity 0.2s ease;
 }
-
-@media (max-width: 1150px) {
+@media (max-width: 768px) {
   .container {
-    --field-w: 60vw;
-    --field-h: 7vh;
+    --field-w: 80vw;
   }
 }
 
-@media (max-width: 400px) {
-  .container {
-    --field-w: 90vw;
-    --field-h: 7vh;
-  }
-}
 </style>

@@ -147,10 +147,18 @@ function goToBarbearias() {
     font-family: 'Poppins', sans-serif;
 }
     
-/* ---- BARBEARIAS ---- */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 35px;
+    justify-content: center;
+    max-height: 1250px;
+    overflow-y: auto;
+  }
+
 .barbershop {
     width: 300px;
-    height:70vh;
+    height: 70vh;
     border: 1px solid #2c2c2c;
     border-radius: 12px;
     margin-bottom: 16px;
@@ -321,14 +329,6 @@ function goToBarbearias() {
     box-shadow: 0 0 15px rgba(240, 194, 56, 0.5);
 }
 
-/* ---- CONTAINER PRINCIPAL ---- */
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 35px;
-    justify-content: center;
-  }
-
 .titulo-barbearias {
     width: 100%;
     text-align: center;
@@ -336,5 +336,15 @@ function goToBarbearias() {
     font-size: 24px;
     font-weight: 700;
     margin: 20px 0;
+}
+@media (max-width: 768px) {
+    .barbershop {
+        width: 90%;
+        height: auto;
+    }
+    .centerButton button {
+        width: 100%;
+        border-radius: 0;
+    }
 }
 </style>

@@ -32,4 +32,9 @@ import InfoBarbearia from '@/components/layout/InfoBarbearia.vue';
 .details {
   position: relative;
 }
+@media (max-width: 768px) {
+  .details {
+    margin-top: 2rem;
+  }
+}
 </style>
