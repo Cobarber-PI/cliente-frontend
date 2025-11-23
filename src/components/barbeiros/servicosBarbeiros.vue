@@ -311,8 +311,8 @@ function selecionarHorario(horario) {
 .ContainerDataHorario {
   display: flex;
   justify-content: center;
-  margin-top: 5px;
-  gap: 42px;
+  margin: 6px 0 0 40px;
+  gap: 40px;
 }
 
 .containerCalendario,

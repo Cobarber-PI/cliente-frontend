@@ -1,20 +1,28 @@
 <script setup>
 import { onMounted } from 'vue';
 import { useAuthStore } from '@/stores/auth';
-import { useRouter } from 'vue-router';
 import { ref } from 'vue';
 
-const router = useRouter();
 const authStore = useAuthStore();
 const showMenu = ref(false);
 
 const toggleMenu = () => {
-    showMenu.value = !showMenu.value;
+        showMenu.value = !showMenu.value;
 };
 
 onMounted(() => {
-    authStore.me();
+        authStore.me();
 });
+
+// aceitar v-model:search do componente pai
+const props = defineProps({
+    search: { type: String, default: '' }
+});
+const emit = defineEmits(['update:search']);
+
+function updateSearch(value) {
+    emit('update:search', value);
+}
 </script>
 
 <template>
@@ -83,8 +91,8 @@ onMounted(() => {
         <p>Agende um horário com os melhores barbeiros de sua região. Simples, rápido e sem complicação</p>
         <div class="busca">
             <div class="inputs">
-                <input type="text" placeholder="Digite seu bairro ou cidade">
-                <button class="buscarBarberias">
+                <input :value="props.search" @input="e => updateSearch(e.target.value)" @keyup.enter="e => updateSearch(e.target.value)" type="text" placeholder="Digite seu bairro ou cidade">
+                <button class="buscarBarberias" @click="() => updateSearch(props.search)">
                     <img src="/home/lupa.svg" alt="">
                     <p>Buscar barbearias</p>
                 </button>
