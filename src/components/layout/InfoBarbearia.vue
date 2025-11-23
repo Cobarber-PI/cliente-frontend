@@ -29,7 +29,7 @@ function voltar() {
       <img :src="infos.Image" :alt="infos.nome" class="barbearia-image" />
     </div>
     <div class="buttomVoltar">
-      <button><ArrowLeftIcon class="arrow-icon" @click="voltar" />Voltar</button>
+      <button @click="voltar()"><ArrowLeftIcon class="arrow-icon"/>Voltar</button>
     </div>
     <div class="informations">
       <h1>{{ infos.nome }}</h1>
@@ -113,5 +113,22 @@ p,h1{
   vertical-align: middle;
   margin-right: 5px;
 }
+@media (max-width: 768px) {
+  .buttomVoltar {
+    margin: 1rem 1rem;
+  }
 
+  .informations {
+    margin: 8rem 1rem;
+  }
+
+  .obs {
+    width: 100%;
+  }
+
+  .teste {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
 </style>

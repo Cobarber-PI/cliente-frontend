@@ -271,6 +271,9 @@ main>p {
     font-size: 18px;
     font-weight: 500;
 }
+.buscarBarberias img {
+    margin-left: 10px;
+}
 
 .textoInfo {
     display: flex;
@@ -516,4 +519,45 @@ main>p {
     width: 20px;
     height: 20px;
 }
+@media (max-width: 768px) {
+    .container {
+        padding: 0 20px;
+    }
+    main{
+        height: auto;
+        padding: 60px 0 40px 0;
+    }
+
+    .nav ul {
+        display: none;
+    }
+
+    .homeTitulo {
+        font-size: 40px;
+        padding-top: 5rem;
+    }
+
+    main>p {
+        width: 90%;
+        font-size: 18px;
+    }
+
+    .busca {
+        width: 90%;
+        height: 80px;
+    }
+
+    .inputs>input {
+        width: 60%;
+        height: 45px;
+        font-size: 14px;
+    }
+
+    .inputs>.buscarBarberias {
+        width: 130px;
+        height: 45px;
+        font-size: 14px;
+    }
+}
+
 </style>

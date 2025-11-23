@@ -12,14 +12,20 @@ import Email from 'vue-material-design-icons/Email.vue'
           <div class="image"><img src="/introdução/logoBarber.png" alt="Logo CoBarber" /></div>
           <h2>CoBarber</h2>
         </div>
-        <span
-          >A plataforma mais completa para agendamento em barbearias. Conectando clientes e
-          profissionais de forma simples e eficiente.</span
-        >
+        <span>
+          A plataforma mais completa para agendamento em barbearias. Conectando clientes e
+          profissionais de forma simples e eficiente.
+        </span>
         <div class="infos">
-          <span><MapMarker style="color: #efb402" /> São Paulo (SP) - Brasil</span>
-          <span><Phone style="color: #efb402" /> (11) 9999-9999</span>
-          <span><Email style="color: #efb402" /> contato@cobarber.com</span>
+          <span>
+            <MapMarker style="color: #efb402" /> São Paulo (SP) - Brasil
+          </span>
+          <span>
+            <Phone style="color: #efb402" /> (11) 9999-9999
+          </span>
+          <span>
+            <Email style="color: #efb402" /> contato@cobarber.com
+          </span>
         </div>
       </div>
       <div class="colum">
@@ -54,7 +60,7 @@ import Email from 'vue-material-design-icons/Email.vue'
         <ul>
           <li><a href="https://github.com/GoodSir6">Termos de Uso</a></li>
           <li><a href="https://github.com/GoodSir6">Política de Privacidade</a></li>
-          <li><a href="https://github.com/GoodSir6">Cookies</a></li>
+          <li><a href="https://github.com/rumians">Cookies</a></li>
           <li><a href="https://github.com/GoodSir6">LGPD</a></li>
         </ul>
       </div>
@@ -114,7 +120,8 @@ footer {
 
 .infos span {
   display: flex;
-  gap: 10px; /* espaço entre ícone e texto */
+  gap: 10px;
+  /* espaço entre ícone e texto */
   font-size: 15px;
   color: #a1a1aa;
 }
@@ -167,4 +174,17 @@ footer {
   border: solid 1px #f0c238;
   border-radius: 12px;
 }
+@media (max-width: 768px) {
+  footer {
+    height: auto;
+    padding: 30px 0;
+  }
+  .footer-container {
+    justify-content: center;
+    padding: 20px;
+    row-gap: 40px;
+    flex-wrap: wrap;
+  }
+}
+
 </style>

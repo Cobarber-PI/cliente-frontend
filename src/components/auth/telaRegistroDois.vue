@@ -52,7 +52,7 @@ watch([cpf, dataNascimento, celular], () => {
 }
 
 .container {
-  --field-w: 25.5vw;
+  --field-w: 500px;
   --field-h: 6.6vh;
 
   background: #0F0F0E;

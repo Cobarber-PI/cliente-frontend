@@ -49,7 +49,7 @@
 <style scoped>
 
 .title {
-    font-size: 30px;
+  font-size: 30px;
   margin-left: 2rem;
   margin-top: 1rem;
 }
@@ -112,5 +112,24 @@
 .fechado {
   color: red;
   font-weight: bold;
+}
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .funcionamento, .comodidades {
+    width: 80%;
+    margin: 1rem 0;
+  }
+
+  .funcionamento table {
+    width: 100%;
+    height: auto;
+    padding: 0 10px;
+    border-spacing: 10px;
+    font-size: 12px;
+  }
 }
 </style>

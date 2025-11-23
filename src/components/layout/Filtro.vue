@@ -472,4 +472,10 @@ input[type='checkbox']:checked::after {
   background-image: url('/Filtro/marca-de-verificacao.png');
   background-size: contain;
 }
+@media (max-width: 768px) {
+  aside.filtros {
+    width: 100%;
+  }
+}
+
 </style>

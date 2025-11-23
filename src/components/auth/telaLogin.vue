@@ -75,7 +75,7 @@ async function onLogin() {
 }
 
 .container {
-  --field-w: 25.5vw;
+  --field-w: 450px;
   --field-h: 6.6vh;
 
   background: #0F0F0E;
@@ -207,10 +207,9 @@ input::placeholder {
   justify-content: center;
   gap: 8px;
 }
-@media screen and (max-width: 1150px) {
+@media (max-width: 768px) {
   .container {
-    --field-w: 50vw;
-    --field-h: 7.5vh;
+    --field-w: 80vw;
   }
 }
 </style>
