@@ -1,31 +1,31 @@
 import { defineStore } from 'pinia'
-import { ref, reactive } from 'vue'
+import { reactive } from 'vue'
 import BarbeariaService from '@/services/barbearia'
 
 export const useBarbeariaStore = defineStore('barbearia', () => {
-  const state = reactive ({
-    barbearias: ref([]),
-    currentBarbearia: ref(null),
-    checked: ref(false),
-    meta: ref({}),
-    search: ref(''),
+  const state = reactive({
+    barbearias: [],
+    currentBarbearia: null,
+    checked: false,
+    meta: {},
+    search: '',
   })
 
   async function fetchAll(page = 1, perPage = 999) {
     const response = await BarbeariaService.fetchAll(page, perPage)
-    state.barbearias.value = response.data.results
-    state.meta.value = {
+    state.barbearias = response.data.results
+    state.meta = {
       count: response.data.count,
       next: response.data.next,
       previous: response.data.previous
     }
-    state.checked.value = true
+    state.checked = true
     return response
   }
 
   async function fetchById(id) {
     const response = await BarbeariaService.fetchById(id)
-    state.currentBarbearia.value = response.data
+    state.currentBarbearia = response.data   // sem .value
     return response
   }
 
@@ -56,4 +56,4 @@ export const useBarbeariaStore = defineStore('barbearia', () => {
     remove,
   }
 })
-
+  

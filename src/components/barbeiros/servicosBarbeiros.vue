@@ -1,7 +1,9 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed,  } from 'vue'
 import mdiContentCut from 'vue-material-design-icons/ContentCut.vue'
 import PhoneIcon from 'vue-material-design-icons/Phone.vue'
+
+
 
 // Lista de serviços
 const servicos_cortes = [
@@ -59,6 +61,7 @@ function selecionarHorario(horario) {
 </script>
 
 <template>
+
   <div class="container">
     <!-- Serviços -->
     <div class="Containerservicos">

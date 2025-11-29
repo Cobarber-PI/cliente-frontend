@@ -41,11 +41,11 @@ const router = createRouter({
       component: EscolhaView
     },
     {
-      path: '/barbearia',
+      path: '/barbearia/:barbearia_id',
       name: 'InfoBarbearia',
       component: InfoBarbeariaView
     },
-    
+
   ],
   scrollBehavior() {
     return { top: 0 }
