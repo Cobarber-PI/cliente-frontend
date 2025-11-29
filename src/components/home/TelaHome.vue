@@ -1,12 +1,13 @@
 <script setup>
-import { onMounted } from 'vue';
 import { useAuthStore } from '@/stores/auth';
 import { useRouter } from 'vue-router';
-import { ref } from 'vue';
+import { ref, onMounted, } from 'vue';
 
 const router = useRouter();
 const authStore = useAuthStore();
 const showMenu = ref(false);
+
+
 
 const toggleMenu = () => {
     showMenu.value = !showMenu.value;

@@ -1,115 +1,25 @@
 <script setup>
-
-
-const infoBarbershop = [
-    {
-        id: 1,
-        Image: '/ListaBarbearia/Barber_to_João.jpeg',
-        name: 'Barbearia do João',
-        address: 'Rua das Flores, 123 - Centro',
-        rating: 4.8,
-        reviews: 142,
-        clock: '08:00 - 18:00',
-        services: ['Corte Masculino', 'Barba', 'Bigode', '+1 mais'],
-        distance: '1.2 km'
-    },
-    {
-        id: 2,
-        Image: '/ListaBarbearia/Barber_to_João.jpeg',
-        name: 'Barbearia do João',
-        address: 'Rua das Flores, 123 - Centro',
-        rating: 4.6,
-        reviews: 95,
-        clock: '09:00 - 19:00',
-        services: ['Corte Masculino', 'Sobrancelha', 'Pigmentação'],
-        distance: '800 m'
-    },
-    {
-        id: 3,
-        Image: '/ListaBarbearia/Barber_to_João.jpeg',
-        name: 'Barbearia do João',
-        address: 'Rua das Flores, 123 - Centro',
-        rating: 5.0,
-        reviews: 200,
-        clock: '10:00 - 20:00',
-        services: ['Corte Masculino', 'Barba', 'Alisamento'],
-        distance: '2.4 km'
-    },
-    {
-        id: 3,
-        Image: '/ListaBarbearia/Barber_to_João.jpeg',
-        name: 'Barbearia do João',
-        address: 'Rua das Flores, 123 - Centro',
-        rating: 5.0,
-        reviews: 200,
-        clock: '10:00 - 20:00',
-        services: ['Corte Masculino', 'Barba', 'Alisamento'],
-        distance: '2.4 km'
-    },
-    {
-        id: 3,
-        Image: '/ListaBarbearia/Barber_to_João.jpeg',
-        name: 'Barbearia do João',
-        address: 'Rua das Flores, 123 - Centro',
-        rating: 5.0,
-        reviews: 200,
-        clock: '10:00 - 20:00',
-        services: ['Corte Masculino', 'Barba', 'Alisamento'],
-        distance: '2.4 km'
-    },
-    {
-        id: 3,
-        Image: '/ListaBarbearia/Barber_to_João.jpeg',
-        name: 'Barbearia do João',
-        address: 'Rua das Flores, 123 - Centro',
-        rating: 5.0,
-        reviews: 200,
-        clock: '10:00 - 20:00',
-        services: ['Corte Masculino', 'Barba', 'Alisamento'],
-        distance: '2.4 km'
-    },
-    {
-        id: 3,
-        Image: '/ListaBarbearia/Barber_to_João.jpeg',
-        name: 'Barbearia do João',
-        address: 'Rua das Flores, 123 - Centro',
-        rating: 5.0,
-        reviews: 200,
-        clock: '10:00 - 20:00',
-        services: ['Corte Masculino', 'Barba', 'Alisamento'],
-        distance: '2.4 km'
-    },
-    {
-        id: 3,
-        Image: '/ListaBarbearia/Barber_to_João.jpeg',
-        name: 'Barbearia do João',
-        address: 'Rua das Flores, 123 - Centro',
-        rating: 5.0,
-        reviews: 200,
-        clock: '10:00 - 20:00',
-        services: ['Corte Masculino', 'Barba', 'Alisamento'],
-        distance: '2.4 km'
-    },
-    {
-        id: 3,
-        Image: '/ListaBarbearia/Barber_to_João.jpeg',
-        name: 'Barbearia do João',
-        address: 'Rua das Flores, 123 - Centro',
-        rating: 5.0,
-        reviews: 200,
-        clock: '10:00 - 20:00',
-        services: ['Corte Masculino', 'Barba', 'Alisamento'],
-        distance: '2.4 km'
-    },
-]
-
-import { useRouter } from 'vue-router';
+import { ref, onMounted, computed } from "vue";
+import { useRouter } from "vue-router";
+import { useBarbeariaStore } from "@/stores/barbearia";
 
 const router = useRouter();
+const barbeariaStore = useBarbeariaStore();
+
+const page = ref(1);
+const perPage = ref(999);
+
+const infoBarbershop = computed(() => barbeariaStore.state.barbearias.value);
 
 function goToBarbearias() {
-  router.push('/barbearia');
+  router.push("/barbearia");
 }
+
+onMounted(async () => {
+  await barbeariaStore.fetchAll(page.value, perPage.value);
+  window.barbeariaStore = barbeariaStore; // ADICIONE ISSO
+
+});
 </script>
 
 <template>
@@ -120,15 +30,15 @@ function goToBarbearias() {
                 <span class="distance">{{ barbershop.distance }}</span>
             </div>
             <div class="informations">
-                <h3>{{ barbershop.name }}</h3>
+                <h3>{{ barbershop.nome }}</h3>
                 <div class="address">
                     <p><img src="/ListaBarbearia/localizacao.png" alt="localização">{{ barbershop.address }}</p>
                 </div>
                 <div class="ratingClock">
                     <div class="rating"> <span class="stars">⭐⭐⭐⭐☆</span> <strong>{{ barbershop.rating }}</strong>
-                        <span>({{ barbershop.reviews }})</span>
+                        <span>({{ barbershop.telefone }})</span>
                     </div>
-                    <div class="clock">{{ barbershop.clock }}</div>
+                    <div class="clock">{{ barbershop.cep }}</div>
                 </div>
                 <p class="title-services">Serviços:</p>
                 <div class="services"> <span v-for="(service, index) in barbershop.services" :key="index">{{ service
@@ -146,7 +56,7 @@ function goToBarbearias() {
 * {
     font-family: 'Poppins', sans-serif;
 }
-    
+
 .container {
     display: flex;
     flex-wrap: wrap;
