@@ -56,6 +56,39 @@ function selecionarServico(index) {
 function selecionarHorario(horario) {
   horarioSelecionado.value = horarioSelecionado.value === horario ? null : horario
 }
+
+const podeConfirmar = computed(() => {
+  return (
+    servicoSelecionado.value !== null &&
+    barbeiroSelecionado.value !== null &&
+    dataSelecionada.value !== null &&
+    horarioSelecionado.value !== null
+  )
+})
+
+// Modal state e resumo
+const showModal = ref(false)
+
+const resumo = computed(() => {
+  const servico = servicos_cortes[servicoSelecionado.value]?.nome ?? ''
+  const barbeiro = barbeiros[barbeiroSelecionado.value]?.nome ?? ''
+  const data = dataSelecionada.value ? dataSelecionada.value.toLocaleDateString('pt-BR') : ''
+  const horario = horarioSelecionado.value ?? ''
+  return { servico, barbeiro, data, horario }
+})
+
+function abrirModal() {
+  showModal.value = true
+}
+
+function fecharModal() {
+  showModal.value = false
+}
+
+function confirmarAgendamento() {
+  console.log('Agendamento confirmado:', resumo.value)
+  showModal.value = false
+}
 </script>
 
 <template>
@@ -130,8 +163,38 @@ function selecionarHorario(horario) {
         </div>
       </div>
     </div>
-    <div class="resumoAgendamento">
+  </div>
 
+  <!-- Resumo / Botão de confirmação posicionado abaixo dos painéis -->
+  <div v-if="mostraCalendario" class="resumoAgendamento">
+    <button v-if="podeConfirmar" class="botaoConfirmar" @click="abrirModal">
+      Confirmar Agendamento
+    </button>
+  </div>
+
+  <!-- Modal de confirmação -->
+  <div v-if="showModal" class="modalOverlay" @click.self="fecharModal">
+    <div class="modalBox">
+      <h3>Confirme seu agendamento</h3>
+      <div class="span">
+      <span>Revise todas as informações do seu agendamento antes de confirmar.</span>
+      </div>
+      <div class="resumo-barbeiro">
+        <div class="modalRow"><strong>Barbeiro:</strong> <span>{{ resumo.barbeiro }}</span></div>
+      </div>
+      <div class="resumo-servico">
+        <div class="modalRow"><strong>Serviço:</strong> <span>{{ resumo.servico }}</span></div>
+      </div>
+      <div class="resumo-data">
+        <div class="modalRow"><strong>Data:</strong> <span>{{ resumo.data }}</span></div>
+      </div>
+      <div class="resumo-data-horario">
+        <div class="modalRow"><strong>Horário:</strong> <span>{{ resumo.horario }}</span></div>
+      </div>
+      <div class="modalActions">
+        <button class="modalConfirm" @click="confirmarAgendamento">Confirmar</button>
+        <button class="modalCancel" @click="fecharModal">Cancelar</button>
+      </div>
     </div>
   </div>
 </template>
@@ -386,21 +449,133 @@ function selecionarHorario(horario) {
   font-size: 15px;
   color: #FAC938;
 }
+
+/* ===== RESUMO / BOTÃO CONFIRMAR ===== */
+.resumoAgendamento {
+  width: calc(90% + 40px);
+  margin: 20px auto 40px auto;
+  display: flex;
+  justify-content: center;
+}
+
+.botaoConfirmar {
+  background-color: #FAC938;
+  color: #000;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(250, 201, 56, 0.18);
+}
+
+@media (max-width: 768px) {
+  .resumoAgendamento {
+    width: 100%;
+    padding: 0 12px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 12px;
+    z-index: 40;
+    justify-content: center;
+  }
+
+  .botaoConfirmar {
+    width: 95%;
+    padding: 16px 0;
+    border-radius: 8px;
+  }
+}
+
+/* ===== MODAL ===== */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalBox {
+  background: #0f0f0f;
+  border: 1px solid #262626;
+  color: #fff;
+  width: 520px;
+  max-width: 90%;
+  height: 70vh;
+  padding: 22px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.modalBox h3 {
+  margin: 0 0 12px 0;
+  color: #FAC938;
+}
+
+.span {
+  text-align: justify;
+  color: #8d8e87;
+  font-size: 14px;
+}
+
+.modalRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #191919;
+}
+
+.modalActions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.modalConfirm {
+  background: #FAC938;
+  color: #000;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.modalCancel {
+  background: transparent;
+  color: #fff;
+  border: 1px solid #333;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
     padding: 1rem;
   }
+
   .Containerservicos,
   .ContainerBarbeiro {
     width: 100%;
     height: auto;
     margin-bottom: 20px;
   }
+
   .ContainerDataHorario {
     flex-direction: column;
     gap: 20px;
   }
+
   .containerCalendario,
   .containerHorarios {
     width: 100%;
