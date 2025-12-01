@@ -1,38 +1,48 @@
 <script setup>
-  import MdiClockOutline from 'vue-material-design-icons/ClockOutline.vue';
+import MdiClockOutline from 'vue-material-design-icons/ClockOutline.vue';
+import api from '@/plugin/axios';
+import { onMounted } from 'vue'
+import { ref } from 'vue';
+
+const horarios = ref([])
+const traducaoDias = {
+  1: 'Segunda-feira',
+  2: 'Terça-feira',
+  3: 'Quarta-feira',
+  4: 'Quinta-feira',
+  5: 'Sexta-feira',
+  6: 'Sábado',
+  0: 'Domingo'
+}
+
+onMounted(async () => {
+  const { data } = await api.get("/horarios-funcionamento/")
+  horarios.value = data.results.map(h => ({
+    day: traducaoDias[h.dia_da_semana],
+    time: `${h.horario_abertura} - ${h.horario_fechamento}`,
+  }))
+  console.log(horarios.value)
+})
 </script>
 
 <template>
   <div class="container">
     <div class="funcionamento">
-  <h1 class="title"><MdiClockOutline class="title-icon" />Horários de Funcionamento</h1>
-      <table>
-        <tbody>
-          <tr>
-            <td><strong>Segunda-feira</strong></td>
-            <td>08:00 - 18:00</td>
-            <td><strong>Sexta-feira</strong></td>
-            <td>08:00 - 19:00</td>
-          </tr>
-          <tr>
-            <td><strong>Terça-feira</strong></td>
-            <td>08:00 - 18:00</td>
-            <td><strong>Sábado</strong></td>
-            <td>08:00 - 19:00</td>
-          </tr>
-          <tr>
-            <td><strong>Quarta-feira</strong></td>
-            <td>08:00 - 18:00</td>
-            <td><strong>Domingo</strong></td>
-            <td class="fechado" >Fechado</td>
-          </tr>
-          <tr>
-            <td><strong>Quinta-feira</strong></td>
-            <td>08:00 - 18:00</td>
-          </tr>
-        </tbody>
-      </table>
+      <h1 class="title">
+        <MdiClockOutline class="title-icon" />Horários de Funcionamento
+      </h1>
+
+      <!-- NOVA GRID DOS DIAS (substitui a tabela) -->
+      <div class="dias-grid">
+        <div class="dia-item" v-for="h in horarios" :key="h.day">
+          <strong>{{ h.day }}</strong>
+          <span :class="{ fechado: h.time === 'Fechado' }">
+            {{ h.time }}
+          </span>
+        </div>
+      </div>
     </div>
+
     <div class="comodidades">
       <h1>Comodidades</h1>
       <ul>
@@ -47,7 +57,6 @@
 </template>
 
 <style scoped>
-
 .title {
   font-size: 30px;
   margin-left: 2rem;
@@ -73,11 +82,25 @@
   border: solid #262626 1px;
 }
 
-.funcionamento table {
-  width: 110%;
-  padding: 10px 25px;
-  border-spacing: 15px;
+/* <-- NOVO GRID DOS DIAS --> */
+.dias-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 22px 25px;
+  gap: 10px 40px;
+  width: 100%;
 }
+
+.dia-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.fechado {
+  color: red;
+  font-weight: bold;
+}
+/* -------------------------- */
 
 .comodidades {
   width: 30%;
@@ -109,27 +132,20 @@
   margin-top: 1rem;
 }
 
-.fechado {
-  color: red;
-  font-weight: bold;
-}
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
     align-items: center;
   }
 
-  .funcionamento, .comodidades {
+  .funcionamento,
+  .comodidades {
     width: 80%;
     margin: 1rem 0;
   }
 
-  .funcionamento table {
-    width: 100%;
-    height: auto;
-    padding: 0 10px;
-    border-spacing: 10px;
-    font-size: 12px;
+  .dias-grid {
+    grid-template-columns: 1fr; /* mobile: 1 coluna */
   }
 }
 </style>

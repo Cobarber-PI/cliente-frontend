@@ -34,7 +34,7 @@ onMounted(async () => {
       <div class="informations">
         <h3>{{ barbershop.nome }}</h3>
         <div class="address">
-          <p><img src="/ListaBarbearia/localizacao.png" alt="localização">{{ barbershop.address }}</p>
+          <p><img src="/ListaBarbearia/localizacao.png" alt="localização">{{ barbershop.endereco }}</p>
         </div>
         <div class="ratingClock">
           <div class="rating"> <span class="stars">⭐⭐⭐⭐☆</span> <strong>{{ barbershop.rating }}</strong>
